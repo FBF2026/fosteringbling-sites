@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fostering Bling Foundation — Providing Hope and Love to Our Gems</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0D2B3E;
+    --orange: #E8721A;
+    --orange-light: #FDF0E6;
+    --teal: #00B4A6;
+    --teal-light: #E6F8F7;
+    --gold: #C8973A;
+    --diamond: #A8D4E6;
+    --emerald: #2D7D5A;
+    --ruby: #C0392B;
+    --white: #FFFFFF;
+    --warm: #FBF8F4;
+    --text: #1A2E3B;
+    --muted: #6B8090;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--warm);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    background: rgba(13, 43, 62, 0.97);
+    backdrop-filter: blur(10px);
+    padding: 16px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+
+  .nav-gem {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, var(--diamond), var(--teal));
+    clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav-brand-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1.1;
+  }
+
+  .nav-brand-text span {
+    display: block;
+    font-size: 0.65rem;
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
+    color: var(--teal);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+  }
+
+  .nav-links a {
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--teal); }
+
+  .nav-donate {
+    background: var(--orange) !important;
+    color: white !important;
+    padding: 8px 20px;
+    border-radius: 6px;
+    font-weight: 600 !important;
+  }
+
+  .nav-donate:hover { background: #d4621a !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(160deg, var(--navy) 0%, #1a3a52 50%, #0a2030 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 24px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(0,180,166,0.12) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 30%, rgba(232,114,26,0.08) 0%, transparent 60%);
+  }
+
+  /* Floating gems */
+  .gem-float {
+    position: absolute;
+    opacity: 0.12;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .gem-float:nth-child(1) { top: 15%; left: 8%; width: 60px; height: 60px; animation-delay: 0s; }
+  .gem-float:nth-child(2) { top: 25%; right: 10%; width: 40px; height: 40px; animation-delay: 1.5s; }
+  .gem-float:nth-child(3) { bottom: 20%; left: 15%; width: 50px; height: 50px; animation-delay: 3s; }
+  .gem-float:nth-child(4) { bottom: 30%; right: 8%; width: 35px; height: 35px; animation-delay: 2s; }
+
+  .gem-shape {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--diamond), var(--teal));
+    clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(10deg); }
+  }
+
+  .hero-content { position: relative; z-index: 1; max-width: 800px; }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0,180,166,0.15);
+    border: 1px solid rgba(0,180,166,0.3);
+    color: var(--teal);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-bottom: 28px;
+    animation: fadeUp 0.6s ease forwards;
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 7vw, 5rem);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 12px;
+    animation: fadeUp 0.6s ease 0.1s both forwards;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--orange);
+  }
+
+  .hero-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-style: italic;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 24px;
+    animation: fadeUp 0.6s ease 0.2s both forwards;
+  }
+
+  .hero p {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.8;
+    max-width: 580px;
+    margin: 0 auto 40px;
+    animation: fadeUp 0.6s ease 0.3s both forwards;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeUp 0.6s ease 0.4s both forwards;
+  }
+
+  .btn {
+    padding: 13px 28px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: none;
+    letter-spacing: 0.02em;
+  }
+
+  .btn-orange { background: var(--orange); color: white; }
+  .btn-orange:hover { background: #d4621a; transform: translateY(-2px); }
+  .btn-outline-white { background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.3); }
+  .btn-outline-white:hover { border-color: white; background: rgba(255,255,255,0.08); }
+  .btn-teal { background: var(--teal); color: white; }
+  .btn-teal:hover { background: #009e92; transform: translateY(-2px); }
+  .btn-outline-navy { background: transparent; color: var(--navy); border: 1.5px solid var(--navy); }
+  .btn-outline-navy:hover { background: var(--navy); color: white; }
+
+  /* EIN BADGE */
+  .ein-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 32px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.5);
+    animation: fadeUp 0.6s ease 0.5s both forwards;
+  }
+
+  .ein-badge strong { color: rgba(255,255,255,0.8); }
+
+  /* STATS BAR */
+  .stats-bar {
+    background: var(--orange);
+    padding: 24px 40px;
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    flex-wrap: wrap;
+  }
+
+  .stat-item { text-align: center; }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.8);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* SECTIONS */
+  section { padding: 80px 24px; }
+
+  .container { max-width: 1060px; margin: 0 auto; }
+
+  .section-tag {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 10px;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  .section-title em { font-style: italic; color: var(--orange); }
+
+  .section-body {
+    font-size: 1rem;
+    color: var(--muted);
+    line-height: 1.8;
+    max-width: 680px;
+  }
+
+  /* MISSION */
+  .mission { background: var(--white); }
+
+  .mission-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    margin-top: 48px;
+  }
+
+  .mission-visual {
+    background: linear-gradient(135deg, var(--navy), #1a4a6e);
+    border-radius: 20px;
+    padding: 48px 36px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .mission-visual::before {
+    content: '';
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 150px; height: 150px;
+    background: radial-gradient(circle, rgba(0,180,166,0.2), transparent);
+    border-radius: 50%;
+  }
+
+  .big-gem {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, var(--diamond) 0%, var(--teal) 50%, #005f57 100%);
+    clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+    margin: 0 auto 24px;
+    animation: shimmer 3s ease-in-out infinite;
+  }
+
+  @keyframes shimmer {
+    0%, 100% { filter: brightness(1); }
+    50% { filter: brightness(1.3); }
+  }
+
+  .mission-visual h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-style: italic;
+    color: white;
+    margin-bottom: 12px;
+  }
+
+  .mission-visual p {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.7;
+  }
+
+  /* GEMS SECTION */
+  .gems { background: var(--warm); }
+
+  .gems-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+    margin-top: 48px;
+  }
+
+  .gem-card {
+    border-radius: 16px;
+    padding: 36px 28px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .gem-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+  }
+
+  .gem-card.ruby { background: linear-gradient(145deg, #fff5f4, #ffe8e6); border: 1.5px solid #f5c6c2; }
+  .gem-card.emerald { background: linear-gradient(145deg, #f0faf5, #dcf2e7); border: 1.5px solid #a8dfc0; }
+  .gem-card.diamond { background: linear-gradient(145deg, #f0f8ff, #dceef8); border: 1.5px solid #a8d4e6; }
+  .gem-card.pearl { background: linear-gradient(145deg, #faf7f2, #f0ebe0); border: 1.5px solid #d4c8b0; }
+
+  .gem-icon {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none !important;
+    clip-path: none !important;
+    border-radius: 0 !important;
+    filter: drop-shadow(0 4px 14px rgba(0,0,0,0.2));
+    transition: filter 0.3s ease, transform 0.3s ease;
+  }
+  .gem-card:hover .gem-icon {
+    filter: drop-shadow(0 6px 20px rgba(0,0,0,0.3));
+    transform: scale(1.1) translateY(-3px);
+  }
+
+  .gem-card.ruby .gem-icon_DISABLED {  display: flex; align-items: center; justify-content: center;  background: linear-gradient(135deg, #e74c3c, #c0392b); }
+  .gem-card.emerald .gem-icon_DISABLED {  display: flex; align-items: center; justify-content: center;  background: linear-gradient(135deg, #2ecc71, #27ae60); }
+  .gem-card.diamond .gem-icon_DISABLED {  display: flex; align-items: center; justify-content: center;  background: linear-gradient(135deg, var(--diamond), #5dade2); }
+  .gem-card.pearl .gem-icon_DISABLED {  display: flex; align-items: center; justify-content: center;  background: radial-gradient(circle at 35% 35%, #ffffff, #e8ddd0, #c8b89a); border-radius: 50%; clip-path: circle(50%); }
+
+  .gem-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .gem-card.ruby .gem-label { color: var(--ruby); }
+  .gem-card.emerald .gem-label { color: var(--emerald); }
+  .gem-card.diamond .gem-label { color: #2980b9; }
+
+  .gem-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+
+  .gem-card p {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+
+  .gem-link {
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: gap 0.2s;
+  }
+
+  .gem-card.ruby .gem-link { color: var(--ruby); }
+  .gem-card.emerald .gem-link { color: var(--emerald); }
+  .gem-card.diamond .gem-link { color: #2980b9; }
+  .gem-card.pearl .gem-label { color: #8B7355; }
+  .gem-card.pearl .gem-link { color: #8B7355; }
+  .gem-link:hover { gap: 10px; }
+
+  /* HAVENASSIST SECTION */
+  .havenassist-section {
+    background: linear-gradient(135deg, var(--navy) 0%, #1a4a6e 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .havenassist-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 80% 50%, rgba(0,180,166,0.15) 0%, transparent 60%);
+  }
+
+  .havenassist-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .havenassist-grid .section-tag { color: var(--teal); }
+  .havenassist-grid .section-title { color: white; }
+  .havenassist-grid .section-title em { color: var(--teal); }
+  .havenassist-grid .section-body { color: rgba(255,255,255,0.65); }
+
+  .ha-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 28px;
+  }
+
+  .ha-feat {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 16px;
+  }
+
+  .ha-feat-icon { font-size: 1.4rem; margin-bottom: 8px; }
+  .ha-feat h4 { font-size: 0.85rem; font-weight: 600; color: white; margin-bottom: 4px; }
+  .ha-feat p { font-size: 0.78rem; color: rgba(255,255,255,0.5); line-height: 1.5; }
+
+  .ha-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(0,180,166,0.3);
+    border-radius: 20px;
+    padding: 40px 32px;
+    text-align: center;
+  }
+
+  .ha-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 6px;
+  }
+
+  .ha-logo span { color: var(--teal); }
+
+  .ha-tagline {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 24px;
+  }
+
+  .ha-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .ha-stat {
+    background: rgba(0,180,166,0.1);
+    border-radius: 8px;
+    padding: 14px;
+  }
+
+  .ha-stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--teal);
+  }
+
+  .ha-stat-label { font-size: 0.72rem; color: rgba(255,255,255,0.5); margin-top: 2px; }
+
+  /* DONATE */
+  .donate-section { background: var(--white); }
+
+  .donate-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+  }
+
+  .donate-card {
+    border-radius: 16px;
+    padding: 32px 24px;
+    text-align: center;
+    border: 1.5px solid #E8E0D4;
+    transition: all 0.3s;
+    position: relative;
+  }
+
+  .donate-card:hover {
+    border-color: var(--orange);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(232,114,26,0.1);
+  }
+
+  .donate-card.featured {
+    border-color: var(--orange);
+    background: var(--orange-light);
+  }
+
+  .donate-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--orange);
+    color: white;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+
+  .donate-amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--orange);
+    margin: 12px 0 4px;
+  }
+
+  .donate-period { font-size: 0.82rem; color: var(--muted); margin-bottom: 16px; }
+
+  .donate-card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+
+  .donate-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; margin-bottom: 24px; }
+
+  /* SPONSOR */
+  .sponsor-section {
+    background: linear-gradient(135deg, var(--orange) 0%, #c85e10 100%);
+    padding: 70px 24px;
+    text-align: center;
+  }
+
+  .sponsor-section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: white;
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+
+  .sponsor-section p {
+    color: rgba(255,255,255,0.8);
+    font-size: 1rem;
+    line-height: 1.8;
+    max-width: 600px;
+    margin: 0 auto 36px;
+  }
+
+  .sponsor-tiers {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 36px;
+  }
+
+  .sponsor-tier {
+    background: rgba(255,255,255,0.15);
+    border: 1.5px solid rgba(255,255,255,0.3);
+    border-radius: 10px;
+    padding: 16px 24px;
+    text-align: center;
+    color: white;
+    min-width: 140px;
+  }
+
+  .sponsor-tier-amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+  }
+
+  .sponsor-tier-label { font-size: 0.78rem; opacity: 0.8; margin-top: 2px; }
+
+  /* NOTARY */
+  .notary-section { background: var(--warm); }
+
+  .notary-card {
+    background: var(--navy);
+    border-radius: 20px;
+    padding: 52px 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+    margin-top: 48px;
+  }
+
+  .notary-card .section-title { color: white; }
+  .notary-card .section-body { color: rgba(255,255,255,0.6); margin-bottom: 24px; }
+
+  .notary-services {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .notary-service {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 14px;
+    text-align: center;
+  }
+
+  .notary-service .icon { font-size: 1.5rem; margin-bottom: 6px; }
+  .notary-service p { font-size: 0.78rem; color: rgba(255,255,255,0.65); }
+
+  /* FOOTER */
+  footer {
+    background: var(--navy);
+    padding: 60px 40px 32px;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    max-width: 1060px;
+    margin: 0 auto 48px;
+  }
+
+  .footer-brand h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    color: white;
+    margin-bottom: 6px;
+  }
+
+  .footer-brand p { font-size: 0.82rem; line-height: 1.7; margin-bottom: 16px; }
+
+  .footer-ein {
+    background: rgba(255,255,255,0.06);
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 0.75rem;
+    display: inline-block;
+  }
+
+  .footer-col h4 {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 16px;
+  }
+
+  .footer-col a {
+    display: block;
+    color: rgba(255,255,255,0.55);
+    text-decoration: none;
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+    transition: color 0.2s;
+  }
+
+  .footer-col a:hover { color: var(--teal); }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 24px;
+    max-width: 1060px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 0.78rem;
+  }
+
+  .footer-bottom a { color: var(--teal); text-decoration: none; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 14px 20px; }
+    .nav-links { display: none; }
+    .mission-grid, .havenassist-grid, .notary-card { grid-template-columns: 1fr; gap: 32px; }
+    .gems-grid, .donate-grid { grid-template-columns: 1fr; }
+    .ha-features { grid-template-columns: 1fr 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .stats-bar { gap: 32px; }
+  }
+
+  .gem-card.pearl { background: linear-gradient(145deg, #faf7f2, #f0ebe0); border: 1.5px solid #d4c8b0; }
+  .gem-card.pearl .gem-icon_DISABLED {  display: flex; align-items: center; justify-content: center;  background: radial-gradient(circle at 35% 35%, #ffffff, #e8ddd0, #c8b89a); border-radius: 50%; clip-path: circle(50%); }
+  .gem-card.pearl .gem-label { color: #8B7355; }
+  .gem-card.pearl .gem-link { color: #8B7355; }
+
+  /* BLACK WOMAN OWNED BADGE */
+  .bwo-badge {
+    display: inline-block;
+    margin-top: 16px;
+    background: rgba(200,151,58,0.12);
+    border: 1px solid rgba(200,151,58,0.4);
+    border-radius: 30px;
+    padding: 8px 24px;
+    font-size: 0.82rem;
+    color: var(--gold);
+    font-weight: 500;
+    letter-spacing: 0.03em;
+  }
+
+  /* CONTACT & NOTARY FORMS */
+  .forms-section { background: var(--warm); padding: 100px 40px; }
+  .forms-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 1060px; margin: 60px auto 0; }
+  .form-card { background: white; border-radius: 16px; padding: 40px; box-shadow: 0 4px 24px rgba(13,43,62,0.08); border-top: 4px solid var(--teal); }
+  .form-card.notary { border-top-color: var(--gold); }
+  .form-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--navy); margin-bottom: 8px; }
+  .form-card p.form-desc { color: var(--muted); font-size: 0.88rem; line-height: 1.7; margin-bottom: 28px; }
+  .form-group { margin-bottom: 18px; }
+  .form-group label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--navy); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.06em; }
+  .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px 16px; border: 1.5px solid #ddd; border-radius: 8px; font-family: 'Jost', sans-serif; font-size: 0.9rem; color: var(--text); background: #fafafa; transition: border-color 0.2s; outline: none; }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(0,180,166,0.1); background: white; }
+  .form-card.notary .form-group input:focus, .form-card.notary .form-group select:focus, .form-card.notary .form-group textarea:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(200,151,58,0.1); }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+  .form-submit { width: 100%; padding: 14px; border: none; border-radius: 8px; font-family: 'Jost', sans-serif; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all 0.2s; margin-top: 8px; }
+  .form-submit.teal { background: var(--teal); color: white; }
+  .form-submit.teal:hover { background: #009688; transform: translateY(-1px); }
+  .form-submit.gold { background: var(--gold); color: white; }
+  .form-submit.gold:hover { background: #b8832a; transform: translateY(-1px); }
+  .form-success { display: none; text-align: center; padding: 32px; background: #E9F7EF; border-radius: 12px; border: 2px solid #2ECC71; }
+  .form-success .success-icon { font-size: 2.5rem; margin-bottom: 12px; }
+  .form-success h4 { color: var(--navy); font-size: 1.2rem; margin-bottom: 8px; }
+  .form-success p { color: var(--muted); font-size: 0.88rem; margin: 0; }
+  @media (max-width: 768px) { .forms-grid { grid-template-columns: 1fr; } .bwo-badge { font-size: 0.75rem; padding: 6px 16px; } }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand">
+    <img src="https://pub-629428d185ca4960a0a73c850d32294b.r2.dev/company_4431/images/60052b55-7738-423b-8925-bef0ca050d4f.png" alt="Fostering Bling Foundation Logo" style="height:48px;width:auto;object-fit:contain;"/>
+    <div class="nav-brand-text">
+      Fostering Bling Foundation
+      <span>Providing Hope & Love to Our Gems</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="#mission">Mission</a>
+    <a href="#gems">Our Gems</a>
+    <a href="#havenassist">HavenAssist</a>
+    <a href="#notary">Notary</a>
+    <a href="https://paypal.me/FosteringBling" target="_blank" class="nav-donate">Donate</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="gem-float"><div class="gem-shape"></div></div>
+  <div class="gem-float"><div class="gem-shape"></div></div>
+  <div class="gem-float"><div class="gem-shape"></div></div>
+  <div class="gem-float"><div class="gem-shape"></div></div>
+
+  <div class="hero-content">
+    <div class="hero-tag">✦ 501(c)(3) Nonprofit Organization</div>
+    <h1>Providing Hope and<br><em>Love to Our Gems</em></h1>
+    <p class="hero-tagline">Working Today to Provide a Brighter Tomorrow For Our Foster Families</p>
+    <p>Fostering Bling Foundation raises funds, builds technology, and promotes initiatives to serve the people who need them most — foster parents, foster children, and the caseworkers who hold the system together.</p>
+    <div class="hero-cta">
+      <a href="https://paypal.me/FosteringBling" target="_blank" class="btn btn-orange">Donate Today</a>
+      <a href="#gems" class="btn btn-outline-white">Learn Our Mission</a>
+      <a href="https://havenassist.org" target="_blank" class="btn btn-teal">HavenAssist →</a>
+    </div>
+    <div class="ein-badge">
+      ✓ IRS Verified &nbsp;|&nbsp; <strong>501(c)(3) Tax Exempt</strong> &nbsp;|&nbsp; EIN: <strong>88-2792734</strong> &nbsp;|&nbsp; Donations are tax-deductible
+    </div>
+    <div class="bwo-badge">
+      ✊🏾 Black Woman-Owned &nbsp;•&nbsp; Founded by a Licensed Foster Parent &nbsp;•&nbsp; Built for the Community We Serve
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-num">30-50%</div>
+    <div class="stat-label">Foster Families Quit Annually</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">400K+</div>
+    <div class="stat-label">Children in US Foster Care</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">500K+</div>
+    <div class="stat-label">Caseworkers Nationwide</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">2022</div>
+    <div class="stat-label">IRS 501(c)(3) Approved</div>
+  </div>
+</div>
+
+<!-- MISSION -->
+<section class="mission" id="mission">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-tag">Our Foundation</div>
+      <h2 class="section-title">We believe every child is a <em>gem</em> worth protecting.</h2>
+      <p class="section-body">At Fostering Bling Foundation we're raising funds and promoting initiatives to serve the people who need them most. We believe in taking action with urgency to raise public awareness about some of the most pressing issues facing today's foster care system.</p>
+    </div>
+    <div class="mission-grid fade-up">
+      <div>
+        <p style="color: var(--muted); line-height: 1.9; margin-bottom: 20px;">The foster care system is not broken because people don't care — it's broken because the people who care most have no tools, no support, and no voice. Fostering Bling Foundation exists to change that.</p>
+        <p style="color: var(--muted); line-height: 1.9; margin-bottom: 28px;">We fund technology, resources, and community programs that keep foster families strong, caseworkers supported, and children stable. Our flagship technology platform, HavenAssist, is the AI-powered arm of our mission.</p>
+        <a href="#gems" class="btn btn-outline-navy">Meet Our Community</a>
+      </div>
+      <div class="mission-visual">
+        <img src="https://pub-629428d185ca4960a0a73c850d32294b.r2.dev/company_4431/images/60052b55-7738-423b-8925-bef0ca050d4f.png" alt="Fostering Bling Foundation" style="width:180px;height:auto;object-fit:contain;margin:0 auto 20px;display:block;filter:drop-shadow(0 8px 24px rgba(200,151,58,0.3));"/>
+        <h3>"The fact that the foster care system is terribly broken is a compelling reason to engage it — not avoid it."</h3>
+        <p style="margin-top: 12px; font-size: 0.8rem; opacity: 0.5;">— Johnston Moore</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GEMS -->
+<section class="gems" id="gems">
+  <div class="container">
+    <div class="fade-up" style="text-align: center;">
+      <div class="section-tag">Who We Serve</div>
+      <h2 class="section-title">Every person in the system is a <em>gem.</em></h2>
+      <p class="section-body" style="margin: 0 auto;">Each person connected to foster care has immeasurable value. Our programs are designed to meet each gem exactly where they are.</p>
+    </div>
+    <div class="gems-grid fade-up">
+
+      <div class="gem-card ruby">
+        <div class="gem-icon">
+          <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" width="64" height="64">
+            <defs>
+              <radialGradient id="ruby-grad" cx="38%" cy="32%" r="60%">
+                <stop offset="0%" stop-color="#ff6b6b"/>
+                <stop offset="40%" stop-color="#c0392b"/>
+                <stop offset="100%" stop-color="#7b0d0d"/>
+              </radialGradient>
+            </defs>
+            <!-- Main gem body -->
+            <polygon points="40,8 68,28 60,65 20,65 12,28" fill="url(#ruby-grad)" stroke="#8B0000" stroke-width="1"/>
+            <!-- Table facet top -->
+            <polygon points="40,8 60,22 52,38 28,38 20,22" fill="#e74c3c" opacity="0.7"/>
+            <!-- Left facet -->
+            <polygon points="12,28 20,22 28,38 20,65" fill="#922b21" opacity="0.9"/>
+            <!-- Right facet -->
+            <polygon points="68,28 60,22 52,38 60,65" fill="#a93226" opacity="0.8"/>
+            <!-- Bottom facet -->
+            <polygon points="20,65 28,38 52,38 60,65" fill="#7b1a1a" opacity="0.95"/>
+            <!-- Highlight -->
+            <ellipse cx="33" cy="22" rx="8" ry="5" fill="white" opacity="0.35" transform="rotate(-15,33,22)"/>
+            <ellipse cx="30" cy="19" rx="3" ry="2" fill="white" opacity="0.5" transform="rotate(-15,30,19)"/>
+          </svg>
+        </div>
+        <div class="gem-label">Rubies</div>
+        <h3>Potential Foster Parents</h3>
+        <p>You have the heart. We provide the information and resources needed to successfully become a foster parent. With the right support, anyone can fulfill their potential as a new foster parent.</p>
+        <a href="#" class="gem-link">Get Started →</a>
+      </div>
+
+      <div class="gem-card emerald">
+        <div class="gem-icon">
+          <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" width="64" height="64">
+            <defs>
+              <radialGradient id="em-grad" cx="35%" cy="30%" r="65%">
+                <stop offset="0%" stop-color="#58d68d"/>
+                <stop offset="45%" stop-color="#1e8449"/>
+                <stop offset="100%" stop-color="#0b4d29"/>
+              </radialGradient>
+            </defs>
+            <!-- Outer octagon -->
+            <polygon points="24,10 56,10 70,24 70,56 56,70 24,70 10,56 10,24" fill="url(#em-grad)" stroke="#145a32" stroke-width="1"/>
+            <!-- Step 1 -->
+            <polygon points="28,16 52,16 64,28 64,52 52,64 28,64 16,52 16,28" fill="none" stroke="#27ae60" stroke-width="1.2" opacity="0.7"/>
+            <!-- Step 2 table -->
+            <polygon points="32,22 48,22 58,32 58,48 48,58 32,58 22,48 22,32" fill="#27ae60" opacity="0.4"/>
+            <!-- Left facet dark -->
+            <polygon points="10,24 16,28 16,52 10,56" fill="#0b4d29" opacity="0.9"/>
+            <!-- Right facet -->
+            <polygon points="70,24 64,28 64,52 70,56" fill="#1a6b35" opacity="0.8"/>
+            <!-- Top facet -->
+            <polygon points="24,10 28,16 52,16 56,10" fill="#52be80" opacity="0.6"/>
+            <!-- Highlight -->
+            <ellipse cx="34" cy="28" rx="9" ry="5" fill="white" opacity="0.3" transform="rotate(-10,34,28)"/>
+            <ellipse cx="31" cy="25" rx="3" ry="2" fill="white" opacity="0.5"/>
+          </svg>
+        </div>
+        <div class="gem-label">Emeralds</div>
+        <h3>Current Foster Parents</h3>
+        <p>You are already doing extraordinary work. We address the limited resources available to active foster parents — through recognition, community support, and tools like HavenAssist FP that help you navigate the system.</p>
+        <a href="#" class="gem-link">Access Resources →</a>
+      </div>
+
+      <div class="gem-card diamond">
+        <div class="gem-icon">
+          <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" width="64" height="64">
+            <defs>
+              <radialGradient id="dia-grad" cx="40%" cy="30%" r="65%">
+                <stop offset="0%" stop-color="#ebf5fb"/>
+                <stop offset="50%" stop-color="#aed6f1"/>
+                <stop offset="100%" stop-color="#2980b9"/>
+              </radialGradient>
+            </defs>
+            <!-- Crown top -->
+            <polygon points="40,6 62,30 18,30" fill="url(#dia-grad)" stroke="#2471a3" stroke-width="0.8"/>
+            <!-- Pavillion bottom -->
+            <polygon points="18,30 62,30 40,74" fill="#aed6f1" stroke="#2471a3" stroke-width="0.8"/>
+            <!-- Crown facets -->
+            <polygon points="40,6 62,30 50,30" fill="#d6eaf8" opacity="0.8"/>
+            <polygon points="40,6 18,30 30,30" fill="#85c1e9" opacity="0.7"/>
+            <line x1="40" y1="6" x2="40" y2="30" stroke="#2471a3" stroke-width="0.7" opacity="0.5"/>
+            <line x1="40" y1="6" x2="50" y2="30" stroke="#2471a3" stroke-width="0.7" opacity="0.4"/>
+            <line x1="40" y1="6" x2="30" y2="30" stroke="#2471a3" stroke-width="0.7" opacity="0.4"/>
+            <!-- Pavillion facets -->
+            <line x1="18" y1="30" x2="40" y2="74" stroke="#2471a3" stroke-width="0.7" opacity="0.4"/>
+            <line x1="62" y1="30" x2="40" y2="74" stroke="#2471a3" stroke-width="0.7" opacity="0.4"/>
+            <line x1="30" y1="30" x2="40" y2="74" stroke="#2471a3" stroke-width="0.6" opacity="0.35"/>
+            <line x1="50" y1="30" x2="40" y2="74" stroke="#2471a3" stroke-width="0.6" opacity="0.35"/>
+            <!-- Girdle line -->
+            <line x1="18" y1="30" x2="62" y2="30" stroke="#2471a3" stroke-width="1" opacity="0.6"/>
+            <!-- Sparkle highlights -->
+            <ellipse cx="34" cy="18" rx="7" ry="4" fill="white" opacity="0.5" transform="rotate(-20,34,18)"/>
+            <circle cx="30" cy="14" r="2" fill="white" opacity="0.7"/>
+            <circle cx="55" cy="22" r="1.5" fill="white" opacity="0.6"/>
+          </svg>
+        </div>
+        <div class="gem-label">Diamonds</div>
+        <h3>Foster Children</h3>
+        <p>Our children are the future — and they must shine. We promote confidence, enrich hope, and create pathways so that every fostered youth can become whatever they choose to be. The sky is the limit.</p>
+        <a href="#" class="gem-link">Support Our Youth →</a>
+      </div>
+
+      <div class="gem-card pearl">
+        <div class="gem-icon">
+          <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" width="64" height="64">
+            <defs>
+              <radialGradient id="pearl-grad" cx="38%" cy="32%" r="65%">
+                <stop offset="0%" stop-color="#ffffff"/>
+                <stop offset="30%" stop-color="#f5efe6"/>
+                <stop offset="65%" stop-color="#ddd0be"/>
+                <stop offset="100%" stop-color="#b8a898"/>
+              </radialGradient>
+              <radialGradient id="pearl-sheen" cx="65%" cy="70%" r="50%">
+                <stop offset="0%" stop-color="#e8d5c4" stop-opacity="0.6"/>
+                <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <!-- Pearl body -->
+            <circle cx="40" cy="40" r="32" fill="url(#pearl-grad)"/>
+            <!-- Iridescent sheen -->
+            <circle cx="40" cy="40" r="32" fill="url(#pearl-sheen)"/>
+            <!-- Soft shadow rim -->
+            <circle cx="40" cy="40" r="32" fill="none" stroke="#c8b89a" stroke-width="1.5" opacity="0.5"/>
+            <!-- Primary highlight -->
+            <ellipse cx="30" cy="26" rx="11" ry="7" fill="white" opacity="0.7" transform="rotate(-30,30,26)"/>
+            <!-- Secondary highlight -->
+            <ellipse cx="26" cy="22" rx="5" ry="3" fill="white" opacity="0.9" transform="rotate(-30,26,22)"/>
+            <!-- Pink/rose iridescence -->
+            <ellipse cx="52" cy="52" rx="12" ry="8" fill="#f4c2c2" opacity="0.2" transform="rotate(20,52,52)"/>
+            <!-- Blue iridescence -->
+            <ellipse cx="50" cy="30" rx="8" ry="5" fill="#c8e6f5" opacity="0.15" transform="rotate(40,50,30)"/>
+          </svg>
+        </div>
+        <div class="gem-label">Pearls</div>
+        <h3>Caseworkers</h3>
+        <p>Like a pearl formed under pressure, caseworkers become something extraordinary through perseverance and purpose. We support every Pearl with HavenAssist tools, recognition, and community so they can keep showing up for our gems.</p>
+        <a href="#havenassist" class="gem-link">Get HavenAssist →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- HAVENASSIST -->
+<section class="havenassist-section" id="havenassist">
+  <div class="container">
+    <div class="havenassist-grid fade-up">
+      <div>
+        <div class="section-tag">Technology Initiative</div>
+        <h2 class="section-title">Meet <em>HavenAssist</em> — our AI platform for foster families & caseworkers.</h2>
+        <p class="section-body">Fostering Bling Foundation is the nonprofit backbone of HavenAssist — a trauma-aware AI platform that helps caseworkers document faster and helps foster parents navigate the system with confidence.</p>
+        <div class="ha-features">
+          <div class="ha-feat">
+            <div class="ha-feat-icon">📋</div>
+            <h4>Incident Reports</h4>
+            <p>Trauma-aware documentation in minutes</p>
+          </div>
+          <div class="ha-feat">
+            <div class="ha-feat-icon">📞</div>
+            <h4>Call Prep Scripts</h4>
+            <p>Navigate DCFS calls with confidence</p>
+          </div>
+          <div class="ha-feat">
+            <div class="ha-feat-icon">⚠️</div>
+            <h4>Escalation Guidance</h4>
+            <p>Know your rights. Know your next step.</p>
+          </div>
+          <div class="ha-feat">
+            <div class="ha-feat-icon">💬</div>
+            <h4>Comms Log</h4>
+            <p>Every conversation documented safely</p>
+          </div>
+        </div>
+        <div style="margin-top: 28px; display: flex; gap: 12px; flex-wrap: wrap;">
+          <a href="https://havenassist.org" target="_blank" class="btn btn-teal">Visit HavenAssist</a>
+          <a href="https://paypal.me/FosteringBling" target="_blank" class="btn btn-outline-white">Sponsor a User</a>
+        </div>
+      </div>
+      <div class="ha-card">
+        <div class="ha-logo">Haven<span>Assist</span></div>
+        <div class="ha-tagline">AI Tools for Child Welfare Workers & Foster Families</div>
+        <div class="ha-stats">
+          <div class="ha-stat">
+            <div class="ha-stat-num">8-12</div>
+            <div class="ha-stat-label">Hours reclaimed weekly per CW</div>
+          </div>
+          <div class="ha-stat">
+            <div class="ha-stat-num">$5</div>
+            <div class="ha-stat-label">Individual plans starting at</div>
+          </div>
+          <div class="ha-stat">
+            <div class="ha-stat-num">2</div>
+            <div class="ha-stat-label">Platforms: CW + FP</div>
+          </div>
+          <div class="ha-stat">
+            <div class="ha-stat-num">Free</div>
+            <div class="ha-stat-label">Pilot available today</div>
+          </div>
+        </div>
+        <a href="https://havenassist.org" target="_blank" class="btn btn-teal" style="width: 100%; text-align: center; display: block;">Start Free Pilot →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DONATE -->
+<section class="donate-section" id="donate">
+  <div class="container">
+    <div class="fade-up" style="text-align: center;">
+      <div class="section-tag">Support Our Mission</div>
+      <h2 class="section-title">Your donation is <em>tax-deductible</em> and goes directly to our gems.</h2>
+      <p class="section-body" style="margin: 0 auto;">Every dollar funds free HavenAssist access for foster families and caseworkers who can't afford it, community programs, and resources for our gems.</p>
+    </div>
+    <div class="donate-grid fade-up">
+
+      <div class="donate-card">
+        <div class="donate-amount">$25</div>
+        <div class="donate-period">one-time gift</div>
+        <h3>Support a Gem</h3>
+        <p>Provides one month of resources and community support for a foster family in need.</p>
+        <a href="https://paypal.me/FosteringBling/25" target="_blank" class="btn btn-outline-navy" style="width: 100%; text-align: center; display: block;">Donate $25</a>
+      </div>
+
+      <div class="donate-card featured">
+        <div class="donate-badge">⭐ Most Impactful</div>
+        <div class="donate-amount">$50</div>
+        <div class="donate-period">one-time or monthly</div>
+        <h3>Sponsor a Caseworker</h3>
+        <p>Covers one month of HavenAssist access for a caseworker who can't afford it out of pocket.</p>
+        <a href="https://paypal.me/FosteringBling/50" target="_blank" class="btn btn-orange" style="width: 100%; text-align: center; display: block;">Donate $50</a>
+      </div>
+
+      <div class="donate-card">
+        <div class="donate-amount">$100</div>
+        <div class="donate-period">one-time or monthly</div>
+        <h3>Champion a Family</h3>
+        <p>Sponsors a full foster family with HavenAssist FP access and foundation resources for one month.</p>
+        <a href="https://paypal.me/FosteringBling/100" target="_blank" class="btn btn-outline-navy" style="width: 100%; text-align: center; display: block;">Donate $100</a>
+      </div>
+
+    </div>
+    <div style="text-align: center; margin-top: 32px;">
+      <p style="color: var(--muted); font-size: 0.85rem;">Fostering Bling Foundation is a 501(c)(3) tax-exempt organization. EIN: 88-2792734. All donations are tax-deductible to the fullest extent of the law.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SPONSOR SECTION -->
+<section class="sponsor-section">
+  <div class="container">
+    <h2>Sponsor a Caseworker or Foster Family</h2>
+    <p>Caseworkers and foster parents can't always afford the tools they need. Your sponsorship covers their HavenAssist subscription — giving them the AI support that keeps children in loving homes.</p>
+    <div class="sponsor-tiers">
+      <div class="sponsor-tier">
+        <div class="sponsor-tier-amount">$5/mo</div>
+        <div class="sponsor-tier-label">Individual CW or FP</div>
+      </div>
+      <div class="sponsor-tier">
+        <div class="sponsor-tier-amount">$50/mo</div>
+        <div class="sponsor-tier-label">10 Users Sponsored</div>
+      </div>
+      <div class="sponsor-tier">
+        <div class="sponsor-tier-amount">$500/mo</div>
+        <div class="sponsor-tier-label">Full Agency Access</div>
+      </div>
+    </div>
+    <a href="https://paypal.me/FosteringBling" target="_blank" class="btn btn-outline-white">Become a Sponsor →</a>
+  </div>
+</section>
+
+<!-- NOTARY -->
+<section class="notary-section" id="notary">
+  <div class="container">
+    <div class="notary-card fade-up">
+      <div>
+        <div class="section-tag" style="color: var(--teal);">Community Service</div>
+        <h2 class="section-title">Notary Services for Foster Families</h2>
+        <p class="section-body">Our founder is a licensed Illinois Notary Public. We provide affordable mobile notary services specifically for foster families navigating DCFS processes — because paperwork shouldn't be a barrier to keeping children safe.</p>
+        <a href="#contact" class="btn btn-teal" style="margin-top: 8px;">Request Notary Services</a>
+      </div>
+      <div class="notary-services">
+        <div class="notary-service">
+          <div class="icon">📄</div>
+          <p>Consent Forms & Affidavits</p>
+        </div>
+        <div class="notary-service">
+          <div class="icon">⚖️</div>
+          <p>Court Document Packages</p>
+        </div>
+        <div class="notary-service">
+          <div class="icon">🏠</div>
+          <p>Placement Agreements</p>
+        </div>
+        <div class="notary-service">
+          <div class="icon">📱</div>
+          <p>Remote Online Notarization</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- CONTACT & NOTARY FORMS -->
+<section class="forms-section" id="contact">
+  <div class="container">
+    <div class="fade-up" style="text-align:center;">
+      <div class="section-tag">Get In Touch</div>
+      <h2 class="section-title">We're here for <em>every gem.</em></h2>
+      <p class="section-body" style="margin:0 auto;">Whether you need notary services, want to learn about our programs, or just have a question — reach out. We respond within 24 hours.</p>
+    </div>
+    <div class="forms-grid fade-up">
+
+      <!-- CONTACT FORM -->
+      <div class="form-card">
+        <h3>Contact Us</h3>
+        <p class="form-desc">Have a question about FBF, HavenAssist, or our programs? Send us a message and we'll get back to you within 24 hours.</p>
+        <div id="contact-form-wrap">
+          <div class="form-group">
+            <label>Your Name *</label>
+            <input type="text" id="cf-name" placeholder="Full name" required />
+          </div>
+          <div class="form-group">
+            <label>Email Address *</label>
+            <input type="email" id="cf-email" placeholder="your@email.com" required />
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" id="cf-phone" placeholder="(000) 000-0000" />
+          </div>
+          <div class="form-group">
+            <label>I am a... *</label>
+            <select id="cf-role">
+              <option value="">Select your role</option>
+              <option>Foster Parent</option>
+              <option>Caseworker</option>
+              <option>Prospective Foster Parent</option>
+              <option>Agency / Organization</option>
+              <option>Donor / Supporter</option>
+              <option>Media / Press</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Message *</label>
+            <textarea id="cf-message" placeholder="How can we help you?"></textarea>
+          </div>
+          <button class="form-submit teal" onclick="submitContactForm()">Send Message →</button>
+        </div>
+        <div class="form-success" id="contact-success">
+          <div class="success-icon">✅</div>
+          <h4>Message received!</h4>
+          <p>Thank you for reaching out. Senett will personally respond within 24 hours.<br><br>In the meantime, explore <a href="https://havenassist.org" style="color:var(--teal);">HavenAssist</a> or consider <a href="https://paypal.me/FosteringBling" style="color:var(--teal);">supporting our mission</a>.</p>
+        </div>
+      </div>
+
+      <!-- NOTARY FORM -->
+      <div class="form-card notary">
+        <h3>Request Notary Services</h3>
+        <p class="form-desc">Senett is a licensed Illinois Notary Public specializing in foster care documents. Mobile and remote online notarization available. Affordable rates for foster families.</p>
+        <div id="notary-form-wrap">
+          <div class="form-group">
+            <label>Your Name *</label>
+            <input type="text" id="nf-name" placeholder="Full name" required />
+          </div>
+          <div class="form-group">
+            <label>Email Address *</label>
+            <input type="email" id="nf-email" placeholder="your@email.com" required />
+          </div>
+          <div class="form-group">
+            <label>Phone Number *</label>
+            <input type="tel" id="nf-phone" placeholder="(000) 000-0000" required />
+          </div>
+          <div class="form-group">
+            <label>Document Type *</label>
+            <select id="nf-doctype">
+              <option value="">Select document type</option>
+              <option>Consent Form or Affidavit</option>
+              <option>Court Document Package</option>
+              <option>Placement Agreement</option>
+              <option>Power of Attorney</option>
+              <option>Medical Authorization</option>
+              <option>School Enrollment Documents</option>
+              <option>Other Foster Care Documents</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Service Type *</label>
+            <select id="nf-service">
+              <option value="">Select service type</option>
+              <option>In-Person (Fairview Heights, IL area)</option>
+              <option>Mobile (I come to you)</option>
+              <option>Remote Online Notarization (video call)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Preferred Date & Time</label>
+            <input type="text" id="nf-datetime" placeholder="e.g. This Friday afternoon" />
+          </div>
+          <div class="form-group">
+            <label>Additional Notes</label>
+            <textarea id="nf-notes" placeholder="Any additional details about your documents or situation..." style="min-height:80px;"></textarea>
+          </div>
+          <button class="form-submit gold" onclick="submitNotaryForm()">Request Appointment →</button>
+        </div>
+        <div class="form-success" id="notary-success">
+          <div class="success-icon">📄</div>
+          <h4>Request received!</h4>
+          <p>Senett will contact you within 24 hours to confirm your notary appointment.<br><br>Please have your valid ID and all documents ready for your appointment.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <h3>Fostering Bling Foundation</h3>
+      <p>Providing Hope and Love to Our Gems. Working today to provide a brighter tomorrow for our foster families.</p>
+      <div class="footer-ein">✓ 501(c)(3) Tax Exempt &nbsp;|&nbsp; EIN: 88-2792734</div>
+    </div>
+    <div class="footer-col">
+      <h4>Foundation</h4>
+      <a href="#mission">Our Mission</a>
+      <a href="#gems">Our Gems</a>
+      <a href="https://paypal.me/FosteringBling" target="_blank">Donate</a>
+      <a href="#mission">About Us</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Programs</h4>
+      <a href="#gems">Rubies Program</a>
+      <a href="#gems">Emeralds Program</a>
+      <a href="#gems">Diamonds Program</a>
+      <a href="#notary">Notary Services</a>
+      <a href="#donate">Sponsor a Caseworker</a>
+    </div>
+    <div class="footer-col">
+      <h4>HavenAssist</h4>
+      <a href="https://havenassist.org" target="_blank">Visit HavenAssist</a>
+      <a href="https://havenassist.org" target="_blank">For Caseworkers</a>
+      <a href="https://havenassist.org" target="_blank">For Foster Parents</a>
+      <a href="https://havenassist.org" target="_blank">Start Free Pilot</a>
+      <a href="https://havenassist.org" target="_blank">Agency Partnerships</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Fostering Bling Foundation. All rights reserved. &nbsp;|&nbsp; <a href="/privacy-policy">Privacy Policy</a></span>
+    <span>Fairview Heights, Illinois &nbsp;|&nbsp; <a href="https://havenassist.org" target="_blank">havenassist.org</a></span>
+  </div>
+</footer>
+
+<script>
+  // Scroll animation
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Contact Form
+  function submitContactForm() {
+    const name = document.getElementById('cf-name').value.trim();
+    const email = document.getElementById('cf-email').value.trim();
+    const phone = document.getElementById('cf-phone').value.trim();
+    const role = document.getElementById('cf-role').value;
+    const message = document.getElementById('cf-message').value.trim();
+
+    if (!name || !email || !role || !message) {
+      alert('Please fill in all required fields marked with *');
+      return;
+    }
+    if (!email.includes('@')) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+
+    const subject = encodeURIComponent('FBF Contact Form — ' + role + ' — ' + name);
+    const body = encodeURIComponent(
+      'NAME: ' + name + '\n' +
+      'EMAIL: ' + email + '\n' +
+      'PHONE: ' + (phone || 'Not provided') + '\n' +
+      'ROLE: ' + role + '\n\n' +
+      'MESSAGE:\n' + message + '\n\n' +
+      '— Sent from www.fosteringbling.org'
+    );
+
+    window.location.href = 'mailto:briteskinlady@gmail.com?subject=' + subject + '&body=' + body;
+
+    document.getElementById('contact-form-wrap').style.display = 'none';
+    document.getElementById('contact-success').style.display = 'block';
+  }
+
+  // Notary Form
+  function submitNotaryForm() {
+    const name = document.getElementById('nf-name').value.trim();
+    const email = document.getElementById('nf-email').value.trim();
+    const phone = document.getElementById('nf-phone').value.trim();
+    const doctype = document.getElementById('nf-doctype').value;
+    const service = document.getElementById('nf-service').value;
+    const datetime = document.getElementById('nf-datetime').value.trim();
+    const notes = document.getElementById('nf-notes').value.trim();
+
+    if (!name || !email || !phone || !doctype || !service) {
+      alert('Please fill in all required fields marked with *');
+      return;
+    }
+    if (!email.includes('@')) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+
+    const subject = encodeURIComponent('Notary Request — ' + doctype + ' — ' + name);
+    const body = encodeURIComponent(
+      'NOTARY SERVICE REQUEST\n' +
+      '========================\n\n' +
+      'NAME: ' + name + '\n' +
+      'EMAIL: ' + email + '\n' +
+      'PHONE: ' + phone + '\n\n' +
+      'DOCUMENT TYPE: ' + doctype + '\n' +
+      'SERVICE TYPE: ' + service + '\n' +
+      'PREFERRED TIME: ' + (datetime || 'Flexible') + '\n\n' +
+      'NOTES: ' + (notes || 'None') + '\n\n' +
+      '— Sent from www.fosteringbling.org'
+    );
+
+    window.location.href = 'mailto:briteskinlady@gmail.com?subject=' + subject + '&body=' + body;
+
+    document.getElementById('notary-form-wrap').style.display = 'none';
+    document.getElementById('notary-success').style.display = 'block';
+  }
+</script>
+
+</body>
+</html>
