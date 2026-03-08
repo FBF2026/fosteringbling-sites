@@ -1,9 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="refresh" content="0; url=/fosteringbling.html">
+<meta charset="UTF-8">
+<script>
+  var host = window.location.hostname;
+  if (host === 'havenassist.org' || host === 'www.havenassist.org') {
+    window.location.replace('/havenassist-cw.html');
+  } else if (host === 'birthdaybling.org' || host === 'www.birthdaybling.org') {
+    window.location.replace('/birthday-bling-box.html');
+  } else {
+    window.location.replace('/fosteringbling.html');
+  }
+</script>
 </head>
-<body>
-<a href="/fosteringbling.html">Click here</a>
-</body>
+<body></body>
 </html>
