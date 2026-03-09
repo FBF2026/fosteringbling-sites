@@ -1308,30 +1308,77 @@
     showAlert(`${emoji} Feeling noted. Ms. Williams has been quietly notified.`);
   }
 
-  function sendMessage() {
+  let chatHistory = [];
+
+  async function sendMessage() {
     const input = document.getElementById('msg-input');
     const text = input.value.trim();
     if (!text) return;
     addMessage(text, 'mine');
     input.value = '';
     input.style.height = 'auto';
-    setTimeout(() => {
-      const responses = [
-        "Thank you for sharing that with me 💙 I'm here.",
-        "Got it. I'll look into that right away.",
-        "That takes courage to say. I'm proud of you.",
-        "You did the right thing by telling me. How can I help?",
-        "I hear you. You are not alone in this. 💙"
-      ];
-      addMessage(responses[Math.floor(Math.random() * responses.length)], 'theirs');
-    }, 1200);
+    await getAIResponse(text);
   }
 
-  function sendQuick(text) {
+  async function sendQuick(text) {
     addMessage(text, 'mine');
-    setTimeout(() => {
-      addMessage("Got your message. I'll get back to you shortly 💙", 'theirs');
-    }, 1000);
+    await getAIResponse(text);
+  }
+
+  async function getAIResponse(userText) {
+    // Show typing indicator
+    const area = document.getElementById('messages-area');
+    const typingDiv = document.createElement('div');
+    typingDiv.className = 'msg-bubble-wrap theirs';
+    typingDiv.id = 'typing-indicator';
+    typingDiv.innerHTML = '<div class="msg-bubble" style="opacity:0.6">💙 typing...</div>';
+    area.appendChild(typingDiv);
+    area.scrollTop = area.scrollHeight;
+
+    chatHistory.push({ role: 'user', content: userText });
+
+    const systemPrompt = `You are HavenAssist, a warm, safe, trauma-aware AI companion for children and youth in foster care. You were created by Fostering Bling Foundation, founded by a licensed foster parent who deeply cares about every child in care.
+
+Your role is to be a safe, supportive presence for children aged 6–18 in foster care.
+
+CORE PRINCIPLES — never break these:
+1. Always respond with warmth, empathy, and genuine care
+2. Never minimize feelings — always validate first
+3. Use age-appropriate, simple language
+4. Never say anything that could cause fear or panic
+5. If a child expresses danger, abuse, or self-harm — gently encourage them to use the emergency button or tell a trusted adult, and remind them they are safe and loved
+6. Never give legal or medical advice — always refer to their caseworker or trusted adult
+7. Remind children they have rights and they matter
+8. Keep responses short — 2-4 sentences max for younger children, slightly longer for teens
+9. Always end with something encouraging or a gentle question to keep them talking
+10. Use emojis sparingly but warmly — 💙 💎 🌟
+
+You are NOT a replacement for their caseworker, therapist, or foster parent. You are a safe space to express feelings and get gentle support.
+
+If the child seems to be in crisis say: "What you're feeling matters so much. Please press the red 🚨 button at the top so someone who loves you can help right now."`;
+
+    try {
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-6',
+          max_tokens: 300,
+          system: systemPrompt,
+          messages: chatHistory
+        })
+      });
+
+      const data = await response.json();
+      const aiText = data.content?.[0]?.text || "I'm here with you 💙 Can you tell me more?";
+      chatHistory.push({ role: 'assistant', content: aiText });
+
+      document.getElementById('typing-indicator')?.remove();
+      addMessage(aiText, 'theirs');
+    } catch (err) {
+      document.getElementById('typing-indicator')?.remove();
+      addMessage("I'm here with you 💙 Sometimes the connection gets slow. Can you try again?", 'theirs');
+    }
   }
 
   function addMessage(text, side) {
