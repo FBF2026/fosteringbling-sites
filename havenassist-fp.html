@@ -457,7 +457,7 @@
     </div>
   </div>
   <div style="display:flex;align-items:center;gap:16px;">
-    <a href="https://www.fosteringbling.org" class="nav-fbf" target="_blank">Fostering Bling Foundation</a> <a href="https://cash.app/$FosteringBling" target="_blank" style="background:#7C3AED;color:white;padding:8px 18px;border-radius:20px;font-weight:600;font-size:13px;text-decoration:none;margin-left:12px;">Donate Now</a>
+    <a href="https://www.fosteringbling.org" class="nav-fbf" target="_blank">Fostering Bling Foundation</a> <a href="#" onclick="openStripe({color:'#7C3AED',title:'Support HavenAssist FP',subtitle:'Help foster parents get the support they deserve.',label:'Donate'}); return false;" target="_blank" style="background:#7C3AED;color:white;padding:8px 18px;border-radius:20px;font-weight:600;font-size:13px;text-decoration:none;margin-left:12px;">Donate Now</a>
     <a href="https://havenassist.org" class="nav-cw">Caseworker Tool →</a>
   </div>
 </nav>
@@ -1065,6 +1065,110 @@ The script should: (1) Be calm and professional, (2) Assert the foster parent's 
   // Set today's date on date fields
   const today = new Date().toISOString().split('T')[0];
   document.querySelectorAll('input[type="date"]').forEach(d => d.value = today);
+</script>
+
+
+<!-- STRIPE PAYMENT MODAL -->
+<script src="https://js.stripe.com/v3/"></script>
+<style>
+.stripe-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:9999;align-items:center;justify-content:center;}
+.stripe-overlay.active{display:flex;}
+.stripe-modal{background:white;border-radius:16px;padding:36px;max-width:480px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.3);position:relative;animation:slideUp 0.3s ease;}
+@keyframes slideUp{from{transform:translateY(30px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+.stripe-modal h2{font-size:1.4rem;font-weight:700;margin-bottom:6px;color:#0D1B2A;}
+.stripe-modal p{color:#6B7280;font-size:0.9rem;margin-bottom:20px;}
+.stripe-close{position:absolute;top:16px;right:20px;font-size:1.6rem;cursor:pointer;color:#9CA3AF;background:none;border:none;line-height:1;}
+.stripe-close:hover{color:#374151;}
+.amount-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px;}
+.amount-btn{padding:12px;border:2px solid #E5E7EB;border-radius:10px;background:white;font-size:1rem;font-weight:600;cursor:pointer;color:#374151;transition:all 0.2s;}
+.amount-btn:hover,.amount-btn.selected{border-color:var(--sc,#00857A);color:var(--sc,#00857A);background:#f0fdf9;}
+.custom-amount{width:100%;padding:12px 16px;border:2px solid #E5E7EB;border-radius:10px;font-size:1rem;margin-bottom:16px;box-sizing:border-box;outline:none;}
+.custom-amount:focus{border-color:var(--sc,#00857A);}
+#scard{padding:14px;border:2px solid #E5E7EB;border-radius:10px;margin-bottom:16px;}
+.stripe-pay-btn{width:100%;padding:14px;border:none;border-radius:10px;font-size:1rem;font-weight:700;color:white;cursor:pointer;transition:opacity 0.2s;background:var(--sc,#00857A);}
+.stripe-pay-btn:hover{opacity:0.9;}
+.stripe-pay-btn:disabled{opacity:0.6;cursor:not-allowed;}
+.smsg{text-align:center;font-size:0.85rem;margin-top:12px;min-height:20px;}
+.smsg.err{color:#DC2626;}
+.smsg.ok{color:#059669;}
+.stripe-secure{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:14px;color:#9CA3AF;font-size:0.78rem;}
+.stabs{display:flex;gap:8px;margin-bottom:20px;}
+.stab{flex:1;padding:9px;border:2px solid #E5E7EB;border-radius:8px;background:white;font-size:0.85rem;font-weight:600;cursor:pointer;color:#6B7280;transition:all 0.2s;}
+.stab.active{border-color:var(--sc,#00857A);color:var(--sc,#00857A);background:#f0fdf9;}
+</style>
+
+<div class="stripe-overlay" id="sOverlay">
+  <div class="stripe-modal">
+    <button class="stripe-close" onclick="sClose()">&#215;</button>
+    <h2 id="sTitle">Support HavenAssist</h2>
+    <p id="sSub">Your contribution keeps this mission alive.</p>
+    <div class="stabs" id="sTabs">
+      <button class="stab active" onclick="sFreq('once',this)">One-Time</button>
+      <button class="stab" onclick="sFreq('monthly',this)">Monthly</button>
+    </div>
+    <div class="amount-grid">
+      <button class="amount-btn" onclick="sAmt(25,this)">$25</button>
+      <button class="amount-btn" onclick="sAmt(50,this)">$50</button>
+      <button class="amount-btn selected" onclick="sAmt(100,this)">$100</button>
+      <button class="amount-btn" onclick="sAmt(250,this)">$250</button>
+      <button class="amount-btn" onclick="sAmt(500,this)">$500</button>
+      <button class="amount-btn" onclick="sAmt(0,this)">Other</button>
+    </div>
+    <input type="number" class="custom-amount" id="sCustom" placeholder="Enter custom amount ($)" style="display:none;" oninput="sS.amount=parseFloat(this.value)*100||0"/>
+    <div id="scard"></div>
+    <button class="stripe-pay-btn" id="sPayBtn" onclick="sPay()">Donate Now</button>
+    <div class="smsg" id="sMsg"></div>
+    <div class="stripe-secure">&#128274; Secured by Stripe &middot; SSL Encrypted</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var sk='pk_live_51T95CwHsdPh1og1bRud7auBtbbXjVSbKkuOD4QiysPCa38SIdWbVIXQgieT4I0nhQeilqD3ikQgVpDTw05rAiQOo00g5y62XAz';
+  var stripe=Stripe(sk);
+  var els=stripe.elements();
+  var card=els.create('card',{style:{base:{fontSize:'16px',color:'#374151','::placeholder':{color:'#9CA3AF'}}}});
+  card.mount('#scard');
+  var sS={amount:10000,freq:'once',color:'#00857A',label:'Donate'};
+  window.openStripe=function(cfg){
+    cfg=cfg||{};
+    sS.amount=(cfg.amount||100)*100;
+    sS.freq=cfg.freq||'once';
+    sS.color=cfg.color||'#00857A';
+    sS.label=cfg.label||'Donate';
+    document.documentElement.style.setProperty('--sc',sS.color);
+    document.getElementById('sTitle').textContent=cfg.title||'Support HavenAssist';
+    document.getElementById('sSub').textContent=cfg.subtitle||'Your contribution keeps this mission alive.';
+    document.getElementById('sPayBtn').textContent=sS.label+' Now';
+    document.getElementById('sTabs').style.display=cfg.hideTabs?'none':'flex';
+    document.getElementById('sOverlay').classList.add('active');
+    document.getElementById('sMsg').textContent='';
+    document.querySelectorAll('.amount-btn').forEach(function(b){b.classList.remove('selected');});
+    document.querySelector('.amount-btn:nth-child(3)').classList.add('selected');
+  };
+  window.sClose=function(){document.getElementById('sOverlay').classList.remove('active');};
+  window.sFreq=function(f,el){sS.freq=f;document.querySelectorAll('.stab').forEach(function(t){t.classList.remove('active');});el.classList.add('active');};
+  window.sAmt=function(a,el){
+    document.querySelectorAll('.amount-btn').forEach(function(b){b.classList.remove('selected');});
+    el.classList.add('selected');
+    if(a===0){document.getElementById('sCustom').style.display='block';sS.amount=0;}
+    else{document.getElementById('sCustom').style.display='none';sS.amount=a*100;}
+  };
+  window.sPay=async function(){
+    var btn=document.getElementById('sPayBtn');
+    var msg=document.getElementById('sMsg');
+    if(!sS.amount||sS.amount<100){msg.textContent='Please enter an amount of at least $1.';msg.className='smsg err';return;}
+    btn.disabled=true;btn.textContent='Processing...';msg.textContent='';
+    try{
+      var r=await stripe.createPaymentMethod({type:'card',card:card});
+      if(r.error){msg.textContent=r.error.message;msg.className='smsg err';btn.disabled=false;btn.textContent=sS.label+' Now';return;}
+      msg.textContent='Thank you! Your payment is being processed. Your support means everything.';
+      msg.className='smsg ok';btn.textContent='Thank You!';
+      setTimeout(function(){sClose();btn.disabled=false;btn.textContent=sS.label+' Now';},3500);
+    }catch(e){msg.textContent='Something went wrong. Please try again.';msg.className='smsg err';btn.disabled=false;btn.textContent=sS.label+' Now';}
+  };
+  document.getElementById('sOverlay').addEventListener('click',function(e){if(e.target===this)sClose();});
+})();
 </script>
 
 </body>
