@@ -1434,7 +1434,7 @@
     // Send via Formspree
     const btn = document.querySelector('#contact-form-wrap button[onclick]') || document.querySelector('#contact-form-wrap .btn');
     if(btn){ btn.disabled = true; btn.textContent = 'Sending...'; }
-    fetch('https://formspree.io/f/xbjnpwqk', {
+    fetch('https://formspree.io/f/xjgagnpl', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({ name, email, phone, role, message, _subject: 'FBF Contact Form — ' + role + ' — ' + name })
@@ -1486,7 +1486,7 @@
     // Send via Formspree
     const nbtn = document.querySelector('#notary-form-wrap button[onclick]') || document.querySelector('#notary-form-wrap .btn');
     if(nbtn){ nbtn.disabled = true; nbtn.textContent = 'Sending...'; }
-    fetch('https://formspree.io/f/xbjnpwqk', {
+    fetch('https://formspree.io/f/xjgagnpl', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({ name, email, phone, doctype, service, datetime, notes, _subject: 'Notary Request — ' + doctype + ' — ' + name })
