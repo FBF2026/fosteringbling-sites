@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog | Fostering Bling Foundation</title>
+<meta name="description" content="Stories, tools, and truth for the foster care community. Written for Pearls, Emeralds, Diamonds, and everyone who shows up for children.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:     #0B1F4B;
+    --teal:     #028090;
+    --teal-lt:  #E0F4F6;
+    --gold:     #C8922A;
+    --gold-lt:  #FDF3E3;
+    --ruby:     #C0392B;
+    --ruby-lt:  #FDECEA;
+    --emerald:  #1A7A5E;
+    --emerald-lt:#E3F5EF;
+    --diamond:  #4A7FBF;
+    --diamond-lt:#EBF2FA;
+    --pearl:    #7B6FA0;
+    --pearl-lt: #F0EEF8;
+    --cream:    #FAF8F4;
+    --white:    #FFFFFF;
+    --muted:    #6B7A8D;
+    --border:   #E2E8F0;
+    --ink:      #1A2E4A;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.75;
+  }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--navy);
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.2);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--white);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a {
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--white); }
+  .nav-cta {
+    background: var(--teal);
+    color: white !important;
+    padding: 0.45rem 1.1rem;
+    border-radius: 99px;
+    font-size: 0.82rem !important;
+    font-weight: 600 !important;
+  }
+
+  /* ── BLOG HERO ── */
+  .blog-hero {
+    background: var(--navy);
+    padding: 5rem 2rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .blog-hero::before {
+    content: '💎';
+    position: absolute;
+    font-size: 20rem;
+    opacity: 0.04;
+    top: -4rem;
+    left: -4rem;
+    pointer-events: none;
+  }
+  .blog-hero::after {
+    content: '✨';
+    position: absolute;
+    font-size: 16rem;
+    opacity: 0.04;
+    bottom: -3rem;
+    right: -2rem;
+    pointer-events: none;
+  }
+  .blog-hero-tag {
+    display: inline-block;
+    background: var(--teal);
+    color: white;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.35rem 1rem;
+    border-radius: 99px;
+    margin-bottom: 1.25rem;
+  }
+  .blog-hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    color: var(--white);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+  .blog-hero h1 em { color: var(--gold); font-style: italic; }
+  .blog-hero p {
+    color: rgba(255,255,255,0.7);
+    font-size: 1rem;
+    max-width: 520px;
+    margin: 0 auto 2rem;
+  }
+
+  /* ── GEM KEY ── */
+  .gem-key {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+  }
+  .gem-pill {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 0.3rem 0.85rem;
+    border-radius: 99px;
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.8);
+    font-weight: 500;
+  }
+
+  /* ── MAIN LAYOUT ── */
+  .blog-wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 3.5rem;
+    align-items: start;
+  }
+
+  /* ── FEATURED POST ── */
+  .featured-label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+  .featured-label span {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .featured-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .post-card {
+    background: var(--white);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.07);
+    margin-bottom: 2.5rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+  }
+  .post-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+  }
+
+  /* Full article view */
+  .post-full {
+    background: var(--white);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.07);
+    margin-bottom: 2.5rem;
+  }
+
+  .post-banner {
+    background: linear-gradient(135deg, var(--navy) 0%, #1A3A5C 60%, var(--teal) 100%);
+    padding: 3rem 2.5rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .post-banner::before {
+    content: '📋';
+    position: absolute;
+    font-size: 12rem;
+    opacity: 0.06;
+    right: -1rem;
+    top: -2rem;
+  }
+  .post-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+  }
+  .post-tag {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.28rem 0.75rem;
+    border-radius: 99px;
+  }
+  .tag-pearl    { background: var(--pearl-lt);   color: var(--pearl); }
+  .tag-emerald  { background: var(--emerald-lt); color: var(--emerald); }
+  .tag-diamond  { background: var(--diamond-lt); color: var(--diamond); }
+  .tag-ruby     { background: var(--ruby-lt);    color: var(--ruby); }
+  .tag-featured { background: var(--gold-lt);    color: var(--gold); }
+
+  .post-date { font-size: 0.78rem; color: rgba(255,255,255,0.55); }
+
+  .post-banner h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    color: var(--white);
+    line-height: 1.25;
+    margin-bottom: 0.75rem;
+  }
+  .post-banner .post-intro {
+    color: rgba(255,255,255,0.75);
+    font-size: 0.95rem;
+    max-width: 580px;
+  }
+
+  /* ── ARTICLE BODY ── */
+  .post-body {
+    padding: 2.5rem;
+  }
+  .post-body p {
+    color: #2E3D50;
+    font-size: 0.97rem;
+    margin-bottom: 1.25rem;
+    line-height: 1.85;
+  }
+  .post-body strong { color: var(--navy); font-weight: 700; }
+  .post-body em { color: var(--teal); font-style: italic; }
+
+  /* Mistake blocks */
+  .mistake-block {
+    border-radius: 16px;
+    margin: 2rem 0;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .mistake-header {
+    background: var(--navy);
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .mistake-num {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: var(--gold);
+    color: var(--navy);
+    font-size: 1rem;
+    font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .mistake-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    color: var(--white);
+    line-height: 1.3;
+  }
+  .mistake-header h3 span {
+    display: block;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.75rem;
+    color: var(--teal);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 0.2rem;
+  }
+  .mistake-body { padding: 1.5rem; background: var(--white); }
+  .mistake-label {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.65rem;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+  }
+  .label-mistake { background: var(--ruby-lt);   color: var(--ruby); }
+  .label-fix     { background: var(--emerald-lt); color: var(--emerald); }
+  .mistake-body p { font-size: 0.92rem; color: #2E3D50; line-height: 1.75; margin-bottom: 0.75rem; }
+  .mistake-body p:last-child { margin-bottom: 0; }
+
+  /* Fix highlight */
+  .fix-box {
+    background: var(--emerald-lt);
+    border-left: 4px solid var(--emerald);
+    border-radius: 0 10px 10px 0;
+    padding: 1rem 1.25rem;
+    margin-top: 0.75rem;
+  }
+  .fix-box p { color: var(--emerald) !important; font-weight: 600; font-size: 0.9rem !important; }
+
+  /* HavenAssist CTA block */
+  .havenassist-block {
+    background: linear-gradient(135deg, var(--navy) 0%, #1A3A5C 100%);
+    border-radius: 20px;
+    padding: 2.5rem;
+    margin: 2.5rem 0;
+    color: white;
+  }
+  .havenassist-block h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+  .havenassist-block .sub {
+    color: rgba(255,255,255,0.65);
+    font-size: 0.88rem;
+    margin-bottom: 1.5rem;
+  }
+  .feature-chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1.75rem; }
+  .feature-chip {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.9);
+    font-size: 0.8rem;
+    padding: 0.35rem 0.9rem;
+    border-radius: 99px;
+    font-weight: 500;
+  }
+  .ha-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--teal);
+    color: white;
+    padding: 0.85rem 1.75rem;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .ha-cta:hover { background: #02A0B5; transform: translateX(3px); }
+
+  /* Closing quote */
+  .closing-quote {
+    background: var(--gold-lt);
+    border-left: 5px solid var(--gold);
+    border-radius: 0 16px 16px 0;
+    padding: 1.5rem 1.75rem;
+    margin: 2rem 0;
+  }
+  .closing-quote p {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--navy);
+    margin: 0 !important;
+    line-height: 1.65;
+  }
+
+  /* ── SECOND POST — VIVIAN ── */
+  .vivian-banner {
+    background: linear-gradient(135deg, var(--emerald) 0%, #0D5C46 100%);
+    padding: 3rem 2.5rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .vivian-banner::before {
+    content: '💚';
+    position: absolute;
+    font-size: 14rem;
+    opacity: 0.1;
+    right: -2rem;
+    top: -3rem;
+  }
+  .vivian-banner h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--white);
+    line-height: 1.25;
+    margin-bottom: 0.75rem;
+  }
+  .vivian-banner .post-intro { color: rgba(255,255,255,0.75); font-size: 0.95rem; }
+
+  .vivian-body { padding: 2.5rem; }
+  .vivian-body p {
+    color: #2E3D50;
+    font-size: 1rem;
+    margin-bottom: 1.35rem;
+    line-height: 1.9;
+  }
+  .vivian-body strong { color: var(--navy); }
+  .vivian-body em { font-style: italic; color: var(--emerald); }
+
+  .vivian-pull {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-style: italic;
+    color: var(--emerald);
+    border-left: 4px solid var(--emerald);
+    padding: 1rem 1.5rem;
+    margin: 2rem 0;
+    line-height: 1.6;
+    background: var(--emerald-lt);
+    border-radius: 0 12px 12px 0;
+  }
+
+  .gem-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--emerald);
+    color: white;
+    font-size: 0.82rem;
+    font-weight: 700;
+    padding: 0.5rem 1.25rem;
+    border-radius: 99px;
+    margin-top: 1rem;
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar { position: sticky; top: 80px; }
+
+  .sidebar-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  }
+  .sidebar-card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--navy);
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .gem-guide { display: flex; flex-direction: column; gap: 0.6rem; }
+  .gem-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 0.85rem;
+    border-radius: 10px;
+    font-size: 0.84rem;
+    font-weight: 600;
+  }
+  .gem-item.pearl   { background: var(--pearl-lt);   color: var(--pearl); }
+  .gem-item.emerald { background: var(--emerald-lt); color: var(--emerald); }
+  .gem-item.diamond { background: var(--diamond-lt); color: var(--diamond); }
+  .gem-item.ruby    { background: var(--ruby-lt);    color: var(--ruby); }
+  .gem-item.gold    { background: var(--gold-lt);    color: var(--gold); }
+  .gem-emoji { font-size: 1.1rem; }
+
+  .about-card {
+    background: var(--navy);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: white;
+  }
+  .about-card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+  }
+  .about-card p { font-size: 0.83rem; color: rgba(255,255,255,0.72); line-height: 1.65; margin-bottom: 1rem; }
+  .about-cta {
+    display: block;
+    background: var(--teal);
+    color: white;
+    text-align: center;
+    padding: 0.7rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .about-cta:hover { background: #02A0B5; }
+
+  .newsletter-card {
+    background: linear-gradient(135deg, var(--teal) 0%, #026070 100%);
+    border-radius: 16px;
+    padding: 1.5rem;
+    color: white;
+  }
+  .newsletter-card h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .newsletter-card p { font-size: 0.8rem; color: rgba(255,255,255,0.8); margin-bottom: 1rem; line-height: 1.55; }
+  .newsletter-input {
+    width: 100%;
+    padding: 0.65rem 1rem;
+    border-radius: 8px;
+    border: none;
+    font-size: 0.85rem;
+    margin-bottom: 0.65rem;
+    font-family: 'Nunito', sans-serif;
+  }
+  .newsletter-btn {
+    width: 100%;
+    background: var(--navy);
+    color: white;
+    border: none;
+    padding: 0.7rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+    transition: background 0.2s;
+  }
+  .newsletter-btn:hover { background: #1A3A5C; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.82rem;
+    margin-top: 2rem;
+  }
+  footer a { color: var(--teal); text-decoration: none; }
+  footer strong { color: var(--gold); }
+
+  /* ── ANIMATIONS ── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .blog-wrap { grid-template-columns: 1fr; }
+    .sidebar { position: static; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="fosteringbling.html">Fostering <span>Bling</span> Foundation</a>
+  <div class="nav-links">
+    <a href="fosteringbling.html">Home</a>
+    <a href="blog.html" class="active">Blog</a>
+    <a href="havenassist-cw.html">HavenAssist</a>
+    <a href="birthday-bling-box.html">Birthday Bling Box</a>
+    <a href="havenassist-fp.html" class="nav-cta">Join Pilot</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="blog-hero">
+  <div class="blog-hero-tag">✨ The FBF Blog</div>
+  <h1>Stories, Tools & Truth<br>for <em>Every Gem</em> in the System</h1>
+  <p>Written for the Pearls who document, the Emeralds who show up, the Diamonds who deserve better — and the Rubies ready to say yes.</p>
+  <div class="gem-key">
+    <div class="gem-pill">🤍 Pearls = Caseworkers</div>
+    <div class="gem-pill">💚 Emeralds = Foster Parents</div>
+    <div class="gem-pill">💎 Diamonds = Foster Children</div>
+    <div class="gem-pill">❤️ Rubies = Future Foster Parents</div>
+  </div>
+</section>
+
+<!-- MAIN -->
+<div class="blog-wrap">
+  <main>
+
+    <!-- POST 1: 7 MISTAKES -->
+    <div class="featured-label"><span>⭐ Featured Post</span></div>
+
+    <article class="post-full fade-up">
+      <div class="post-banner">
+        <div class="post-meta-row">
+          <span class="post-tag tag-pearl">🤍 For Pearls</span>
+          <span class="post-tag tag-emerald">💚 For Emeralds</span>
+          <span class="post-tag tag-featured">Featured</span>
+          <span class="post-date">March 2026 · By Fostering Bling Foundation</span>
+        </div>
+        <h2>7 Mistakes You're Making with Foster Care Documentation (and How to Fix Them)</h2>
+        <p class="post-intro">Documentation is not a chore. It is an act of love — the legal and emotional record of a Diamond's journey. Are you making these common mistakes?</p>
+      </div>
+
+      <div class="post-body">
+        <p>At the Fostering Bling Foundation, we believe every child in the foster care system is a <strong>Diamond</strong>: a precious, resilient gem that deserves to shine with absolute brilliance. But for a Diamond to truly sparkle, the setting around them must be secure. That setting is built by you — our <strong>Pearls</strong> (the dedicated caseworkers) and our <strong>Emeralds</strong> (the nurturing foster parents).</p>
+
+        <p>Research shows that a lack of standardized documentation is a leading cause of systemic failure in child welfare. <strong>When the record is broken, the Diamond suffers.</strong></p>
+
+        <p>Are you making these common mistakes? Let's identify the cracks and fix them together.</p>
+
+        <!-- MISTAKE 1 -->
+        <div class="mistake-block">
+          <div class="mistake-header">
+            <div class="mistake-num">1</div>
+            <h3><span>The Mistake</span>The "Friday Slump": Delayed Entry</h3>
+          </div>
+          <div class="mistake-body">
+            <div class="label-mistake post-tag" style="display:inline-block; font-size:0.7rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; padding:0.2rem 0.65rem; border-radius:4px; margin-bottom:0.5rem; background:#FDECEA; color:#C0392B;">The Problem</div>
+            <p>You tell yourself "I'll remember it all on Friday." But memory is a fickle thing. Statistics suggest that documentation accuracy drops by over <strong>40% when recorded more than 48 hours after an event.</strong> The specific nuances of a Tuesday afternoon breakthrough are gone by Friday.</p>
+            <div class="fix-box">
+              <p>✅ <strong>The Fix:</strong> Practice "Micro-Documentation." Jot down three bullet points immediately after an interaction. This preserves the shining details that make a Diamond's story unique.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- MISTAKE 2 -->
+        <div class="mistake-block">
+          <div class="mistake-header">
+            <div class="mistake-num">2</div>
+            <h3><span>The Mistake</span>The "Just Fine" Vagueism: Lack of Detail</h3>
+          </div>
+          <div class="mistake-body">
+            <div class="label-mistake post-tag" style="display:inline-block; font-size:0.7rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; padding:0.2rem 0.65rem; border-radius:4px; margin-bottom:0.5rem; background:#FDECEA; color:#C0392B;">The Problem</div>
+            <p>"The child had a good day." Vague language provides <strong>zero value</strong> to the court, the clinicians, or the next caseworker. Without detail, we lose the map of their progress.</p>
+            <div class="fix-box">
+              <p>✅ <strong>The Fix:</strong> Use objective, factual observations. Instead of "good day," try: <em>"The Diamond completed their homework without reminders and engaged in 20 minutes of cooperative play with peers."</em> Specificity is the polish that makes the record clear.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- MISTAKE 3 -->
+        <div class="mistake-block">
+          <div class="mistake-header">
+            <div class="mistake-num">3</div>
+            <h3><span>The Mistake</span>The Trauma Blindspot: Ignoring the "Why"</h3>
+          </div>
+          <div class="mistake-body">
+            <div class="label-mistake post-tag" style="display:inline-block; font-size:0.7rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; padding:0.2rem 0.65rem; border-radius:4px; margin-bottom:0.5rem; background:#FDECEA; color:#C0392B;">The Problem</div>
+            <p>Recording a Diamond's "acting out" without acknowledging the trauma-informed context creates a narrative of a <strong>"difficult child"</strong> rather than a <strong>"healing child."</strong></p>
+            <div class="fix-box">
+              <p>✅ <strong>The Fix:</strong> Frame documentation through a trauma-aware lens. Instead of "The child was aggressive," try: <em>"The Diamond exhibited fight-or-flight symptoms when the scheduled visitor was five minutes late, likely triggered by previous abandonment experiences."</em></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- MISTAKE 4 -->
+        <div class="mistake-block">
+          <div class="mistake-header">
+            <div class="mistake-num">4</div>
+            <h3><span>The Mistake</span>The "Chaos Closet": Disorganized Records</h3>
+          </div>
+          <div class="mistake-body">
+            <div class="label-mistake post-tag" style="display:inline-block; font-size:0.7rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; padding:0.2rem 0.65rem; border-radius:4px; margin-bottom:0.5rem; background:#FDECEA; color:#C0392B;">The Problem</div>
+            <p>When a Pearl needs a specific Medicaid number or an Emerald needs a vaccine record at school registration, <strong>disorganization leads to "Lost Luster" syndrome</strong> — critical needs missed because the paperwork was buried.</p>
+            <div class="fix-box">
+              <p>✅ <strong>The Fix:</strong> Categorize immediately. Use clear tabs: Medical & Dental · Educational Progress · Legal & Court Documents · Therapy & Behavioral Reports. Efficient organization is a form of advocacy.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- MISTAKE 5 -->
+        <div class="mistake-block">
+          <div class="mistake-header">
+            <div class="mistake-num">5</div>
+            <h3><span>The Mistake</span>Emotional Clouding: Subjectivity Over Objectivity</h3>
+          </div>
+          <div class="mistake-body">
+            <div class="label-mistake post-tag" style="display:inline-block; font-size:0.7rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; padding:0.2rem 0.65rem; border-radius:4px; margin-bottom:0.5rem; background:#FDECEA; color:#C0392B;">The Problem</div>
+            <p>Phrases like <em>"The bio-parent seemed uninterested"</em> or <em>"The child was being manipulative"</em> are subjective and can be <strong>challenged in court.</strong></p>
+            <div class="fix-box">
+              <p>✅ <strong>The Fix:</strong> Stick to the facts. What did you see? What did you hear? Use "The Diamond stated..." rather than "I felt the Diamond was..." Objective documentation is a shield that protects you and the child.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- MISTAKE 6 -->
+        <div class="mistake-block">
+          <div class="mistake-header">
+            <div class="mistake-num">6</div>
+            <h3><span>The Mistake</span>The Communication Void: Missing Stakeholder Links</h3>
+          </div>
+          <div class="mistake-body">
+            <div class="label-mistake post-tag" style="display:inline-block; font-size:0.7rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; padding:0.2rem 0.65rem; border-radius:4px; margin-bottom:0.5rem; background:#FDECEA; color:#C0392B;">The Problem</div>
+            <p>If an Emerald tells a teacher something but doesn't record the conversation, the Pearl remains in the dark. <strong>This creates gaps in the protective circle.</strong></p>
+            <div class="fix-box">
+              <p>✅ <strong>The Fix:</strong> Document every touchpoint. Date, time, who you spoke to, and the outcome. This ensures everyone is moving in the same direction toward the child's permanency goal.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- MISTAKE 7 -->
+        <div class="mistake-block">
+          <div class="mistake-header">
+            <div class="mistake-num">7</div>
+            <h3><span>The Mistake</span>The Manual Grind: Refusing Modern Tools</h3>
+          </div>
+          <div class="mistake-body">
+            <div class="label-mistake post-tag" style="display:inline-block; font-size:0.7rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; padding:0.2rem 0.65rem; border-radius:4px; margin-bottom:0.5rem; background:#FDECEA; color:#C0392B;">The Problem</div>
+            <p>Relying on outdated, manual processes that lead to burnout. <strong>Pearls are leaving the profession at alarming rates</strong> due to administrative burden. Emeralds feel isolated and overwhelmed by the "paperwork tax" of parenting.</p>
+            <div class="fix-box">
+              <p>✅ <strong>The Fix:</strong> Embrace AI-powered support. You don't have to do this alone.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- HAVENASSIST CTA -->
+        <div class="havenassist-block">
+          <h3>Introducing HavenAssist</h3>
+          <p class="sub">Reclaim Your Time. Protect Your Diamonds.</p>
+          <div class="feature-chips">
+            <span class="feature-chip">🧠 Trauma-Informed Suggestions</span>
+            <span class="feature-chip">📁 Instant Categorization</span>
+            <span class="feature-chip">🎙️ Voice-to-Text Accuracy</span>
+            <span class="feature-chip">⚡ Up to 50% Less Documentation Time</span>
+          </div>
+          <a href="havenassist-cw.html" class="ha-cta">Explore HavenAssist →</a>
+        </div>
+
+        <div class="closing-quote">
+          <p>"Don't let the paperwork dim your shine. Let's use the right tools, the right language, and the right heart to change the narrative for every foster child in Illinois. Together, we don't just manage cases. We protect Diamonds. We build hope. We foster bling. 💎✨"</p>
+        </div>
+
+      </div>
+    </article>
+
+    <!-- POST 2: VIVIAN -->
+    <div class="featured-label" style="margin-top:1rem;"><span>💚 Ruby to Emerald Series</span></div>
+
+    <article class="post-full fade-up">
+      <div class="vivian-banner">
+        <div class="post-meta-row">
+          <span class="post-tag tag-ruby">❤️ Ruby to Emerald</span>
+          <span class="post-tag tag-emerald">💚 True Story</span>
+          <span class="post-date">March 2026 · By Senett Basquine</span>
+        </div>
+        <h2>From Ruby to Emerald:<br>Vivian's Story</h2>
+        <p class="post-intro">I didn't recruit a stranger first. I recruited my sister. This is what happened when someone said yes — not because it was easy, but because she wasn't alone.</p>
+      </div>
+
+      <div class="vivian-body">
+        <p>I didn't recruit a stranger first.</p>
+        <p>I recruited my sister.</p>
+        <p>Vivian watched me navigate the hard parts of foster care up close. She saw the behaviors, the breakthroughs, the sleepless nights. She loved my son — but she was honest.</p>
+
+        <div class="vivian-pull">"I don't know if I can handle that."</div>
+
+        <p>I told her the truth: <em>You won't have to do it alone. I've got your back.</em></p>
+        <p>That was enough.</p>
+        <p>Vivian said yes. And then she said yes again. And again. And again.</p>
+        <p>Today she has <strong>four children in her home</strong> — four kids who needed someone to open a door — and she is doing it while <strong>fighting breast cancer.</strong></p>
+        <p>She is not doing it because it's easy.</p>
+        <p>She is doing it because somebody told her she wouldn't be alone.</p>
+
+        <div class="vivian-pull">"That's what this community is. That's what foster care can be when we stop leaving people to figure it out by themselves."</div>
+
+        <p>Vivian didn't just become a foster parent.</p>
+        <p><strong>She became proof.</strong></p>
+
+        <div style="margin-top:1.5rem;">
+          <div class="gem-badge">💚 From Ruby to Emerald — and one of the strongest ones I know.</div>
+        </div>
+
+        <div style="margin-top:2rem; padding: 1.5rem; background: var(--ruby-lt); border-radius:16px; border: 1px solid #f5c5c1;">
+          <p style="font-weight:700; color:var(--ruby); margin-bottom:0.5rem;">❤️ Are you a Ruby?</p>
+          <p style="font-size:0.9rem; color:#2E3D50; margin:0;">If Vivian's story resonates with you — if you've been wondering whether you could do this — we want to talk to you. You won't do it alone either. <a href="fosteringbling.html" style="color:var(--teal); font-weight:700;">Learn more at fosteringbling.org →</a></p>
+        </div>
+      </div>
+    </article>
+
+  </main>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <div class="sidebar-card">
+      <h4>💎 The Gem Framework</h4>
+      <div class="gem-guide">
+        <div class="gem-item pearl"><span class="gem-emoji">🤍</span> Pearls — Caseworkers</div>
+        <div class="gem-item emerald"><span class="gem-emoji">💚</span> Emeralds — Foster Parents</div>
+        <div class="gem-item diamond"><span class="gem-emoji">💎</span> Diamonds — Foster Children</div>
+        <div class="gem-item ruby"><span class="gem-emoji">❤️</span> Rubies — Future Foster Parents</div>
+        <div class="gem-item gold"><span class="gem-emoji">✨</span> Gold — FBF + HavenAssist</div>
+      </div>
+    </div>
+
+    <div class="about-card">
+      <h4>About Fostering Bling Foundation</h4>
+      <p>A 501(c)(3) nonprofit dedicated to empowering the foster care community through innovation, education, and unwavering support. Based in Fairview Heights, IL.</p>
+      <p style="font-size:0.75rem; color:rgba(255,255,255,0.45);">EIN: 88-2792734 · Candid Platinum 2024</p>
+      <a href="fosteringbling.html" class="about-cta">Visit Our Website →</a>
+    </div>
+
+    <div class="newsletter-card">
+      <h4>📬 Stay in the Loop</h4>
+      <p>Get new posts, resources, and tools for the foster care community — straight to your inbox.</p>
+      <input type="email" class="newsletter-input" placeholder="your@email.com">
+      <button class="newsletter-btn">Subscribe — It's Free</button>
+    </div>
+
+    <div class="sidebar-card">
+      <h4>🔗 Quick Links</h4>
+      <div style="display:flex; flex-direction:column; gap:0.5rem;">
+        <a href="havenassist-cw.html" style="font-size:0.85rem; color:var(--teal); font-weight:600; text-decoration:none;">→ HavenAssist for Caseworkers</a>
+        <a href="havenassist-fp.html" style="font-size:0.85rem; color:var(--teal); font-weight:600; text-decoration:none;">→ HavenAssist for Foster Parents</a>
+        <a href="birthday-bling-box.html" style="font-size:0.85rem; color:var(--teal); font-weight:600; text-decoration:none;">→ Birthday Bling Box</a>
+        <a href="fosteringbling.html" style="font-size:0.85rem; color:var(--teal); font-weight:600; text-decoration:none;">→ About FBF</a>
+      </div>
+    </div>
+
+  </aside>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p><strong>Fostering Bling Foundation</strong> · 501(c)(3) Nonprofit · EIN 88-2792734 · Candid Platinum 2024</p>
+  <p style="margin-top:0.4rem;">30 Stacy Dr, Fairview Heights, IL 62208 · <a href="mailto:LetsChat@fosteringbling.org">LetsChat@fosteringbling.org</a> · <a href="fosteringbling.html">fosteringbling.org</a></p>
+  <p style="margin-top:0.4rem; font-size:0.75rem; opacity:0.5;">Illinois Corporation in Good Standing · File No. 7356-366-6</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
