@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Jewelry Box™ — Monthly Sustainer Program — Fostering Bling Foundation</title>
+<meta name="description" content="Join The Jewelry Box™ — Fostering Bling Foundation's monthly sustainer program. Give $5–$50/month to fund birthday boxes and resources for foster children, foster families, and caseworkers. Cancel anytime. 100% tax-deductible.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0D2B3E;
+    --orange: #E8721A;
+    --teal: #00B4A6;
+    --teal-light: #E6F8F7;
+    --gold: #C8973A;
+    --gold-light: #F9F3E8;
+    --diamond: #A8D4E6;
+    --diamond-dark: #2471A3;
+    --diamond-mid: #5DADE2;
+    --white: #FFFFFF;
+    --warm: #FBF8F4;
+    --text: #1A2E3B;
+    --muted: #6B8090;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--warm);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    background: rgba(13,43,62,0.97);
+    backdrop-filter: blur(10px);
+    padding: 16px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+
+  .nav-brand-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1.1;
+  }
+
+  .nav-brand-text span {
+    display: block;
+    font-size: 0.65rem;
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
+    color: var(--teal);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .nav-links { display: flex; gap: 24px; align-items: center; }
+  .nav-links a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--teal); }
+
+  .nav-donate {
+    background: var(--gold);
+    color: var(--navy);
+    padding: 9px 20px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.82rem;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .nav-donate:hover { background: #b5832e; color: var(--navy); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(160deg, #0A1220 0%, #0D2B3E 40%, #0A3A1E 70%, #0D2B3E 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 40px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .gem-float {
+    position: absolute;
+    pointer-events: none;
+    animation: floatGem linear infinite;
+    opacity: 0;
+  }
+
+  @keyframes floatGem {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.5; }
+    90% { opacity: 0.3; }
+    100% { transform: translateY(-20vh) rotate(540deg); opacity: 0; }
+  }
+
+  .hero-tag {
+    display: inline-block;
+    background: rgba(200,151,58,0.12);
+    border: 1px solid rgba(200,151,58,0.35);
+    color: var(--gold);
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 6px 20px;
+    border-radius: 30px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  .hero-emoji { font-size: 3.5rem; margin-bottom: 20px; display: block; filter: drop-shadow(0 0 20px rgba(200,151,58,0.4)); }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    color: var(--white);
+    line-height: 1.05;
+    margin-bottom: 8px;
+    position: relative;
+  }
+
+  .hero h1 sup { font-size: 0.45em; vertical-align: super; color: var(--gold); }
+
+  .hero-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    color: rgba(255,255,255,0.55);
+    font-style: italic;
+    margin-bottom: 40px;
+  }
+
+  .hero-cta { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 60px; }
+
+  .btn-gold {
+    background: linear-gradient(135deg, var(--gold), #e8b84b);
+    color: var(--navy);
+    padding: 16px 36px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+  }
+  .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(200,151,58,0.4); }
+
+  .btn-outline-gold {
+    background: transparent;
+    color: var(--gold);
+    padding: 16px 36px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    border: 2px solid rgba(200,151,58,0.4);
+    transition: all 0.2s;
+    display: inline-block;
+  }
+  .btn-outline-gold:hover { border-color: var(--gold); background: rgba(200,151,58,0.06); }
+
+  /* STAT STRIP */
+  .stat-strip {
+    background: var(--navy);
+    padding: 32px 40px;
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    flex-wrap: wrap;
+    border-top: 1px solid rgba(200,151,58,0.15);
+    border-bottom: 1px solid rgba(200,151,58,0.15);
+  }
+
+  .stat-item { text-align: center; }
+  .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 700; color: var(--gold); line-height: 1; }
+  .stat-label { font-size: 0.75rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
+
+  /* SECTIONS */
+  .container { max-width: 1060px; margin: 0 auto; }
+  .section { padding: 100px 40px; }
+
+  .section-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    color: var(--navy);
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+  .section-title em { color: var(--diamond-dark); font-style: italic; }
+  .section-body { font-size: 1rem; color: var(--muted); line-height: 1.85; max-width: 640px; }
+
+  /* WHY SECTION */
+  .why-section { background: var(--warm); }
+
+  .blockquote-founder {
+    background: linear-gradient(135deg, #EAF4FB, #F0F8FF);
+    border-left: 4px solid var(--gold);
+    border-radius: 0 12px 12px 0;
+    padding: 28px 32px;
+    margin: 36px 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--navy);
+    line-height: 1.65;
+  }
+
+  .blockquote-founder cite {
+    display: block;
+    margin-top: 12px;
+    font-style: normal;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.82rem;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  /* TIERS */
+  .tiers-section { background: white; padding: 100px 40px; }
+
+  .tiers-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-top: 52px;
+  }
+
+  .tier-card {
+    border-radius: 20px;
+    padding: 36px 24px;
+    border: 2px solid rgba(168,212,230,0.2);
+    position: relative;
+    transition: all 0.3s;
+    background: var(--warm);
+    text-align: center;
+  }
+
+  .tier-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(200,151,58,0.12); }
+
+  .tier-card.featured {
+    border-color: var(--gold);
+    background: linear-gradient(160deg, #FDF8EE, #FBF5E0);
+    box-shadow: 0 8px 32px rgba(200,151,58,0.18);
+  }
+
+  .tier-badge {
+    position: absolute;
+    top: -14px; left: 50%;
+    transform: translateX(-50%);
+    background: var(--gold);
+    color: var(--navy);
+    font-size: 0.7rem;
+    font-weight: 800;
+    padding: 4px 16px;
+    border-radius: 20px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .tier-icon { font-size: 2.2rem; margin-bottom: 12px; display: block; }
+
+  .tier-name {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+
+  .tier-amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.6rem;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .tier-period { font-size: 0.78rem; color: var(--muted); margin-bottom: 16px; }
+  .tier-desc { font-size: 0.83rem; color: var(--muted); line-height: 1.65; margin-bottom: 24px; }
+
+  .btn-tier {
+    display: block;
+    text-align: center;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.88rem;
+    text-decoration: none;
+    transition: all 0.2s;
+    background: linear-gradient(135deg, var(--gold), #e8b84b);
+    color: var(--navy);
+    cursor: pointer;
+    border: none;
+    width: 100%;
+  }
+  .btn-tier:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(200,151,58,0.35); }
+
+  .btn-tier-outline {
+    display: block;
+    text-align: center;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.88rem;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: 2px solid rgba(200,151,58,0.4);
+    color: var(--gold);
+    background: transparent;
+    cursor: pointer;
+    width: 100%;
+  }
+  .btn-tier-outline:hover { border-color: var(--gold); background: rgba(200,151,58,0.06); }
+
+  /* HOW IT WORKS */
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-top: 52px;
+    position: relative;
+  }
+
+  .steps-grid::before {
+    content: '';
+    position: absolute;
+    top: 32px;
+    left: 10%;
+    right: 10%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .step-card {
+    text-align: center;
+    padding: 20px;
+    position: relative;
+  }
+
+  .step-num {
+    width: 64px; height: 64px;
+    background: linear-gradient(135deg, var(--gold), #e8b84b);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 0 auto 20px;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 4px 16px rgba(200,151,58,0.3);
+  }
+
+  .step-title { font-weight: 700; font-size: 0.95rem; color: var(--navy); margin-bottom: 8px; }
+  .step-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+
+  /* IMPACT */
+  .impact-section {
+    background: linear-gradient(135deg, var(--navy), #0A3A1E 50%, #0D2B3E);
+    padding: 100px 40px;
+  }
+
+  .impact-section .section-title { color: white; }
+  .impact-section .section-tag { color: var(--gold); }
+
+  .gems-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-top: 52px;
+  }
+
+  .gem-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 32px 24px;
+    text-align: center;
+    transition: all 0.3s;
+  }
+
+  .gem-card:hover { background: rgba(255,255,255,0.08); transform: translateY(-3px); }
+
+  .gem-card-icon { font-size: 2.4rem; margin-bottom: 16px; display: block; }
+  .gem-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: white; margin-bottom: 10px; }
+  .gem-card p { font-size: 0.83rem; color: rgba(255,255,255,0.5); line-height: 1.65; }
+
+  /* CTA FORM SECTION */
+  .cta-section { background: var(--warm); padding: 100px 40px; }
+
+  .cta-inner {
+    max-width: 560px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .amount-select-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin: 36px 0 24px;
+  }
+
+  .amount-select-btn {
+    padding: 16px 8px;
+    border: 2px solid rgba(200,151,58,0.3);
+    border-radius: 12px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+  }
+
+  .amount-select-btn:hover, .amount-select-btn.active {
+    border-color: var(--gold);
+    background: var(--gold-light);
+  }
+
+  .amount-select-btn .amt { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 700; color: var(--navy); display: block; line-height: 1; }
+  .amount-select-btn .tier-lbl { font-size: 0.72rem; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 4px; display: block; }
+
+  .give-btn {
+    width: 100%;
+    padding: 18px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--gold), #e8b84b);
+    color: var(--navy);
+    font-family: 'Jost', sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-bottom: 16px;
+  }
+  .give-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(200,151,58,0.4); }
+
+  .secure-note { font-size: 0.78rem; color: var(--muted); margin-bottom: 28px; }
+
+  .tax-note {
+    background: white;
+    border: 1.5px solid rgba(168,212,230,0.2);
+    border-radius: 12px;
+    padding: 20px 24px;
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.7;
+    text-align: left;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--navy);
+    padding: 48px 40px 28px;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .footer-inner {
+    max-width: 1060px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 28px;
+  }
+
+  .footer-brand h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: white; margin-bottom: 4px; }
+  .footer-brand .footer-tagline { font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--gold); font-size: 0.9rem; margin-bottom: 6px; }
+  .footer-brand p { font-size: 0.78rem; color: rgba(255,255,255,0.35); }
+
+  .footer-links { display: flex; gap: 24px; flex-wrap: wrap; align-items: center; }
+  .footer-links a { color: rgba(255,255,255,0.4); text-decoration: none; font-size: 0.82rem; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--gold); }
+
+  .footer-bottom {
+    max-width: 1060px;
+    margin: 28px auto 0;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    font-size: 0.75rem;
+    text-align: center;
+    color: rgba(255,255,255,0.2);
+  }
+
+  /* ANIMATIONS */
+  .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 1000px) {
+    .tiers-grid { grid-template-columns: 1fr 1fr; }
+    .gems-grid { grid-template-columns: 1fr 1fr; }
+    .steps-grid { grid-template-columns: 1fr 1fr; }
+    .steps-grid::before { display: none; }
+  }
+
+  @media (max-width: 640px) {
+    nav { padding: 14px 20px; }
+    .nav-links { display: none; }
+    .section { padding: 64px 20px; }
+    .tiers-grid { grid-template-columns: 1fr; }
+    .gems-grid { grid-template-columns: 1fr 1fr; }
+    .steps-grid { grid-template-columns: 1fr 1fr; }
+    .stat-strip { gap: 32px; }
+    .hero h1 { font-size: 3rem; }
+    .amount-select-grid { grid-template-columns: repeat(2, 1fr); }
+    .tiers-section, .cta-section { padding: 64px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="https://www.fosteringbling.org" class="nav-brand">
+    <img src="https://pub-629428d185ca4960a0a73c850d32294b.r2.dev/company_4431/images/60052b55-7738-423b-8925-bef0ca050d4f.png" alt="Fostering Bling Foundation" style="height:44px;width:auto;object-fit:contain;"/>
+    <div class="nav-brand-text">
+      Fostering Bling Foundation
+      <span>Providing Hope & Love to Our Gems</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="https://www.fosteringbling.org">Home</a>
+    <a href="https://www.fosteringbling.org/blog">Blog</a>
+    <a href="https://www.birthdaybling.org">Birthday Bling Box</a>
+    <a href="https://havenassist.org" target="_blank">HavenAssist</a>
+    <a href="#give" class="nav-donate">💎 Give Monthly</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <!-- Floating gems -->
+  <div class="gem-float" style="left:5%;width:8px;height:8px;background:var(--gold);clip-path:polygon(50% 0%,100% 38%,82% 100%,18% 100%,0% 38%);animation-duration:10s;animation-delay:0s;"></div>
+  <div class="gem-float" style="left:18%;width:6px;height:6px;background:var(--diamond);clip-path:polygon(50% 0%,100% 38%,82% 100%,18% 100%,0% 38%);animation-duration:14s;animation-delay:2s;"></div>
+  <div class="gem-float" style="left:33%;width:10px;height:10px;background:var(--teal);clip-path:polygon(50% 0%,100% 38%,82% 100%,18% 100%,0% 38%);animation-duration:11s;animation-delay:4s;"></div>
+  <div class="gem-float" style="left:52%;width:7px;height:7px;background:var(--gold);clip-path:polygon(50% 0%,100% 38%,82% 100%,18% 100%,0% 38%);animation-duration:9s;animation-delay:1s;"></div>
+  <div class="gem-float" style="left:68%;width:9px;height:9px;background:var(--diamond);clip-path:polygon(50% 0%,100% 38%,82% 100%,18% 100%,0% 38%);animation-duration:13s;animation-delay:3s;"></div>
+  <div class="gem-float" style="left:83%;width:8px;height:8px;background:rgba(200,151,58,0.8);clip-path:polygon(50% 0%,100% 38%,82% 100%,18% 100%,0% 38%);animation-duration:12s;animation-delay:5s;"></div>
+
+  <div style="position:relative;z-index:1;">
+    <div class="hero-tag">✨ Monthly Sustainer Program</div>
+    <span class="hero-emoji">🎁</span>
+    <h1>The Jewelry Box<sup>™</sup></h1>
+    <p class="hero-tagline">"Because <em>Every Gem</em> Deserves to Sparkle"</p>
+    <div class="hero-cta">
+      <a href="#give" class="btn-gold">💎 Join The Jewelry Box — Give Monthly</a>
+    </div>
+    <div style="color:rgba(255,255,255,0.2);font-size:0.8rem;">
+      Fostering Bling Foundation &nbsp;•&nbsp; 501(c)(3) Tax Exempt &nbsp;•&nbsp; EIN: 88-2792734 &nbsp;•&nbsp; Cancel Anytime
+    </div>
+  </div>
+</section>
+
+<!-- STAT STRIP -->
+<div class="stat-strip">
+  <div class="stat-item">
+    <div class="stat-num">30–50%</div>
+    <div class="stat-label">Foster families quit each year</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">💎</div>
+    <div class="stat-label">Every child deserves a celebrated birthday</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">$5</div>
+    <div class="stat-label">Is all it takes to start shining</div>
+  </div>
+</div>
+
+<!-- WHY THIS EXISTS -->
+<section class="section why-section">
+  <div class="container">
+    <div class="fade-up" style="max-width:680px;">
+      <div class="section-tag">✨ Why This Exists</div>
+      <h2 class="section-title">Every Diamond Has a<br><em>Birthday Worth Celebrating</em></h2>
+      <p class="section-body">Foster children are our <strong>Diamonds</strong> — precious, resilient, and deserving of every sparkle life has to offer. But too often, birthdays pass without a box, a gift, or even a card.</p>
+      <p class="section-body" style="margin-top:16px;">The Fostering Bling Foundation started Birthday Bling Box to change that. But boxes cost money. Supplies cost money. Showing up consistently costs money.</p>
+
+      <blockquote class="blockquote-founder">
+        "The Jewelry Box isn't just a donation. It's a promise. A promise that every Diamond in our care will know they are seen, celebrated, and loved — every single month of the year."
+        <cite>— Senett Basquine, Founder & CEO · Fostering Bling Foundation</cite>
+      </blockquote>
+
+      <p class="section-body">When you join The Jewelry Box as a monthly sustainer, you become part of the setting that makes every Diamond shine. Your giving — small or large — funds birthday boxes, resources for foster families, and the tools caseworkers need to serve every child well.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TIERS -->
+<section class="tiers-section" id="tiers">
+  <div class="container">
+    <div class="fade-up" style="text-align:center;">
+      <div class="section-tag">💛 Choose Your Tier</div>
+      <h2 class="section-title">Every Amount Makes a<br><em>Diamond Sparkle</em></h2>
+      <p class="section-body" style="margin:0 auto;">Give monthly. Cancel anytime. 100% tax-deductible.</p>
+    </div>
+    <div class="tiers-grid fade-up">
+
+      <div class="tier-card">
+        <span class="tier-icon">🥈</span>
+        <div class="tier-name">Silver</div>
+        <div class="tier-amount">$5</div>
+        <div class="tier-period">/month</div>
+        <p class="tier-desc">Covers birthday card + wrapping for one Diamond</p>
+        <button class="btn-tier-outline" onclick="openStripe({color:'#C8973A',title:'Join The Jewelry Box™ — Silver',subtitle:'$5/month covers a birthday card and wrapping for one Diamond.',label:'Give',freq:'monthly',amount:5,hideTabs:true}); return false;">Join as Silver →</button>
+      </div>
+
+      <div class="tier-card featured">
+        <div class="tier-badge">⭐ Most Popular</div>
+        <span class="tier-icon">💎</span>
+        <div class="tier-name">Gold</div>
+        <div class="tier-amount">$15</div>
+        <div class="tier-period">/month</div>
+        <p class="tier-desc">Covers a full Birthday Bling Box for one Diamond</p>
+        <button class="btn-tier" onclick="openStripe({color:'#C8973A',title:'Join The Jewelry Box™ — Gold',subtitle:'$15/month covers a full Birthday Bling Box for one Diamond.',label:'Give',freq:'monthly',amount:15,hideTabs:true}); return false;">Join as Gold →</button>
+      </div>
+
+      <div class="tier-card">
+        <span class="tier-icon">👑</span>
+        <div class="tier-name">Platinum</div>
+        <div class="tier-amount">$25</div>
+        <div class="tier-period">/month</div>
+        <p class="tier-desc">Covers a box + gift card for the whole foster family</p>
+        <button class="btn-tier-outline" onclick="openStripe({color:'#C8973A',title:'Join The Jewelry Box™ — Platinum',subtitle:'$25/month covers a Birthday Bling Box and a gift card for the whole foster family.',label:'Give',freq:'monthly',amount:25,hideTabs:true}); return false;">Join as Platinum →</button>
+      </div>
+
+      <div class="tier-card">
+        <span class="tier-icon">✨</span>
+        <div class="tier-name">Diamond Circle</div>
+        <div class="tier-amount">$50</div>
+        <div class="tier-period">/month</div>
+        <p class="tier-desc">Sponsors a Diamond's entire year of celebrations</p>
+        <button class="btn-tier-outline" onclick="openStripe({color:'#C8973A',title:'Join The Jewelry Box™ — Diamond Circle',subtitle:'$50/month sponsors a Diamond\'s entire year of celebrations.',label:'Give',freq:'monthly',amount:50,hideTabs:true}); return false;">Join Diamond Circle →</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section" style="background:var(--warm);">
+  <div class="container">
+    <div class="fade-up" style="text-align:center;">
+      <div class="section-tag">🎁 How It Works</div>
+      <h2 class="section-title">Simple. Monthly. <em>Meaningful.</em></h2>
+    </div>
+    <div class="steps-grid fade-up">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <h3 class="step-title">Choose Your Tier</h3>
+        <p class="step-desc">Pick the amount that feels right. Every dollar goes directly to Diamonds.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <h3 class="step-title">Give Monthly</h3>
+        <p class="step-desc">Your card is charged automatically each month. Cancel anytime, no questions asked.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <h3 class="step-title">We Build the Boxes</h3>
+        <p class="step-desc">FBF assembles Birthday Bling Boxes and delivers them through caseworkers and foster families.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <h3 class="step-title">A Diamond Sparkles</h3>
+        <p class="step-desc">A foster child opens a box filled with love — and knows they are celebrated.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT -->
+<section class="impact-section">
+  <div class="container">
+    <div class="fade-up" style="text-align:center;">
+      <div class="section-tag">💎 Your Impact</div>
+      <h2 class="section-title">Every Gem <em style="color:var(--diamond);">Feels It</em></h2>
+      <p class="section-body" style="margin:0 auto;color:rgba(255,255,255,0.5);">The Jewelry Box reaches every gem in the foster care ecosystem.</p>
+    </div>
+    <div class="gems-grid fade-up">
+      <div class="gem-card">
+        <span class="gem-card-icon">💎</span>
+        <h3>Diamonds</h3>
+        <p>Foster children receive birthday boxes, gifts, and the message that they are worth celebrating.</p>
+      </div>
+      <div class="gem-card">
+        <span class="gem-card-icon">💚</span>
+        <h3>Emeralds</h3>
+        <p>Foster parents receive resources and support that help them stay — and keep showing up.</p>
+      </div>
+      <div class="gem-card">
+        <span class="gem-card-icon">🤍</span>
+        <h3>Pearls</h3>
+        <p>Caseworkers gain access to tools and supplies that reduce their administrative burden.</p>
+      </div>
+      <div class="gem-card">
+        <span class="gem-card-icon">❤️</span>
+        <h3>Rubies</h3>
+        <p>Potential foster parents see a community that supports its members — and says yes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA / GIVE -->
+<section class="cta-section" id="give">
+  <div class="cta-inner fade-up">
+    <div class="section-tag">💎 Join The Jewelry Box™</div>
+    <h2 class="section-title">Make a Diamond<br><em>Sparkle Today</em></h2>
+    <p class="section-body" style="margin:0 auto 8px;">Choose your monthly amount. Cancel anytime. Every gift is tax-deductible.</p>
+
+    <div class="amount-select-grid" id="amountGrid">
+      <button class="amount-select-btn" onclick="selectAmount(5,'Silver',this)">
+        <span class="amt">$5</span>
+        <span class="tier-lbl">Silver</span>
+      </button>
+      <button class="amount-select-btn active" onclick="selectAmount(15,'Gold',this)">
+        <span class="amt">$15</span>
+        <span class="tier-lbl">Gold ⭐</span>
+      </button>
+      <button class="amount-select-btn" onclick="selectAmount(25,'Platinum',this)">
+        <span class="amt">$25</span>
+        <span class="tier-lbl">Platinum</span>
+      </button>
+      <button class="amount-select-btn" onclick="selectAmount(50,'Diamond',this)">
+        <span class="amt">$50</span>
+        <span class="tier-lbl">Diamond</span>
+      </button>
+    </div>
+
+    <button class="give-btn" id="giveBtnMain" onclick="submitGive()">💎 Give $15/Month — Join The Jewelry Box™</button>
+
+    <p class="secure-note">🔒 Secure payment powered by Stripe · Cancel anytime</p>
+
+    <div class="tax-note">
+      Fostering Bling Foundation is a registered 501(c)(3) nonprofit organization (EIN: 88-2792734). All donations are tax-deductible to the fullest extent of the law. You will receive an annual giving statement for your records.
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <h3>The Jewelry Box™</h3>
+      <div class="footer-tagline">"Because Every Gem Deserves to Sparkle"™</div>
+      <p>A program of <strong style="color:rgba(255,255,255,0.6);">Fostering Bling Foundation</strong></p>
+      <p style="margin-top:4px;">501(c)(3) Nonprofit · EIN 88-2792734 · Candid Platinum 2024 · Fairview Heights, IL</p>
+    </div>
+    <div class="footer-links">
+      <a href="https://www.fosteringbling.org">Home</a>
+      <a href="https://www.birthdaybling.org">Birthday Bling Box</a>
+      <a href="https://www.fosteringbling.org/blog">Blog</a>
+      <a href="mailto:LetsChat@fosteringbling.org">LetsChat@fosteringbling.org</a>
+      <a href="https://www.fosteringbling.org/privacy-policy">Privacy Policy</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2026 Fostering Bling Foundation. All rights reserved. · The Jewelry Box™ is a monthly sustainer program.
+  </div>
+</footer>
+
+<script>
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Amount selector
+  var selectedAmount = 15;
+  var selectedTier = 'Gold';
+
+  function selectAmount(amount, tier, el) {
+    selectedAmount = amount;
+    selectedTier = tier;
+    document.querySelectorAll('.amount-select-btn').forEach(function(b) { b.classList.remove('active'); });
+    el.classList.add('active');
+    document.getElementById('giveBtnMain').textContent = '💎 Give $' + amount + '/Month — Join The Jewelry Box™';
+  }
+
+  function submitGive() {
+    openStripe({
+      color: '#C8973A',
+      title: 'Join The Jewelry Box™ — ' + selectedTier,
+      subtitle: '$' + selectedAmount + '/month supports Diamonds and foster families.',
+      label: 'Give',
+      freq: 'monthly',
+      amount: selectedAmount,
+      hideTabs: true
+    });
+  }
+</script>
+
+<!-- STRIPE PAYMENT MODAL -->
+<script src="https://js.stripe.com/v3/"></script>
+<style>
+.stripe-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:9999;align-items:center;justify-content:center;}
+.stripe-overlay.active{display:flex;}
+.stripe-modal{background:white;border-radius:16px;padding:36px;max-width:480px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.3);position:relative;animation:slideUp 0.3s ease;}
+@keyframes slideUp{from{transform:translateY(30px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+.stripe-modal h2{font-size:1.4rem;font-weight:700;margin-bottom:6px;color:#0D1B2A;}
+.stripe-modal p{color:#6B7280;font-size:0.9rem;margin-bottom:20px;}
+.stripe-close{position:absolute;top:16px;right:20px;font-size:1.6rem;cursor:pointer;color:#9CA3AF;background:none;border:none;line-height:1;}
+.stripe-close:hover{color:#374151;}
+.amount-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px;}
+.amount-btn{padding:12px;border:2px solid #E5E7EB;border-radius:10px;background:white;font-size:1rem;font-weight:600;cursor:pointer;color:#374151;transition:all 0.2s;}
+.amount-btn:hover,.amount-btn.selected{border-color:var(--sc,#C8973A);color:var(--sc,#C8973A);background:#FDF8EE;}
+.custom-amount{width:100%;padding:12px 16px;border:2px solid #E5E7EB;border-radius:10px;font-size:1rem;margin-bottom:16px;box-sizing:border-box;outline:none;}
+.custom-amount:focus{border-color:var(--sc,#C8973A);}
+#scard{padding:14px;border:2px solid #E5E7EB;border-radius:10px;margin-bottom:16px;}
+.stripe-pay-btn{width:100%;padding:14px;border:none;border-radius:10px;font-size:1rem;font-weight:700;color:var(--navy,#0D2B3E);cursor:pointer;transition:opacity 0.2s;background:var(--sc,#C8973A);}
+.stripe-pay-btn:hover{opacity:0.9;}
+.stripe-pay-btn:disabled{opacity:0.6;cursor:not-allowed;}
+.smsg{text-align:center;font-size:0.85rem;margin-top:12px;min-height:20px;}
+.smsg.err{color:#DC2626;}
+.smsg.ok{color:#059669;}
+.stripe-secure{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:14px;color:#9CA3AF;font-size:0.78rem;}
+.stabs{display:flex;gap:8px;margin-bottom:20px;}
+.stab{flex:1;padding:9px;border:2px solid #E5E7EB;border-radius:8px;background:white;font-size:0.85rem;font-weight:600;cursor:pointer;color:#6B7280;transition:all 0.2s;}
+.stab.active{border-color:var(--sc,#C8973A);color:var(--sc,#C8973A);background:#FDF8EE;}
+</style>
+
+<div class="stripe-overlay" id="sOverlay">
+  <div class="stripe-modal">
+    <button class="stripe-close" onclick="sClose()">&#215;</button>
+    <h2 id="sTitle">Join The Jewelry Box™</h2>
+    <p id="sSub">Your monthly gift supports foster children, families, and caseworkers.</p>
+    <div class="stabs" id="sTabs">
+      <button class="stab" onclick="sFreq('once',this)">One-Time</button>
+      <button class="stab active" onclick="sFreq('monthly',this)">Monthly</button>
+    </div>
+    <div class="amount-grid">
+      <button class="amount-btn" onclick="sAmt(5,this)">$5</button>
+      <button class="amount-btn" onclick="sAmt(10,this)">$10</button>
+      <button class="amount-btn selected" onclick="sAmt(15,this)">$15</button>
+      <button class="amount-btn" onclick="sAmt(25,this)">$25</button>
+      <button class="amount-btn" onclick="sAmt(50,this)">$50</button>
+      <button class="amount-btn" onclick="sAmt(0,this)">Other</button>
+    </div>
+    <input type="number" class="custom-amount" id="sCustom" placeholder="Enter custom amount ($)" style="display:none;" oninput="sS.amount=parseFloat(this.value)*100||0"/>
+    <div id="scard"></div>
+    <button class="stripe-pay-btn" id="sPayBtn" onclick="sPay()">Give Now</button>
+    <div class="smsg" id="sMsg"></div>
+    <div class="stripe-secure">&#128274; Secured by Stripe &middot; SSL Encrypted</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var sk='pk_live_51T95CwHsdPh1og1bRud7auBtbbXjVSbKkuOD4QiysPCa38SIdWbVIXQgieT4I0nhQeilqD3ikQgVpDTw05rAiQOo00g5y62XAz';
+  var stripe=Stripe(sk);
+  var els=stripe.elements();
+  var card=els.create('card',{style:{base:{fontSize:'16px',color:'#374151','::placeholder':{color:'#9CA3AF'}}}});
+  card.mount('#scard');
+  var sS={amount:1500,freq:'monthly',color:'#C8973A',label:'Give'};
+  window.openStripe=function(cfg){
+    cfg=cfg||{};
+    sS.amount=(cfg.amount||15)*100;
+    sS.freq=cfg.freq||'monthly';
+    sS.color=cfg.color||'#C8973A';
+    sS.label=cfg.label||'Give';
+    document.documentElement.style.setProperty('--sc',sS.color);
+    document.getElementById('sTitle').textContent=cfg.title||'Join The Jewelry Box™';
+    document.getElementById('sSub').textContent=cfg.subtitle||'Your monthly gift supports foster children, families, and caseworkers.';
+    document.getElementById('sPayBtn').textContent=sS.label+' Now';
+    document.getElementById('sTabs').style.display=cfg.hideTabs?'none':'flex';
+    document.getElementById('sOverlay').classList.add('active');
+    document.getElementById('sMsg').textContent='';
+    document.querySelectorAll('.amount-btn').forEach(function(b){b.classList.remove('selected');});
+    if(cfg.amount){
+      document.querySelectorAll('.amount-btn').forEach(function(b){
+        if(b.textContent==='$'+cfg.amount) b.classList.add('selected');
+      });
+    }
+  };
+  window.sClose=function(){document.getElementById('sOverlay').classList.remove('active');};
+  window.sFreq=function(f,el){sS.freq=f;document.querySelectorAll('.stab').forEach(function(t){t.classList.remove('active');});el.classList.add('active');};
+  window.sAmt=function(a,el){
+    document.querySelectorAll('.amount-btn').forEach(function(b){b.classList.remove('selected');});
+    el.classList.add('selected');
+    if(a===0){document.getElementById('sCustom').style.display='block';sS.amount=0;}
+    else{document.getElementById('sCustom').style.display='none';sS.amount=a*100;}
+  };
+  window.sPay=async function(){
+    var btn=document.getElementById('sPayBtn');
+    var msg=document.getElementById('sMsg');
+    if(!sS.amount||sS.amount<100){msg.textContent='Please enter an amount of at least $1.';msg.className='smsg err';return;}
+    btn.disabled=true;btn.textContent='Processing...';msg.textContent='';
+    try{
+      var r=await stripe.createPaymentMethod({type:'card',card:card});
+      if(r.error){msg.textContent=r.error.message;msg.className='smsg err';btn.disabled=false;btn.textContent=sS.label+' Now';return;}
+      msg.textContent='Thank you! Your payment is being processed. Every Diamond you support will sparkle.';
+      msg.className='smsg ok';btn.textContent='Thank You!';
+      setTimeout(function(){sClose();btn.disabled=false;btn.textContent=sS.label+' Now';},3500);
+    }catch(e){msg.textContent='Something went wrong. Please try again.';msg.className='smsg err';btn.disabled=false;btn.textContent=sS.label+' Now';}
+  };
+  document.getElementById('sOverlay').addEventListener('click',function(e){if(e.target===this)sClose();});
+})();
+</script>
+
+</body>
+</html>
