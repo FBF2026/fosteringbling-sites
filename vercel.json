@@ -1,1 +1,22 @@
-{"redirects":[{"source":"/","has":[{"type":"host","value":"birthdaybling.org"}],"destination":"/birthday-bling-box.html","permanent":false}]}
+{
+  "redirects": [
+    {
+      "source": "/",
+      "has": [{"type": "host", "value": "birthdaybling.org"}],
+      "destination": "/birthday-bling-box.html",
+      "permanent": false
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/",
+      "has": [{"type": "host", "value": "havenassist.org"}],
+      "destination": "/havenassist-cw.html"
+    },
+    {
+      "source": "/",
+      "has": [{"type": "host", "value": "www.havenassist.org"}],
+      "destination": "/havenassist-cw.html"
+    }
+  ]
+}
