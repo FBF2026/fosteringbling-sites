@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birthday Bling Box — Fostering Bling Foundation</title>
+<meta name="description" content="Every foster child deserves a real birthday. The Birthday Bling Box is a full party-in-a-box program from Fostering Bling Foundation — party supplies, decorations, and a $20 cake gift card delivered to foster families.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0D2B3E;
+    --orange: #E8721A;
+    --teal: #00B4A6;
+    --teal-light: #E6F8F7;
+    --gold: #C8973A;
+    --diamond: #A8D4E6;
+    --diamond-dark: #2471A3;
+    --diamond-mid: #5DADE2;
+    --white: #FFFFFF;
+    --warm: #FBF8F4;
+    --text: #1A2E3B;
+    --muted: #6B8090;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--warm);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    background: rgba(13,43,62,0.97);
+    backdrop-filter: blur(10px);
+    padding: 16px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+
+  .nav-brand-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1.1;
+  }
+
+  .nav-brand-text span {
+    display: block;
+    font-size: 0.65rem;
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
+    color: var(--teal);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .nav-links { display: flex; gap: 24px; align-items: center; }
+  .nav-links a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--teal); }
+
+  .nav-donate {
+    background: var(--orange);
+    color: white;
+    padding: 9px 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.82rem;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .nav-donate:hover { background: #d4631a; color: white; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(160deg, #0D1B2A 0%, #0D2B3E 40%, #0A3A5C 70%, #0D2B3E 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 40px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Floating confetti gems */
+  .confetti {
+    position: absolute;
+    pointer-events: none;
+    animation: floatUp linear infinite;
+    opacity: 0;
+  }
+
+  @keyframes floatUp {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.4; }
+    100% { transform: translateY(-20vh) rotate(720deg); opacity: 0; }
+  }
+
+  .hero-tag {
+    display: inline-block;
+    background: rgba(168,212,230,0.12);
+    border: 1px solid rgba(168,212,230,0.3);
+    color: var(--diamond);
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 6px 20px;
+    border-radius: 30px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 7vw, 5rem);
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 16px;
+    position: relative;
+  }
+
+  .hero h1 em { color: var(--diamond); font-style: italic; }
+  .hero h1 .gold { color: var(--gold); }
+
+  .hero-sub {
+    font-size: 1.15rem;
+    color: rgba(255,255,255,0.6);
+    max-width: 580px;
+    margin: 0 auto 40px;
+    line-height: 1.7;
+  }
+
+  .hero-sub strong { color: var(--diamond); font-weight: 600; }
+
+  .hero-cta { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 60px; }
+
+  .btn-diamond {
+    background: linear-gradient(135deg, var(--diamond-mid), var(--diamond));
+    color: var(--navy);
+    padding: 16px 36px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: none;
+    cursor: pointer;
+  }
+  .btn-diamond:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(168,212,230,0.4); }
+
+  .btn-outline-diamond {
+    background: transparent;
+    color: var(--diamond);
+    padding: 16px 36px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    border: 2px solid rgba(168,212,230,0.4);
+    transition: all 0.2s;
+  }
+  .btn-outline-diamond:hover { border-color: var(--diamond); background: rgba(168,212,230,0.06); }
+
+  /* STAT STRIP */
+  .stat-strip {
+    background: var(--navy);
+    padding: 32px 40px;
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    flex-wrap: wrap;
+    border-top: 1px solid rgba(168,212,230,0.1);
+    border-bottom: 1px solid rgba(168,212,230,0.1);
+  }
+
+  .stat-item { text-align: center; }
+  .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 700; color: var(--diamond); line-height: 1; }
+  .stat-label { font-size: 0.75rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
+
+  /* SECTIONS */
+  .container { max-width: 1060px; margin: 0 auto; }
+  .section { padding: 100px 40px; }
+  .section-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--diamond-mid);
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    color: var(--navy);
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+  .section-title em { color: var(--diamond-dark); font-style: italic; }
+  .section-body { font-size: 1rem; color: var(--muted); line-height: 1.85; max-width: 640px; }
+
+  /* WHAT'S INSIDE */
+  .inside-section { background: var(--warm); }
+
+  .items-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 52px;
+  }
+
+  .item-card {
+    background: white;
+    border-radius: 16px;
+    padding: 28px 20px;
+    text-align: center;
+    border: 1.5px solid rgba(168,212,230,0.2);
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .item-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--diamond-mid), var(--diamond));
+  }
+
+  .item-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(168,212,230,0.2); border-color: var(--diamond-mid); }
+
+  .item-icon { font-size: 2.2rem; margin-bottom: 12px; display: block; }
+  .item-name { font-weight: 700; font-size: 0.9rem; color: var(--navy); margin-bottom: 6px; }
+  .item-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+
+  /* THE GEM KEEPSAKE */
+  .keepsake-section {
+    background: linear-gradient(135deg, var(--navy) 0%, #0A3A5C 100%);
+    padding: 100px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .keepsake-section::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(168,212,230,0.06), transparent 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .keepsake-section .section-title { color: var(--white); }
+  .keepsake-section .section-body { color: rgba(255,255,255,0.55); margin: 0 auto; }
+  .keepsake-section .section-tag { color: var(--diamond); }
+
+  .gem-display {
+    width: 120px; height: 120px;
+    background: radial-gradient(circle at 35% 35%, rgba(255,255,255,0.9), var(--diamond) 40%, var(--diamond-mid) 70%, var(--diamond-dark));
+    clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+    margin: 40px auto;
+    position: relative;
+    animation: gemPulse 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 30px rgba(168,212,230,0.5));
+  }
+
+  @keyframes gemPulse {
+    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 30px rgba(168,212,230,0.5)); }
+    50% { transform: scale(1.05); filter: drop-shadow(0 0 50px rgba(168,212,230,0.8)); }
+  }
+
+  .keepsake-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-style: italic;
+    color: var(--diamond);
+    max-width: 600px;
+    margin: 0 auto 20px;
+    line-height: 1.4;
+  }
+
+  /* HOW IT WORKS */
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-top: 52px;
+    position: relative;
+  }
+
+  .steps-grid::before {
+    content: '';
+    position: absolute;
+    top: 32px;
+    left: 10%;
+    right: 10%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--diamond-mid), transparent);
+  }
+
+  .step-card {
+    text-align: center;
+    padding: 20px;
+    position: relative;
+  }
+
+  .step-num {
+    width: 64px; height: 64px;
+    background: linear-gradient(135deg, var(--diamond-mid), var(--diamond));
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 0 auto 20px;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 4px 16px rgba(168,212,230,0.3);
+  }
+
+  .step-title { font-weight: 700; font-size: 0.95rem; color: var(--navy); margin-bottom: 8px; }
+  .step-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+
+  /* SPONSOR TIERS */
+  .sponsor-section { background: white; padding: 100px 40px; }
+
+  .tiers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    margin-top: 52px;
+  }
+
+  .tier-card {
+    border-radius: 20px;
+    padding: 40px 32px;
+    border: 2px solid rgba(168,212,230,0.2);
+    position: relative;
+    transition: all 0.3s;
+    background: var(--warm);
+  }
+
+  .tier-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(168,212,230,0.15); }
+
+  .tier-card.featured {
+    border-color: var(--diamond-mid);
+    background: linear-gradient(160deg, #EAF4FB, #F0F8FF);
+    box-shadow: 0 8px 32px rgba(168,212,230,0.2);
+  }
+
+  .tier-badge {
+    position: absolute;
+    top: -14px; left: 50%;
+    transform: translateX(-50%);
+    background: var(--diamond-mid);
+    color: var(--navy);
+    font-size: 0.72rem;
+    font-weight: 800;
+    padding: 4px 16px;
+    border-radius: 20px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .tier-amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--diamond-dark);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .tier-period { font-size: 0.78rem; color: var(--muted); margin-bottom: 20px; }
+  .tier-title { font-weight: 700; font-size: 1.1rem; color: var(--navy); margin-bottom: 12px; }
+  .tier-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.7; margin-bottom: 28px; }
+
+  .tier-includes { margin-bottom: 28px; }
+  .tier-include-item {
+    font-size: 0.82rem;
+    color: var(--text);
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tier-include-item::before { content: '💎'; font-size: 0.75rem; }
+
+  .btn-sponsor {
+    display: block;
+    text-align: center;
+    padding: 14px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.2s;
+    background: linear-gradient(135deg, var(--diamond-mid), var(--diamond));
+    color: var(--navy);
+  }
+  .btn-sponsor:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(168,212,230,0.4); }
+
+  .btn-sponsor-outline {
+    display: block;
+    text-align: center;
+    padding: 14px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: 2px solid rgba(168,212,230,0.4);
+    color: var(--diamond-dark);
+    background: transparent;
+  }
+  .btn-sponsor-outline:hover { border-color: var(--diamond-mid); background: rgba(168,212,230,0.06); }
+
+  /* REQUEST FORM */
+  .request-section { background: var(--warm); padding: 100px 40px; }
+
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 52px; }
+
+  .form-card {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    border: 1.5px solid rgba(168,212,230,0.2);
+    border-top: 4px solid var(--diamond-mid);
+  }
+
+  .form-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.7rem;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+
+  .form-card p.form-desc { color: var(--muted); font-size: 0.88rem; line-height: 1.7; margin-bottom: 28px; }
+
+  .form-group { margin-bottom: 18px; }
+
+  .form-group label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 7px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1.5px solid #ddd;
+    border-radius: 10px;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.9rem;
+    color: var(--text);
+    background: #fafafa;
+    outline: none;
+    transition: all 0.2s;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--diamond-mid);
+    box-shadow: 0 0 0 3px rgba(93,173,226,0.1);
+    background: white;
+  }
+
+  .form-group textarea { resize: vertical; min-height: 90px; }
+
+  .form-submit {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 8px;
+    background: linear-gradient(135deg, var(--diamond-mid), var(--diamond));
+    color: var(--navy);
+  }
+
+  .form-submit:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(168,212,230,0.4); }
+
+  .form-success {
+    display: none;
+    text-align: center;
+    padding: 32px;
+    background: #EAF4FB;
+    border-radius: 12px;
+    border: 2px solid var(--diamond-mid);
+  }
+
+  .form-success .success-icon { font-size: 2.5rem; margin-bottom: 12px; }
+  .form-success h4 { color: var(--navy); font-size: 1.2rem; margin-bottom: 8px; font-family: 'Cormorant Garamond', serif; }
+  .form-success p { color: var(--muted); font-size: 0.88rem; margin: 0; line-height: 1.6; }
+
+  /* IMPACT SECTION */
+  .impact-section {
+    background: linear-gradient(135deg, var(--navy), #0A3A5C);
+    padding: 100px 40px;
+    text-align: center;
+  }
+
+  .impact-section .section-title { color: white; }
+  .impact-section .section-tag { color: var(--diamond); }
+
+  .impact-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    font-style: italic;
+    color: rgba(255,255,255,0.9);
+    max-width: 720px;
+    margin: 40px auto 24px;
+    line-height: 1.5;
+  }
+
+  .impact-quote em { color: var(--diamond); }
+
+  .impact-attr { color: rgba(255,255,255,0.35); font-size: 0.85rem; }
+
+  /* FOOTER */
+  footer {
+    background: var(--navy);
+    padding: 48px 40px 28px;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .footer-inner {
+    max-width: 1060px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .footer-brand h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: white; margin-bottom: 4px; }
+  .footer-brand p { font-size: 0.78rem; color: rgba(255,255,255,0.35); }
+
+  .footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+  .footer-links a { color: rgba(255,255,255,0.4); text-decoration: none; font-size: 0.82rem; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--diamond); }
+
+  .footer-bottom {
+    max-width: 1060px;
+    margin: 28px auto 0;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    font-size: 0.75rem;
+    text-align: center;
+    color: rgba(255,255,255,0.2);
+  }
+
+  /* ANIMATIONS */
+  .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .items-grid { grid-template-columns: 1fr 1fr; }
+    .steps-grid { grid-template-columns: 1fr 1fr; }
+    .steps-grid::before { display: none; }
+    .tiers-grid { grid-template-columns: 1fr; }
+    .form-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 600px) {
+    nav { padding: 14px 20px; }
+    .nav-links { display: none; }
+    .section { padding: 64px 20px; }
+    .items-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .stat-strip { gap: 32px; }
+    .hero h1 { font-size: 2.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="https://www.fosteringbling.org" class="nav-brand">
+    <img src="https://pub-629428d185ca4960a0a73c850d32294b.r2.dev/company_4431/images/60052b55-7738-423b-8925-bef0ca050d4f.png" alt="Fostering Bling Foundation" style="height:44px;width:auto;object-fit:contain;"/>
+    <div class="nav-brand-text">
+      Fostering Bling Foundation
+      <span>Providing Hope & Love to Our Gems</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="https://www.fosteringbling.org#mission">Mission</a>
+    <a href="https://www.fosteringbling.org#gems">Our Gems</a>
+    <a href="https://havenassist.org" target="_blank">HavenAssist</a>
+    <a href="#request">Request a Box</a>
+    <a href="#" onclick="openStripe({color:'#E8580A',title:'Support Birthday Bling Box',subtitle:'Every child deserves to feel special on their birthday.',label:'Donate'}); return false;" target="_blank" class="nav-donate">Donate Now</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <!-- Floating confetti -->
+  <div class="confetti" style="left:8%;width:10px;height:10px;background:var(--diamond);clip-path:polygon(50% 0%,100% 38%,82% 100%,18% 100%,0% 38%);animation-duration:8s;animation-delay:0s;"></div>
+  <div class="confetti" style="left:20%;width:7px;height:7px;background:var(--gold);clip-path:polygon(50% 0%,100% 38%,82% 100%,18% 100%,0% 38%);animation-duration:11s;animation-delay:2s;"></div>
+  <div class="confetti" style="left:35%;width:12px;height:12px;background:var(--teal);clip-path:polygon(50% 0%,100% 38%,82% 100%,18% 100%,0% 38%);animation-duration:9s;animation-delay:4s;"></div>
+  <div class="confetti" style="left:55%;width:8px;height:8px;background:var(--diamond);clip-path:polygon(50% 0%,100% 38%,82% 100%,18% 100%,0% 38%);animation-duration:12s;animation-delay:1s;"></div>
+  <div class="confetti" style="left:70%;width:10px;height:10px;background:var(--gold);clip-path:polygon(50% 0%,100% 38%,82% 100%,18% 100%,0% 38%);animation-duration:7s;animation-delay:3s;"></div>
+  <div class="confetti" style="left:85%;width:9px;height:9px;background:var(--diamond-mid);clip-path:polygon(50% 0%,100% 38%,82% 100%,18% 100%,0% 38%);animation-duration:10s;animation-delay:5s;"></div>
+
+  <div style="position:relative;z-index:1;">
+    <div class="hero-tag">💎 The Diamonds Program</div>
+    <h1>Every Diamond Deserves<br>a <em>Real</em> <span class="gold">Birthday.</span></h1>
+    <p class="hero-sub">
+      Too many foster children spend their birthday without a party, without decorations, without a cake with their name on it.
+      <strong>That ends here.</strong>
+    </p>
+    <div class="hero-cta">
+      <a href="#" onclick="openStripe({color:'#E8580A',title:'Support Birthday Bling Box',subtitle:'Every child deserves to feel special on their birthday.',label:'Donate'}); return false;" target="_blank" class="btn-diamond">💎 Sponsor a Birthday — $50</a>
+      <a href="#request" class="btn-outline-diamond">Request a Box →</a>
+    </div>
+    <div style="color:rgba(255,255,255,0.2);font-size:0.8rem;">
+      Fostering Bling Foundation &nbsp;•&nbsp; 501(c)(3) Tax Exempt &nbsp;•&nbsp; EIN: 88-2792734 &nbsp;•&nbsp; Black Woman-Owned
+    </div>
+  </div>
+</section>
+
+<!-- STAT STRIP -->
+<div class="stat-strip">
+  <div class="stat-item">
+    <div class="stat-num">400K+</div>
+    <div class="stat-label">Children in US Foster Care</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">1 in 3</div>
+    <div class="stat-label">Won't Have a Birthday Party</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">$50</div>
+    <div class="stat-label">Changes Everything</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">💎</div>
+    <div class="stat-label">Every Child Is a Gem</div>
+  </div>
+</div>
+
+<!-- WHAT'S IN THE BOX -->
+<section class="section inside-section">
+  <div class="container">
+    <div class="fade-up" style="text-align:center;">
+      <div class="section-tag">What's Inside</div>
+      <h2 class="section-title">A full party. <em>In a box.</em></h2>
+      <p class="section-body" style="margin:0 auto;">Everything a foster family needs to throw a real, beautiful, memorable birthday — delivered to their door. No shopping. No stress. Just celebration.</p>
+    </div>
+    <div class="items-grid fade-up">
+
+      <div class="item-card">
+        <span class="item-icon">🎈</span>
+        <div class="item-name">Balloons</div>
+        <div class="item-desc">Age-appropriate, colorful balloons. Enough to fill a room with joy.</div>
+      </div>
+
+      <div class="item-card">
+        <span class="item-icon">🎉</span>
+        <div class="item-name">Streamers & Banner</div>
+        <div class="item-desc">"Happy Birthday" banner plus coordinating streamers and table decorations.</div>
+      </div>
+
+      <div class="item-card">
+        <span class="item-icon">🍽️</span>
+        <div class="item-name">Party Supplies</div>
+        <div class="item-desc">Matching plates, cups, and napkins — coordinated theme, ready to use.</div>
+      </div>
+
+      <div class="item-card">
+        <span class="item-icon">🕯️</span>
+        <div class="item-name">Birthday Candles</div>
+        <div class="item-desc">Because every Diamond deserves to make a wish that gets celebrated.</div>
+      </div>
+
+      <div class="item-card">
+        <span class="item-icon">🎁</span>
+        <div class="item-name">Wrapping & Gift Bag</div>
+        <div class="item-desc">Wrapping paper, ribbon, and a gift bag so every present looks special.</div>
+      </div>
+
+      <div class="item-card">
+        <span class="item-icon">🎂</span>
+        <div class="item-name">$20 Cake Gift Card</div>
+        <div class="item-desc">A gift card for their local grocery store bakery — so the cake has their name on it.</div>
+      </div>
+
+      <div class="item-card">
+        <span class="item-icon">💌</span>
+        <div class="item-name">Birthday Card from FBF</div>
+        <div class="item-desc">A personalized card from Fostering Bling Foundation that tells them they are seen and loved.</div>
+      </div>
+
+      <div class="item-card" style="border-color:rgba(200,151,58,0.4);border-top-color:var(--gold);">
+        <span class="item-icon">✨</span>
+        <div class="item-name" style="color:var(--gold);">Gem Keepsake</div>
+        <div class="item-desc">A small gem they keep forever — a reminder that they are a Diamond. Irreplaceable. Priceless.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- THE GEM KEEPSAKE MOMENT -->
+<section class="keepsake-section">
+  <div style="position:relative;z-index:1;text-align:center;">
+    <div class="section-tag">The Most Important Item</div>
+    <h2 class="section-title" style="color:white;max-width:600px;margin:0 auto;">The gem they keep <em style="color:var(--diamond);">forever.</em></h2>
+    <div class="gem-display"></div>
+    <div class="keepsake-quote">"You are not forgotten. You are not invisible. You are a <em>Diamond.</em>"</div>
+    <p class="section-body" style="margin:0 auto;color:rgba(255,255,255,0.5);">Every Birthday Bling Box includes a small gem keepsake — a physical reminder that they belong to something. That someone planned this for them. That they matter. Long after the balloons deflate, the gem remains.</p>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section" style="background:white;">
+  <div class="container">
+    <div class="fade-up" style="text-align:center;">
+      <div class="section-tag">How It Works</div>
+      <h2 class="section-title">Simple. <em>Beautiful.</em> Delivered.</h2>
+      <p class="section-body" style="margin:0 auto;">We handle everything. Foster families just have to celebrate.</p>
+    </div>
+    <div class="steps-grid fade-up">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-title">Foster Parent Requests</div>
+        <div class="step-desc">Submit a simple request form with the child's birthday month, age, and any theme preferences.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-title">Donor Sponsors the Box</div>
+        <div class="step-desc">A $50 donation from our community covers the full Birthday Bling Box — party supplies, cake card, and gem keepsake.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div class="step-title">FBF Ships the Box</div>
+        <div class="step-desc">We pack and ship or deliver the Birthday Bling Box to arrive before the child's birthday month.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <div class="step-title">Diamond Celebrates 🎉</div>
+        <div class="step-desc">A foster child opens a box full of birthday magic — and knows someone planned this just for them.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPONSOR TIERS -->
+<section class="sponsor-section" id="sponsor">
+  <div class="container">
+    <div class="fade-up" style="text-align:center;">
+      <div class="section-tag">Donate Now</div>
+      <h2 class="section-title">Choose your <em>impact.</em></h2>
+      <p class="section-body" style="margin:0 auto;">Every level of giving makes a real difference in a child's life. Your sponsorship goes directly to Birthday Bling Boxes — nothing else.</p>
+    </div>
+    <div class="tiers-grid fade-up">
+
+      <div class="tier-card">
+        <div class="tier-amount">$50</div>
+        <div class="tier-period">one-time gift</div>
+        <h3 class="tier-title">Sponsor One Birthday</h3>
+        <p class="tier-desc">One complete Birthday Bling Box — everything needed for one foster child to have a real birthday party.</p>
+        <div class="tier-includes">
+          <div class="tier-include-item">Full party supply kit</div>
+          <div class="tier-include-item">$20 cake gift card</div>
+          <div class="tier-include-item">Gem keepsake</div>
+          <div class="tier-include-item">FBF birthday card</div>
+        </div>
+        <a href="#" onclick="openStripe({color:'#E8580A',title:'Support Birthday Bling Box',subtitle:'Every child deserves to feel special on their birthday.',label:'Donate'}); return false;" target="_blank" class="btn-sponsor-outline">Sponsor One Box →</a>
+      </div>
+
+      <div class="tier-card featured">
+        <div class="tier-badge">⭐ Most Impactful</div>
+        <div class="tier-amount">$250</div>
+        <div class="tier-period">one-time or quarterly</div>
+        <h3 class="tier-title">Sponsor 5 Birthdays</h3>
+        <p class="tier-desc">Five complete Birthday Bling Boxes for five foster children who might not otherwise have a birthday celebration at all.</p>
+        <div class="tier-includes">
+          <div class="tier-include-item">5 full party kits</div>
+          <div class="tier-include-item">5 x $20 cake gift cards</div>
+          <div class="tier-include-item">5 gem keepsakes</div>
+          <div class="tier-include-item">Named in FBF newsletter</div>
+        </div>
+        <a href="#" onclick="openStripe({color:'#E8580A',title:'Support Birthday Bling Box',subtitle:'Every child deserves to feel special on their birthday.',label:'Donate'}); return false;" target="_blank" class="btn-sponsor">Sponsor 5 Birthdays →</a>
+      </div>
+
+      <div class="tier-card">
+        <div class="tier-amount">$600</div>
+        <div class="tier-period">annual giving</div>
+        <h3 class="tier-title">Birthday Champion</h3>
+        <p class="tier-desc">Sponsor one foster child's birthday every month for an entire year — ensuring 12 diamonds celebrate in style.</p>
+        <div class="tier-includes">
+          <div class="tier-include-item">12 boxes per year</div>
+          <div class="tier-include-item">Named Diamond Champion</div>
+          <div class="tier-include-item">FBF donor recognition</div>
+          <div class="tier-include-item">Annual impact report</div>
+        </div>
+        <a href="#" onclick="openStripe({color:'#E8580A',title:'Support Birthday Bling Box',subtitle:'Every child deserves to feel special on their birthday.',label:'Donate'}); return false;" target="_blank" class="btn-sponsor-outline">Become a Champion →</a>
+      </div>
+
+    </div>
+    <div style="text-align:center;margin-top:32px;">
+      <p style="color:var(--muted);font-size:0.82rem;">Fostering Bling Foundation is a 501(c)(3) tax-exempt organization. EIN: 88-2792734. All donations are tax-deductible. D-U-N-S: 11-904-9006.</p>
+    </div>
+  </div>
+</section>
+
+<!-- REQUEST + DONATE FORMS -->
+<section class="request-section" id="request">
+  <div class="container">
+    <div class="fade-up" style="text-align:center;">
+      <div class="section-tag">Get a Box · Give a Box</div>
+      <h2 class="section-title">Every Diamond. <em>Every birthday.</em></h2>
+      <p class="section-body" style="margin:0 auto;">Foster families request a box. Donors make it happen. Together we make sure no foster child's birthday goes uncelebrated.</p>
+    </div>
+    <div class="form-grid fade-up">
+
+      <!-- REQUEST A BOX -->
+      <div class="form-card">
+        <h3>Request a Birthday Bling Box</h3>
+        <p class="form-desc">Are you a foster parent? Request a Birthday Bling Box for your foster child. Subject to availability — we'll do everything we can to make it happen.</p>
+        <div id="request-form-wrap">
+          <div class="form-group">
+            <label>Your Name (Foster Parent) *</label>
+            <input type="text" id="rf-name" placeholder="Full name" />
+          </div>
+          <div class="form-group">
+            <label>Email Address *</label>
+            <input type="email" id="rf-email" placeholder="your@email.com" />
+          </div>
+          <div class="form-group">
+            <label>Phone Number *</label>
+            <input type="tel" id="rf-phone" placeholder="(000) 000-0000" />
+          </div>
+          <div class="form-group">
+            <label>Child's Age *</label>
+            <input type="text" id="rf-age" placeholder="e.g. 7 years old" />
+          </div>
+          <div class="form-group">
+            <label>Birthday Month *</label>
+            <select id="rf-month">
+              <option value="">Select month</option>
+              <option>January</option><option>February</option><option>March</option>
+              <option>April</option><option>May</option><option>June</option>
+              <option>July</option><option>August</option><option>September</option>
+              <option>October</option><option>November</option><option>December</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Theme Preference (optional)</label>
+            <input type="text" id="rf-theme" placeholder="e.g. dinosaurs, princesses, sports, unicorns..." />
+          </div>
+          <div class="form-group">
+            <label>Mailing Address *</label>
+            <textarea id="rf-address" placeholder="Street address, city, state, zip" style="min-height:75px;"></textarea>
+          </div>
+          <button class="form-submit" onclick="submitRequestForm()">Request My Birthday Bling Box 🎉</button>
+        </div>
+        <div class="form-success" id="request-success">
+          <div class="success-icon">🎈</div>
+          <h4>Request received!</h4>
+          <p>Senett will personally reach out within 48 hours to confirm your Birthday Bling Box. Your Diamond deserves this celebration. 💎<br><br>Thank you for being the kind of foster parent who shows up for your gem.</p>
+        </div>
+      </div>
+
+      <!-- DONATE -->
+      <div class="form-card" style="border-top-color:var(--gold);">
+        <h3>Donate Now's Birthday</h3>
+        <p class="form-desc">Your $50 gift sponsors one complete Birthday Bling Box for a foster child who might not have a birthday party without your help. 100% goes directly to the boxes.</p>
+        <div style="background:linear-gradient(135deg,#EAF4FB,#F0F8FF);border-radius:12px;padding:24px;margin-bottom:28px;border:1.5px solid rgba(168,212,230,0.3);">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--diamond-dark);margin-bottom:4px;">$50</div>
+          <div style="font-size:0.82rem;color:var(--muted);margin-bottom:16px;">sponsors one complete Birthday Bling Box</div>
+          <a href="#" onclick="openStripe({color:'#E8580A',title:'Support Birthday Bling Box',subtitle:'Every child deserves to feel special on their birthday.',label:'Donate'}); return false;" target="_blank" class="btn-sponsor" style="display:block;text-align:center;text-decoration:none;">💎 Donate Now</a>
+        </div>
+        <div style="background:var(--warm);border-radius:12px;padding:24px;margin-bottom:28px;border:1.5px solid rgba(168,212,230,0.2);">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--diamond-dark);margin-bottom:4px;">$250</div>
+          <div style="font-size:0.82rem;color:var(--muted);margin-bottom:16px;">sponsors 5 Birthday Bling Boxes</div>
+          <a href="#" onclick="openStripe({color:'#E8580A',title:'Support Birthday Bling Box',subtitle:'Every child deserves to feel special on their birthday.',label:'Donate'}); return false;" target="_blank" class="btn-sponsor-outline" style="display:block;text-align:center;text-decoration:none;">Sponsor 5 Birthdays →</a>
+        </div>
+        <div style="background:var(--warm);border-radius:12px;padding:24px;border:1.5px solid rgba(168,212,230,0.2);">
+          <div style="font-size:0.85rem;color:var(--muted);margin-bottom:16px;line-height:1.6;">Want to sponsor a custom amount or set up recurring giving?</div>
+          <a href="#" onclick="openStripe({color:'#E8580A',title:'Support Birthday Bling Box',subtitle:'Every child deserves to feel special on their birthday.',label:'Donate'}); return false;" target="_blank" class="btn-sponsor-outline" style="display:block;text-align:center;text-decoration:none;">Custom Donation →</a>
+        </div>
+        <div style="text-align:center;margin-top:20px;">
+          <p style="font-size:0.75rem;color:var(--muted);">Tax-deductible · EIN: 88-2792734 · 501(c)(3) · Candid Platinum Rated</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT QUOTE -->
+<section class="impact-section">
+  <div style="position:relative;z-index:1;">
+    <div class="section-tag">Why This Matters</div>
+    <div class="impact-quote">"A birthday isn't just a party. It's proof that someone <em>planned for you.</em> That you were expected. That your arrival in this world — and in this family — <em>mattered.</em>"</div>
+    <div class="impact-attr">— Senett, Founder · Fostering Bling Foundation · Foster Mother to Kaleb, Finn & Phiona</div>
+    <div style="margin-top:48px;display:flex;gap:20px;justify-content:center;flex-wrap:wrap;">
+      <a href="#" onclick="openStripe({color:'#E8580A',title:'Support Birthday Bling Box',subtitle:'Every child deserves to feel special on their birthday.',label:'Donate'}); return false;" target="_blank" class="btn-diamond">💎 Sponsor a Birthday</a>
+      <a href="#request" class="btn-outline-diamond">Request a Box</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <h3>Fostering Bling Foundation</h3>
+      <p>Black Woman-Owned · 501(c)(3) · EIN: 88-2792734 · D-U-N-S: 11-904-9006 · Candid Platinum 2024</p>
+    </div>
+    <div class="footer-links">
+      <a href="https://www.fosteringbling.org">Home</a>
+      <a href="https://www.fosteringbling.org#mission">Mission</a>
+      <a href="https://www.fosteringbling.org#gems">Our Gems</a>
+      <a href="https://havenassist.org" target="_blank">HavenAssist</a>
+      <a href="https://www.fosteringbling.org/privacy-policy">Privacy Policy</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2026 Fostering Bling Foundation. All rights reserved. · Fairview Heights, Illinois · <a href="https://havenassist.org" style="color:rgba(168,212,230,0.4);">havenassist.org</a>
+  </div>
+</footer>
+
+<script>
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Request form
+  function submitRequestForm() {
+    const name = document.getElementById('rf-name').value.trim();
+    const email = document.getElementById('rf-email').value.trim();
+    const phone = document.getElementById('rf-phone').value.trim();
+    const age = document.getElementById('rf-age').value.trim();
+    const month = document.getElementById('rf-month').value;
+    const theme = document.getElementById('rf-theme').value.trim();
+    const address = document.getElementById('rf-address').value.trim();
+
+    if (!name || !email || !phone || !age || !month || !address) {
+      alert('Please fill in all required fields marked with *');
+      return;
+    }
+
+    const subject = encodeURIComponent('Birthday Bling Box Request — ' + age + ' — ' + month + ' — ' + name);
+    const body = encodeURIComponent(
+      'BIRTHDAY BLING BOX REQUEST\n' +
+      '==========================\n\n' +
+      'Foster Parent: ' + name + '\n' +
+      'Email: ' + email + '\n' +
+      'Phone: ' + phone + '\n\n' +
+      'Child Age: ' + age + '\n' +
+      'Birthday Month: ' + month + '\n' +
+      'Theme Preference: ' + (theme || 'No preference') + '\n\n' +
+      'Mailing Address:\n' + address + '\n\n' +
+      '— Sent from www.fosteringbling.org/birthday-bling-box'
+    );
+
+    // Send via Formspree
+    fetch('https://formspree.io/f/xjgagnpl', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ _subject: 'Birthday Bling Box Request — Age ' + age + ' — ' + month, name, email, phone, child_age: age, birth_month: month, theme, delivery_address: address })
+    }).then(r => {
+      if(r.ok){
+        document.getElementById('request-form-wrap').style.display = 'none';
+        document.getElementById('request-success').style.display = 'block';
+      } else { alert('Something went wrong. Please email LetsChat@fosteringbling.org directly.'); }
+    }).catch(() => { alert('Something went wrong. Please email LetsChat@fosteringbling.org directly.'); });
+  }
+</script>
+
+
+<!-- STRIPE PAYMENT MODAL -->
+<script src="https://js.stripe.com/v3/"></script>
+<style>
+.stripe-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:9999;align-items:center;justify-content:center;}
+.stripe-overlay.active{display:flex;}
+.stripe-modal{background:white;border-radius:16px;padding:36px;max-width:480px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.3);position:relative;animation:slideUp 0.3s ease;}
+@keyframes slideUp{from{transform:translateY(30px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+.stripe-modal h2{font-size:1.4rem;font-weight:700;margin-bottom:6px;color:#0D1B2A;}
+.stripe-modal p{color:#6B7280;font-size:0.9rem;margin-bottom:20px;}
+.stripe-close{position:absolute;top:16px;right:20px;font-size:1.6rem;cursor:pointer;color:#9CA3AF;background:none;border:none;line-height:1;}
+.stripe-close:hover{color:#374151;}
+.amount-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px;}
+.amount-btn{padding:12px;border:2px solid #E5E7EB;border-radius:10px;background:white;font-size:1rem;font-weight:600;cursor:pointer;color:#374151;transition:all 0.2s;}
+.amount-btn:hover,.amount-btn.selected{border-color:var(--sc,#00857A);color:var(--sc,#00857A);background:#f0fdf9;}
+.custom-amount{width:100%;padding:12px 16px;border:2px solid #E5E7EB;border-radius:10px;font-size:1rem;margin-bottom:16px;box-sizing:border-box;outline:none;}
+.custom-amount:focus{border-color:var(--sc,#00857A);}
+#scard{padding:14px;border:2px solid #E5E7EB;border-radius:10px;margin-bottom:16px;}
+.stripe-pay-btn{width:100%;padding:14px;border:none;border-radius:10px;font-size:1rem;font-weight:700;color:white;cursor:pointer;transition:opacity 0.2s;background:var(--sc,#00857A);}
+.stripe-pay-btn:hover{opacity:0.9;}
+.stripe-pay-btn:disabled{opacity:0.6;cursor:not-allowed;}
+.smsg{text-align:center;font-size:0.85rem;margin-top:12px;min-height:20px;}
+.smsg.err{color:#DC2626;}
+.smsg.ok{color:#059669;}
+.stripe-secure{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:14px;color:#9CA3AF;font-size:0.78rem;}
+.stabs{display:flex;gap:8px;margin-bottom:20px;}
+.stab{flex:1;padding:9px;border:2px solid #E5E7EB;border-radius:8px;background:white;font-size:0.85rem;font-weight:600;cursor:pointer;color:#6B7280;transition:all 0.2s;}
+.stab.active{border-color:var(--sc,#00857A);color:var(--sc,#00857A);background:#f0fdf9;}
+</style>
+
+<div class="stripe-overlay" id="sOverlay">
+  <div class="stripe-modal">
+    <button class="stripe-close" onclick="sClose()">&#215;</button>
+    <h2 id="sTitle">Support HavenAssist</h2>
+    <p id="sSub">Your contribution keeps this mission alive.</p>
+    <div class="stabs" id="sTabs">
+      <button class="stab active" onclick="sFreq('once',this)">One-Time</button>
+      <button class="stab" onclick="sFreq('monthly',this)">Monthly</button>
+    </div>
+    <div class="amount-grid">
+      <button class="amount-btn" onclick="sAmt(25,this)">$25</button>
+      <button class="amount-btn" onclick="sAmt(50,this)">$50</button>
+      <button class="amount-btn selected" onclick="sAmt(100,this)">$100</button>
+      <button class="amount-btn" onclick="sAmt(250,this)">$250</button>
+      <button class="amount-btn" onclick="sAmt(500,this)">$500</button>
+      <button class="amount-btn" onclick="sAmt(0,this)">Other</button>
+    </div>
+    <input type="number" class="custom-amount" id="sCustom" placeholder="Enter custom amount ($)" style="display:none;" oninput="sS.amount=parseFloat(this.value)*100||0"/>
+    <div id="scard"></div>
+    <button class="stripe-pay-btn" id="sPayBtn" onclick="sPay()">Donate Now</button>
+    <div class="smsg" id="sMsg"></div>
+    <div class="stripe-secure">&#128274; Secured by Stripe &middot; SSL Encrypted</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var sk='pk_live_51T95CwHsdPh1og1bzjIsptg4G2lccT1OqXbX2QPNAeEw5zZ89azOpOfcNkR5izm62KOYITaltVSxtUd5uoFGd2bA00LkvJnv01';
+  var stripe=Stripe(sk);
+  var els=stripe.elements();
+  var card=els.create('card',{style:{base:{fontSize:'16px',color:'#374151','::placeholder':{color:'#9CA3AF'}}}});
+  card.mount('#scard');
+  var sS={amount:10000,freq:'once',color:'#00857A',label:'Donate'};
+  window.openStripe=function(cfg){
+    cfg=cfg||{};
+    sS.amount=(cfg.amount||100)*100;
+    sS.freq=cfg.freq||'once';
+    sS.color=cfg.color||'#00857A';
+    sS.label=cfg.label||'Donate';
+    document.documentElement.style.setProperty('--sc',sS.color);
+    document.getElementById('sTitle').textContent=cfg.title||'Support HavenAssist';
+    document.getElementById('sSub').textContent=cfg.subtitle||'Your contribution keeps this mission alive.';
+    document.getElementById('sPayBtn').textContent=sS.label+' Now';
+    document.getElementById('sTabs').style.display=cfg.hideTabs?'none':'flex';
+    document.getElementById('sOverlay').classList.add('active');
+    document.getElementById('sMsg').textContent='';
+    document.querySelectorAll('.amount-btn').forEach(function(b){b.classList.remove('selected');});
+    document.querySelector('.amount-btn:nth-child(3)').classList.add('selected');
+  };
+  window.sClose=function(){document.getElementById('sOverlay').classList.remove('active');};
+  window.sFreq=function(f,el){sS.freq=f;document.querySelectorAll('.stab').forEach(function(t){t.classList.remove('active');});el.classList.add('active');};
+  window.sAmt=function(a,el){
+    document.querySelectorAll('.amount-btn').forEach(function(b){b.classList.remove('selected');});
+    el.classList.add('selected');
+    if(a===0){document.getElementById('sCustom').style.display='block';sS.amount=0;}
+    else{document.getElementById('sCustom').style.display='none';sS.amount=a*100;}
+  };
+  window.sPay=async function(){
+    var btn=document.getElementById('sPayBtn');
+    var msg=document.getElementById('sMsg');
+    if(!sS.amount||sS.amount<100){msg.textContent='Please enter an amount of at least $1.';msg.className='smsg err';return;}
+    btn.disabled=true;btn.textContent='Processing...';msg.textContent='';
+    try{
+      var r=await stripe.createPaymentMethod({type:'card',card:card});
+      if(r.error){msg.textContent=r.error.message;msg.className='smsg err';btn.disabled=false;btn.textContent=sS.label+' Now';return;}
+      msg.textContent='Thank you! Your payment is being processed. Your support means everything.';
+      msg.className='smsg ok';btn.textContent='Thank You!';
+      setTimeout(function(){sClose();btn.disabled=false;btn.textContent=sS.label+' Now';},3500);
+    }catch(e){msg.textContent='Something went wrong. Please try again.';msg.className='smsg err';btn.disabled=false;btn.textContent=sS.label+' Now';}
+  };
+  document.getElementById('sOverlay').addEventListener('click',function(e){if(e.target===this)sClose();});
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HavenAssist FC — Your Safe Space</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0D1B2A;
+    --teal: #00857A;
+    --teal2: #00A896;
+    --gold: #C8973A;
+    --soft-blue: #4A90D9;
+    --purple: #7B5EA7;
+    --coral: #E8734A;
+    --mint: #E0F5F3;
+    --cream: #FAFAF7;
+    --white: #FFFFFF;
+    --text: #1a2a3a;
+    --muted: #6B8299;
+    --border: #E2EAF0;
+    --shadow: 0 4px 24px rgba(13,27,42,0.10);
+    --shadow-lg: 0 8px 40px rgba(13,27,42,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Nunito Sans', sans-serif;
+    background: #F0F6FB;
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── STARS BACKGROUND ── */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: 
+      radial-gradient(ellipse at 20% 10%, rgba(0,133,122,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 90%, rgba(74,144,217,0.08) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── SCREENS ── */
+  .screen {
+    display: none;
+    min-height: 100vh;
+    position: relative;
+    z-index: 1;
+    animation: fadeIn 0.35s ease;
+  }
+  .screen.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+  /* ══════════════════════════════
+     WELCOME / LOGIN SCREEN
+  ══════════════════════════════ */
+  #screen-welcome {
+    background: linear-gradient(160deg, var(--navy) 0%, #0D2B3E 60%, #0A3D4A 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+    text-align: center;
+    min-height: 100vh;
+  }
+  #screen-welcome.active { display: flex; }
+
+  .welcome-gem {
+    font-size: 72px;
+    margin-bottom: 16px;
+    animation: gemPulse 3s ease-in-out infinite;
+  }
+  @keyframes gemPulse {
+    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 12px rgba(0,168,150,0.4)); }
+    50% { transform: scale(1.05); filter: drop-shadow(0 0 24px rgba(0,168,150,0.7)); }
+  }
+
+  .welcome-title {
+    font-family: 'Nunito', sans-serif;
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--white);
+    margin-bottom: 6px;
+    letter-spacing: -0.5px;
+  }
+  .welcome-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 40px;
+    font-style: italic;
+  }
+  .welcome-tagline {
+    font-size: 18px;
+    color: var(--teal2);
+    font-weight: 700;
+    margin-bottom: 8px;
+    font-family: 'Nunito', sans-serif;
+  }
+  .welcome-desc {
+    font-size: 14px;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 48px;
+    max-width: 280px;
+    line-height: 1.6;
+  }
+
+  .login-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 20px;
+    padding: 28px 24px;
+    width: 100%;
+    max-width: 340px;
+    backdrop-filter: blur(10px);
+  }
+  .login-card label {
+    display: block;
+    color: rgba(255,255,255,0.7);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .login-card input {
+    width: 100%;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 12px;
+    padding: 14px 16px;
+    color: white;
+    font-size: 15px;
+    font-family: 'Nunito Sans', sans-serif;
+    margin-bottom: 16px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .login-card input:focus { border-color: var(--teal2); }
+  .login-card input::placeholder { color: rgba(255,255,255,0.3); }
+
+  .age-selector {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .age-btn {
+    flex: 1;
+    padding: 10px 6px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.06);
+    color: rgba(255,255,255,0.6);
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Nunito', sans-serif;
+  }
+  .age-btn.selected, .age-btn:hover {
+    background: var(--teal);
+    border-color: var(--teal);
+    color: white;
+  }
+
+  .btn-primary {
+    width: 100%;
+    background: linear-gradient(135deg, var(--teal) 0%, var(--teal2) 100%);
+    color: white;
+    border: none;
+    border-radius: 14px;
+    padding: 16px;
+    font-size: 16px;
+    font-weight: 800;
+    font-family: 'Nunito', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 20px rgba(0,133,122,0.35);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(0,133,122,0.45); }
+  .btn-primary:active { transform: translateY(0); }
+
+  /* ══════════════════════════════
+     MAIN APP
+  ══════════════════════════════ */
+  #screen-app {
+    padding-bottom: 100px;
+  }
+  #screen-app.active { display: block; }
+
+  /* TOP BAR */
+  .top-bar {
+    background: var(--navy);
+    padding: 16px 20px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 16px rgba(13,27,42,0.2);
+  }
+  .top-bar-left { display: flex; align-items: center; gap: 10px; }
+  .top-bar-gem { font-size: 22px; }
+  .top-bar-name {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 16px;
+    color: white;
+  }
+  .top-bar-name span { color: var(--teal2); }
+  .top-bar-right { display: flex; align-items: center; gap: 12px; }
+  .online-dot {
+    width: 8px; height: 8px;
+    background: #2ECC71;
+    border-radius: 50%;
+    animation: blink 2s ease-in-out infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  .online-label { color: rgba(255,255,255,0.5); font-size: 11px; }
+
+  /* EMERGENCY BUTTON */
+  .emergency-strip {
+    background: linear-gradient(135deg, #C0392B, #E74C3C);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 2px 12px rgba(192,57,43,0.3);
+  }
+  .emergency-strip:hover { filter: brightness(1.05); }
+  .emergency-icon { font-size: 22px; }
+  .emergency-text { flex: 1; }
+  .emergency-text strong { color: white; font-size: 15px; font-family: 'Nunito', sans-serif; font-weight: 800; display: block; }
+  .emergency-text span { color: rgba(255,255,255,0.75); font-size: 12px; }
+  .emergency-arrow { color: rgba(255,255,255,0.7); font-size: 18px; }
+
+  /* GREETING */
+  .greeting-section {
+    padding: 20px 20px 8px;
+  }
+  .greeting-text {
+    font-family: 'Nunito', sans-serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+  .greeting-sub { color: var(--muted); font-size: 13px; }
+
+  /* CASEWORKER CARD */
+  .cw-card {
+    margin: 12px 20px;
+    background: linear-gradient(135deg, var(--navy) 0%, #0D2B3E 100%);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow: hidden;
+  }
+  .cw-card::before {
+    content: '';
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 120px; height: 120px;
+    background: rgba(0,168,150,0.1);
+    border-radius: 50%;
+  }
+  .cw-card-label {
+    color: var(--teal2);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .cw-info { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+  .cw-avatar {
+    width: 52px; height: 52px;
+    background: linear-gradient(135deg, var(--teal), var(--teal2));
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+    border: 2px solid rgba(255,255,255,0.2);
+  }
+  .cw-details { flex: 1; }
+  .cw-name { color: white; font-weight: 800; font-size: 16px; font-family: 'Nunito', sans-serif; }
+  .cw-role { color: rgba(255,255,255,0.55); font-size: 12px; margin-top: 2px; }
+  .cw-status { display: flex; align-items: center; gap: 6px; margin-top: 4px; }
+  .cw-status-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #2ECC71;
+    animation: blink 2s ease-in-out infinite;
+  }
+  .cw-status-dot.away { background: #F39C12; animation: none; }
+  .cw-status-text { color: rgba(255,255,255,0.5); font-size: 11px; }
+
+  .cw-actions { display: flex; gap: 10px; }
+  .cw-action-btn {
+    flex: 1;
+    padding: 11px 8px;
+    border-radius: 12px;
+    border: none;
+    font-size: 12px;
+    font-weight: 700;
+    font-family: 'Nunito', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .cw-action-btn.message {
+    background: rgba(255,255,255,0.1);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+  .cw-action-btn.message:hover { background: rgba(255,255,255,0.18); }
+  .cw-action-btn.call {
+    background: linear-gradient(135deg, var(--teal), var(--teal2));
+    color: white;
+  }
+  .cw-action-btn.call:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,133,122,0.4); }
+  .cw-action-btn.urgent {
+    background: linear-gradient(135deg, #E74C3C, #C0392B);
+    color: white;
+  }
+
+  /* SECTION TITLE */
+  .section-title {
+    font-family: 'Nunito', sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--muted);
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    padding: 16px 20px 8px;
+  }
+
+  /* TOOL GRID */
+  .tool-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 0 20px;
+  }
+  .tool-card {
+    background: white;
+    border-radius: 18px;
+    padding: 18px 16px;
+    cursor: pointer;
+    transition: all 0.25s;
+    box-shadow: 0 2px 12px rgba(13,27,42,0.06);
+    border: 1.5px solid transparent;
+    position: relative;
+    overflow: hidden;
+  }
+  .tool-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+  .tool-card:active { transform: scale(0.97); }
+  .tool-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 18px 18px 0 0;
+  }
+  .tool-card.teal::before { background: linear-gradient(90deg, var(--teal), var(--teal2)); }
+  .tool-card.gold::before { background: linear-gradient(90deg, var(--gold), #E8B84B); }
+  .tool-card.purple::before { background: linear-gradient(90deg, var(--purple), #9B7DC8); }
+  .tool-card.coral::before { background: linear-gradient(90deg, var(--coral), #F08060); }
+  .tool-card.blue::before { background: linear-gradient(90deg, var(--soft-blue), #6AAEE8); }
+  .tool-card.navy::before { background: linear-gradient(90deg, var(--navy), #1A3A5A); }
+
+  .tool-icon { font-size: 28px; margin-bottom: 8px; display: block; }
+  .tool-name {
+    font-family: 'Nunito', sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 3px;
+  }
+  .tool-desc { font-size: 11px; color: var(--muted); line-height: 1.4; }
+
+  /* CHECKIN STRIP */
+  .checkin-strip {
+    margin: 12px 20px;
+    background: linear-gradient(135deg, #F8F4FF, #EEF4FF);
+    border-radius: 16px;
+    padding: 16px 18px;
+    border: 1.5px solid rgba(123,94,167,0.15);
+  }
+  .checkin-question {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    color: var(--navy);
+    margin-bottom: 12px;
+  }
+  .feeling-row { display: flex; gap: 8px; justify-content: space-between; }
+  .feeling-btn {
+    flex: 1;
+    background: white;
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 8px 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+    font-size: 20px;
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+  }
+  .feeling-btn span { font-size: 9px; color: var(--muted); font-weight: 700; }
+  .feeling-btn:hover, .feeling-btn.selected {
+    border-color: var(--purple);
+    background: #F8F4FF;
+    transform: translateY(-2px);
+  }
+
+  /* ══════════════════════════════
+     MESSAGING SCREEN
+  ══════════════════════════════ */
+  #screen-message { background: var(--cream); }
+  #screen-message.active { display: flex; flex-direction: column; height: 100vh; }
+
+  .msg-header {
+    background: var(--navy);
+    padding: 16px 20px;
+    display: flex; align-items: center; gap: 12px;
+    flex-shrink: 0;
+  }
+  .msg-back {
+    color: white; font-size: 22px; cursor: pointer;
+    background: none; border: none; padding: 0;
+  }
+  .msg-header-info { flex: 1; }
+  .msg-header-name { color: white; font-weight: 800; font-size: 15px; font-family: 'Nunito', sans-serif; }
+  .msg-header-status { color: rgba(255,255,255,0.55); font-size: 11px; display: flex; align-items: center; gap: 4px; }
+
+  .messages-area {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .msg-date-sep {
+    text-align: center;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 4px 0;
+  }
+
+  .msg-bubble-wrap { display: flex; flex-direction: column; }
+  .msg-bubble-wrap.mine { align-items: flex-end; }
+  .msg-bubble-wrap.theirs { align-items: flex-start; }
+
+  .msg-bubble {
+    max-width: 75%;
+    padding: 12px 16px;
+    border-radius: 18px;
+    font-size: 14px;
+    line-height: 1.5;
+    position: relative;
+  }
+  .msg-bubble-wrap.mine .msg-bubble {
+    background: linear-gradient(135deg, var(--teal), var(--teal2));
+    color: white;
+    border-bottom-right-radius: 4px;
+  }
+  .msg-bubble-wrap.theirs .msg-bubble {
+    background: white;
+    color: var(--text);
+    border-bottom-left-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .msg-time { font-size: 10px; color: var(--muted); margin-top: 4px; padding: 0 4px; }
+
+  .msg-input-area {
+    background: white;
+    padding: 12px 16px;
+    display: flex; gap: 10px; align-items: flex-end;
+    border-top: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  .msg-input {
+    flex: 1;
+    background: #F0F6FB;
+    border: 1.5px solid var(--border);
+    border-radius: 20px;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-family: 'Nunito Sans', sans-serif;
+    resize: none;
+    outline: none;
+    max-height: 100px;
+    transition: border-color 0.2s;
+  }
+  .msg-input:focus { border-color: var(--teal2); }
+  .msg-send-btn {
+    width: 44px; height: 44px;
+    background: linear-gradient(135deg, var(--teal), var(--teal2));
+    border: none; border-radius: 50%;
+    color: white; font-size: 18px;
+    cursor: pointer; transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .msg-send-btn:hover { transform: scale(1.08); box-shadow: 0 4px 16px rgba(0,133,122,0.4); }
+
+  /* QUICK MESSAGES */
+  .quick-msgs {
+    padding: 8px 16px;
+    display: flex; gap: 8px; overflow-x: auto; flex-shrink: 0;
+    background: white;
+    border-top: 1px solid var(--border);
+  }
+  .quick-msgs::-webkit-scrollbar { display: none; }
+  .quick-msg-chip {
+    white-space: nowrap;
+    background: var(--mint);
+    border: 1px solid rgba(0,133,122,0.2);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--teal);
+    cursor: pointer;
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+  .quick-msg-chip:hover { background: var(--teal); color: white; }
+
+  /* ══════════════════════════════
+     JOURNAL SCREEN
+  ══════════════════════════════ */
+  #screen-journal { background: var(--cream); }
+  #screen-journal.active { display: block; }
+
+  .journal-header {
+    background: linear-gradient(135deg, var(--purple), #9B7DC8);
+    padding: 20px 20px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .journal-header::before {
+    content: '📔';
+    position: absolute; right: 20px; top: 16px;
+    font-size: 48px; opacity: 0.2;
+  }
+  .back-btn {
+    background: rgba(255,255,255,0.2);
+    border: none; border-radius: 10px;
+    padding: 8px 12px; color: white;
+    font-size: 14px; cursor: pointer;
+    margin-bottom: 12px; display: inline-flex; align-items: center; gap: 6px;
+    font-family: 'Nunito', sans-serif; font-weight: 700;
+    transition: background 0.2s;
+  }
+  .back-btn:hover { background: rgba(255,255,255,0.3); }
+  .journal-header h2 {
+    color: white; font-family: 'Nunito', sans-serif;
+    font-size: 24px; font-weight: 900;
+    margin-bottom: 4px;
+  }
+  .journal-header p { color: rgba(255,255,255,0.7); font-size: 13px; }
+
+  .journal-content { padding: 20px; }
+  .journal-prompt-card {
+    background: white;
+    border-radius: 16px;
+    padding: 18px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    border-left: 4px solid var(--purple);
+  }
+  .journal-prompt-label { color: var(--purple); font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
+  .journal-prompt-text { font-size: 15px; color: var(--navy); font-weight: 700; font-family: 'Nunito', sans-serif; }
+
+  .journal-textarea {
+    width: 100%;
+    background: white;
+    border: 1.5px solid var(--border);
+    border-radius: 16px;
+    padding: 16px;
+    font-size: 15px;
+    font-family: 'Nunito Sans', sans-serif;
+    line-height: 1.6;
+    resize: none;
+    min-height: 160px;
+    outline: none;
+    margin-bottom: 16px;
+    transition: border-color 0.2s;
+  }
+  .journal-textarea:focus { border-color: var(--purple); }
+  .journal-textarea::placeholder { color: #BBCCD9; }
+
+  .journal-save-btn {
+    width: 100%;
+    background: linear-gradient(135deg, var(--purple), #9B7DC8);
+    color: white; border: none; border-radius: 14px;
+    padding: 15px; font-size: 15px; font-weight: 800;
+    font-family: 'Nunito', sans-serif; cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 16px rgba(123,94,167,0.3);
+  }
+  .journal-save-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(123,94,167,0.4); }
+
+  .privacy-note {
+    display: flex; align-items: center; gap: 8px;
+    background: #F8F4FF; border-radius: 10px; padding: 10px 14px;
+    margin-top: 12px;
+  }
+  .privacy-note span { font-size: 12px; color: var(--purple); font-weight: 600; }
+
+  /* ══════════════════════════════
+     RIGHTS SCREEN
+  ══════════════════════════════ */
+  #screen-rights { background: var(--cream); }
+  #screen-rights.active { display: block; }
+
+  .rights-header {
+    background: linear-gradient(135deg, var(--navy), #1A3A5A);
+    padding: 20px 20px 24px;
+  }
+  .rights-header h2 {
+    color: white; font-family: 'Nunito', sans-serif;
+    font-size: 24px; font-weight: 900; margin: 12px 0 4px;
+  }
+  .rights-header p { color: rgba(255,255,255,0.65); font-size: 13px; }
+
+  .rights-content { padding: 16px 20px; }
+  .right-card {
+    background: white; border-radius: 16px;
+    padding: 16px; margin-bottom: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    display: flex; gap: 14px; align-items: flex-start;
+    cursor: pointer; transition: all 0.2s;
+    border: 1.5px solid transparent;
+  }
+  .right-card:hover { border-color: var(--teal2); transform: translateX(4px); }
+  .right-number {
+    width: 36px; height: 36px; flex-shrink: 0;
+    background: linear-gradient(135deg, var(--teal), var(--teal2));
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-weight: 900; font-size: 15px;
+    font-family: 'Nunito', sans-serif;
+  }
+  .right-text { flex: 1; }
+  .right-title { font-weight: 800; font-size: 14px; color: var(--navy); margin-bottom: 3px; font-family: 'Nunito', sans-serif; }
+  .right-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+  /* ══════════════════════════════
+     URGENT SCREEN
+  ══════════════════════════════ */
+  #screen-urgent {
+    background: linear-gradient(160deg, #1A0A0A, #2C0F0F);
+    min-height: 100vh;
+  }
+  #screen-urgent.active { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 24px; }
+
+  .urgent-icon { font-size: 64px; margin-bottom: 16px; animation: urgentPulse 1s ease-in-out infinite; }
+  @keyframes urgentPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.08)} }
+  .urgent-title {
+    font-family: 'Nunito', sans-serif; font-size: 28px; font-weight: 900;
+    color: white; text-align: center; margin-bottom: 8px;
+  }
+  .urgent-sub { color: rgba(255,255,255,0.6); font-size: 14px; text-align: center; margin-bottom: 40px; line-height: 1.6; }
+
+  .urgent-options { width: 100%; max-width: 340px; display: flex; flex-direction: column; gap: 12px; }
+  .urgent-option {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 16px; padding: 18px 20px;
+    display: flex; align-items: center; gap: 14px;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .urgent-option:hover { background: rgba(255,255,255,0.14); transform: translateX(4px); }
+  .urgent-option-icon { font-size: 28px; flex-shrink: 0; }
+  .urgent-option-text strong { color: white; font-size: 15px; font-family: 'Nunito', sans-serif; font-weight: 800; display: block; }
+  .urgent-option-text span { color: rgba(255,255,255,0.55); font-size: 12px; }
+  .urgent-option.highlighted { border-color: rgba(231,76,60,0.5); background: rgba(231,76,60,0.12); }
+
+  .urgent-back {
+    margin-top: 24px; color: rgba(255,255,255,0.4);
+    font-size: 13px; cursor: pointer; text-decoration: underline;
+    background: none; border: none; font-family: 'Nunito Sans', sans-serif;
+  }
+
+  /* ══════════════════════════════
+     MY TEAM SCREEN
+  ══════════════════════════════ */
+  #screen-team { background: var(--cream); }
+  #screen-team.active { display: block; }
+
+  .team-header {
+    background: linear-gradient(135deg, var(--soft-blue), #6AAEE8);
+    padding: 20px 20px 24px;
+  }
+  .team-header h2 { color: white; font-family: 'Nunito', sans-serif; font-size: 24px; font-weight: 900; margin: 12px 0 4px; }
+  .team-header p { color: rgba(255,255,255,0.7); font-size: 13px; }
+
+  .team-content { padding: 16px 20px; }
+  .team-card {
+    background: white; border-radius: 16px; padding: 16px;
+    margin-bottom: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    display: flex; align-items: center; gap: 14px;
+  }
+  .team-avatar {
+    width: 48px; height: 48px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .team-info { flex: 1; }
+  .team-name { font-weight: 800; font-size: 15px; color: var(--navy); font-family: 'Nunito', sans-serif; }
+  .team-role { font-size: 12px; color: var(--muted); margin-bottom: 2px; }
+  .team-contact { font-size: 11px; color: var(--teal); font-weight: 700; }
+  .team-call-btn {
+    background: var(--teal); color: white; border: none;
+    border-radius: 10px; padding: 8px 14px;
+    font-size: 12px; font-weight: 700; cursor: pointer;
+    font-family: 'Nunito', sans-serif; transition: all 0.2s;
+    flex-shrink: 0;
+  }
+  .team-call-btn:hover { background: var(--teal2); transform: translateY(-1px); }
+
+  /* ══════════════════════════════
+     BOTTOM NAV
+  ══════════════════════════════ */
+  .bottom-nav {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: white;
+    border-top: 1px solid var(--border);
+    display: flex;
+    padding: 8px 0 12px;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+    z-index: 100;
+  }
+  .nav-item {
+    flex: 1; display: flex; flex-direction: column; align-items: center;
+    gap: 4px; cursor: pointer; padding: 4px 0;
+    transition: all 0.2s; background: none; border: none;
+    font-family: 'Nunito Sans', sans-serif;
+  }
+  .nav-icon { font-size: 22px; transition: transform 0.2s; }
+  .nav-label { font-size: 10px; font-weight: 700; color: var(--muted); }
+  .nav-item.active .nav-label { color: var(--teal); }
+  .nav-item.active .nav-icon { transform: translateY(-2px); }
+
+  /* ══════════════════════════════
+     MODAL
+  ══════════════════════════════ */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(13,27,42,0.7); backdrop-filter: blur(4px);
+    z-index: 200; align-items: flex-end;
+  }
+  .modal-overlay.open { display: flex; animation: modalIn 0.3s ease; }
+  @keyframes modalIn { from { opacity: 0; } to { opacity: 1; } }
+  .modal {
+    background: white; border-radius: 24px 24px 0 0;
+    padding: 24px; width: 100%;
+    animation: slideUp 0.3s ease;
+    max-height: 85vh; overflow-y: auto;
+  }
+  @keyframes slideUp { from { transform: translateY(100%); } to { transform: none; } }
+  .modal-handle { width: 36px; height: 4px; background: var(--border); border-radius: 2px; margin: 0 auto 20px; }
+  .modal h3 { font-family: 'Nunito', sans-serif; font-size: 20px; font-weight: 900; color: var(--navy); margin-bottom: 6px; }
+  .modal p { color: var(--muted); font-size: 13px; margin-bottom: 20px; line-height: 1.6; }
+  .modal-close { position: absolute; top: 20px; right: 20px; background: var(--border); border: none; border-radius: 50%; width: 32px; height: 32px; font-size: 16px; cursor: pointer; }
+
+  /* ALERT */
+  .alert-sent {
+    display: none; position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+    background: #2ECC71; color: white; padding: 14px 24px; border-radius: 50px;
+    font-weight: 800; font-size: 14px; font-family: 'Nunito', sans-serif;
+    box-shadow: 0 4px 20px rgba(46,204,113,0.4); z-index: 300;
+    white-space: nowrap;
+    animation: alertSlide 0.3s ease;
+  }
+  @keyframes alertSlide { from { top: -40px; opacity: 0; } to { top: 20px; opacity: 1; } }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════
+     WELCOME SCREEN
+════════════════════════════ -->
+<div id="screen-welcome" class="screen active">
+  <div class="welcome-gem">💎</div>
+  <div class="welcome-title">HavenAssist FC</div>
+  <div class="welcome-sub">For Foster Children</div>
+  <div class="welcome-tagline">You matter. You have a voice.</div>
+  <div class="welcome-desc">A safe space to connect with your team, know your rights, and keep your story.</div>
+
+  <div class="login-card">
+    <label>Your Name</label>
+    <input type="text" id="child-name" placeholder="Enter your first name" />
+
+    <label>Your Age Group</label>
+    <div class="age-selector">
+      <button class="age-btn" onclick="selectAge(this,'6-10')">6–10</button>
+      <button class="age-btn" onclick="selectAge(this,'11-14')">11–14</button>
+      <button class="age-btn" onclick="selectAge(this,'15-18')">15–18</button>
+    </div>
+
+    <button class="btn-primary" onclick="enterApp()">Enter My Safe Space →</button>
+  </div>
+</div>
+
+<!-- ════════════════════════════
+     MAIN APP SCREEN
+════════════════════════════ -->
+<div id="screen-app" class="screen">
+
+  <div class="top-bar">
+    <div class="top-bar-left">
+      <span class="top-bar-gem">💎</span>
+      <div class="top-bar-name">Haven<span>Assist</span> FC</div>
+    </div>
+    <div class="top-bar-right">
+      <div class="online-dot"></div>
+      <span class="online-label">Connected</span>
+    </div>
+  </div>
+
+  <!-- EMERGENCY STRIP -->
+  <div class="emergency-strip" onclick="showScreen('screen-urgent')">
+    <span class="emergency-icon">🆘</span>
+    <div class="emergency-text">
+      <strong>I Need Help Right Now</strong>
+      <span>Tap to reach your team immediately</span>
+    </div>
+    <span class="emergency-arrow">›</span>
+  </div>
+
+  <!-- GREETING -->
+  <div class="greeting-section">
+    <div class="greeting-text" id="greeting-text">Hi there! 👋</div>
+    <div class="greeting-sub" id="greeting-sub">How are you feeling today?</div>
+  </div>
+
+  <!-- FEELINGS CHECK-IN -->
+  <div class="checkin-strip">
+    <div class="checkin-question">How are you feeling right now?</div>
+    <div class="feeling-row">
+      <button class="feeling-btn" onclick="selectFeeling(this)">😊<span>Good</span></button>
+      <button class="feeling-btn" onclick="selectFeeling(this)">😐<span>Okay</span></button>
+      <button class="feeling-btn" onclick="selectFeeling(this)">😔<span>Sad</span></button>
+      <button class="feeling-btn" onclick="selectFeeling(this)">😡<span>Mad</span></button>
+      <button class="feeling-btn" onclick="selectFeeling(this)">😨<span>Scared</span></button>
+    </div>
+  </div>
+
+  <!-- CASEWORKER CARD -->
+  <div class="section-title">My Caseworker</div>
+  <div class="cw-card">
+    <div class="cw-card-label">✦ Your Support Team</div>
+    <div class="cw-info">
+      <div class="cw-avatar">👩🏽</div>
+      <div class="cw-details">
+        <div class="cw-name">Ms. Williams</div>
+        <div class="cw-role">Your Caseworker · Illinois DCFS</div>
+        <div class="cw-status">
+          <div class="cw-status-dot"></div>
+          <span class="cw-status-text">Online now</span>
+        </div>
+      </div>
+    </div>
+    <div class="cw-actions">
+      <button class="cw-action-btn message" onclick="showScreen('screen-message')">💬 Message</button>
+      <button class="cw-action-btn call" onclick="showAlert('📞 Requesting call with Ms. Williams...')">📞 Call</button>
+      <button class="cw-action-btn urgent" onclick="showScreen('screen-urgent')">🚨 Urgent</button>
+    </div>
+  </div>
+
+  <!-- TOOLS -->
+  <div class="section-title">My Tools</div>
+  <div class="tool-grid">
+    <div class="tool-card teal" onclick="showScreen('screen-message')">
+      <span class="tool-icon">💬</span>
+      <div class="tool-name">Message My Team</div>
+      <div class="tool-desc">Send a message to your caseworker</div>
+    </div>
+    <div class="tool-card purple" onclick="showScreen('screen-journal')">
+      <span class="tool-icon">📔</span>
+      <div class="tool-name">My Journal</div>
+      <div class="tool-desc">Private. Just yours. Always safe.</div>
+    </div>
+    <div class="tool-card gold" onclick="showScreen('screen-rights')">
+      <span class="tool-icon">⚖️</span>
+      <div class="tool-name">My Rights</div>
+      <div class="tool-desc">Know what you're entitled to</div>
+    </div>
+    <div class="tool-card blue" onclick="showScreen('screen-team')">
+      <span class="tool-icon">👥</span>
+      <div class="tool-name">My Team</div>
+      <div class="tool-desc">Everyone who supports you</div>
+    </div>
+    <div class="tool-card coral" onclick="openModal('modal-tell')">
+      <span class="tool-icon">📣</span>
+      <div class="tool-name">Tell My Caseworker</div>
+      <div class="tool-desc">Something I want them to know</div>
+    </div>
+    <div class="tool-card navy" onclick="openModal('modal-memories')">
+      <span class="tool-icon">🌟</span>
+      <div class="tool-name">My Memories</div>
+      <div class="tool-desc">Keep your story safe here</div>
+    </div>
+  </div>
+
+  <div style="height: 20px;"></div>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <button class="nav-item active" onclick="showScreen('screen-app')">
+      <span class="nav-icon">🏠</span>
+      <span class="nav-label">Home</span>
+    </button>
+    <button class="nav-item" onclick="showScreen('screen-message')">
+      <span class="nav-icon">💬</span>
+      <span class="nav-label">Messages</span>
+    </button>
+    <button class="nav-item" onclick="showScreen('screen-journal')">
+      <span class="nav-icon">📔</span>
+      <span class="nav-label">Journal</span>
+    </button>
+    <button class="nav-item" onclick="showScreen('screen-team')">
+      <span class="nav-icon">👥</span>
+      <span class="nav-label">My Team</span>
+    </button>
+    <button class="nav-item" onclick="showScreen('screen-urgent')">
+      <span class="nav-icon">🆘</span>
+      <span class="nav-label">Help</span>
+    </button>
+  </div>
+</div>
+
+<!-- ════════════════════════════
+     MESSAGING SCREEN
+════════════════════════════ -->
+<div id="screen-message" class="screen">
+  <div class="msg-header">
+    <button class="msg-back" onclick="showScreen('screen-app')">‹</button>
+    <div class="msg-header-info">
+      <div class="msg-header-name">Ms. Williams</div>
+      <div class="msg-header-status">
+        <div style="width:6px;height:6px;background:#2ECC71;border-radius:50%;"></div>
+        Online · Your Caseworker
+      </div>
+    </div>
+  </div>
+
+  <div class="messages-area" id="messages-area">
+    <div class="msg-date-sep">Today</div>
+
+    <div class="msg-bubble-wrap theirs">
+      <div class="msg-bubble">Hi! I'm checking in on you today. How are things going at home? 😊</div>
+      <div class="msg-time">9:14 AM</div>
+    </div>
+
+    <div class="msg-bubble-wrap mine">
+      <div class="msg-bubble">Things are okay. I had a hard day at school yesterday.</div>
+      <div class="msg-time">9:22 AM</div>
+    </div>
+
+    <div class="msg-bubble-wrap theirs">
+      <div class="msg-bubble">I'm really glad you told me that. Do you want to talk about what happened? I'm here for you 💙</div>
+      <div class="msg-time">9:25 AM</div>
+    </div>
+
+    <div class="msg-bubble-wrap theirs">
+      <div class="msg-bubble">Also — don't forget your court date is coming up on March 15th. I'll be there with you the whole time. You won't be alone.</div>
+      <div class="msg-time">9:26 AM</div>
+    </div>
+  </div>
+
+  <!-- QUICK MESSAGES -->
+  <div class="quick-msgs">
+    <div class="quick-msg-chip" onclick="sendQuick('I need to talk to you soon')">I need to talk soon</div>
+    <div class="quick-msg-chip" onclick="sendQuick('Something happened I want to tell you about')">Something happened</div>
+    <div class="quick-msg-chip" onclick="sendQuick('I\'m okay today 👍')">I'm okay today</div>
+    <div class="quick-msg-chip" onclick="sendQuick('Can we meet this week?')">Can we meet?</div>
+    <div class="quick-msg-chip" onclick="sendQuick('I have a question about my case')">Case question</div>
+  </div>
+
+  <div class="msg-input-area">
+    <textarea class="msg-input" id="msg-input" placeholder="Type a message..." rows="1"
+      oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+    <button class="msg-send-btn" onclick="sendMessage()">➤</button>
+  </div>
+</div>
+
+<!-- ════════════════════════════
+     JOURNAL SCREEN
+════════════════════════════ -->
+<div id="screen-journal" class="screen">
+  <div class="journal-header">
+    <button class="back-btn" onclick="showScreen('screen-app')">‹ Back</button>
+    <h2>My Journal</h2>
+    <p>This is your private space. No one can read this without your permission.</p>
+  </div>
+  <div class="journal-content">
+    <div class="journal-prompt-card">
+      <div class="journal-prompt-label">✦ Today's Prompt</div>
+      <div class="journal-prompt-text" id="journal-prompt">What's one thing you wish someone understood about your life right now?</div>
+    </div>
+
+    <textarea class="journal-textarea" placeholder="Write whatever you want here. It's just for you..." id="journal-text"></textarea>
+
+    <button class="journal-save-btn" onclick="saveJournal()">Save My Entry 💜</button>
+
+    <div class="privacy-note">
+      <span>🔒</span>
+      <span>Your journal is private and encrypted. Only you can read it unless you choose to share.</span>
+    </div>
+
+    <div class="section-title" style="padding: 20px 0 8px;">More Prompts</div>
+    <div id="prompt-list"></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════
+     RIGHTS SCREEN
+════════════════════════════ -->
+<div id="screen-rights" class="screen">
+  <div class="rights-header">
+    <button class="back-btn" onclick="showScreen('screen-app')">‹ Back</button>
+    <h2>⚖️ My Rights</h2>
+    <p>As a young person in foster care in Illinois, you have real rights. Here's what they are.</p>
+  </div>
+  <div class="rights-content">
+    <div class="right-card" onclick="openRightDetail(this)">
+      <div class="right-number">1</div>
+      <div class="right-text">
+        <div class="right-title">You have the right to be safe</div>
+        <div class="right-desc">No one is allowed to hurt you — physically, emotionally, or in any other way. If you don't feel safe, you can tell your caseworker, a teacher, or call the DCFS hotline.</div>
+      </div>
+    </div>
+    <div class="right-card">
+      <div class="right-number">2</div>
+      <div class="right-text">
+        <div class="right-title">You have the right to know your case plan</div>
+        <div class="right-desc">You have the right to understand what is happening in your case and what the plan is for your future.</div>
+      </div>
+    </div>
+    <div class="right-card">
+      <div class="right-number">3</div>
+      <div class="right-text">
+        <div class="right-title">You have the right to go to school</div>
+        <div class="right-desc">No placement change can interrupt your education. You have the right to stay in your school or get transportation to continue there.</div>
+      </div>
+    </div>
+    <div class="right-card">
+      <div class="right-number">4</div>
+      <div class="right-text">
+        <div class="right-title">You have the right to privacy</div>
+        <div class="right-desc">Your personal belongings, mail, and private conversations deserve respect. You also have the right to a private space in your home.</div>
+      </div>
+    </div>
+    <div class="right-card">
+      <div class="right-number">5</div>
+      <div class="right-text">
+        <div class="right-title">You have the right to contact your caseworker</div>
+        <div class="right-desc">You can contact your caseworker directly at any time. No one can prevent you from reaching your caseworker or DCFS.</div>
+      </div>
+    </div>
+    <div class="right-card">
+      <div class="right-number">6</div>
+      <div class="right-text">
+        <div class="right-title">You have the right to keep your belongings</div>
+        <div class="right-desc">If you move placements, your personal belongings move with you — in a proper bag, not a trash bag. Your things are yours.</div>
+      </div>
+    </div>
+    <div class="right-card">
+      <div class="right-number">7</div>
+      <div class="right-text">
+        <div class="right-title">You have the right to participate in court</div>
+        <div class="right-desc">You have a voice in court proceedings about your case. You can request to speak or have a CASA advocate speak for you.</div>
+      </div>
+    </div>
+    <div class="right-card">
+      <div class="right-number">8</div>
+      <div class="right-text">
+        <div class="right-title">You have the right to report concerns</div>
+        <div class="right-desc">If something feels wrong — in your placement, with your caseworker, or anywhere — you have the right to report it without fear of punishment.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════
+     MY TEAM SCREEN
+════════════════════════════ -->
+<div id="screen-team" class="screen">
+  <div class="team-header">
+    <button class="back-btn" onclick="showScreen('screen-app')">‹ Back</button>
+    <h2>👥 My Team</h2>
+    <p>These are the people in your corner. You are not alone.</p>
+  </div>
+  <div class="team-content">
+    <div class="team-card">
+      <div class="team-avatar" style="background:#E0F5F3;">👩🏽</div>
+      <div class="team-info">
+        <div class="team-name">Ms. Williams</div>
+        <div class="team-role">Caseworker · Illinois DCFS</div>
+        <div class="team-contact">🟢 Online now</div>
+      </div>
+      <button class="team-call-btn" onclick="showAlert('📞 Calling Ms. Williams...')">Call</button>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar" style="background:#FEF9EF;">👨🏾‍⚕️</div>
+      <div class="team-info">
+        <div class="team-name">Dr. Johnson</div>
+        <div class="team-role">Therapist · Monthly sessions</div>
+        <div class="team-contact">Next session: Mar 14</div>
+      </div>
+      <button class="team-call-btn" onclick="showAlert('📞 Calling Dr. Johnson...')">Call</button>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar" style="background:#F5EEF8;">👩🏼‍⚖️</div>
+      <div class="team-info">
+        <div class="team-name">Sarah M.</div>
+        <div class="team-role">CASA Advocate · Your voice in court</div>
+        <div class="team-contact">Court date: Mar 15</div>
+      </div>
+      <button class="team-call-btn" onclick="showAlert('📞 Calling Sarah...')">Call</button>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar" style="background:#FADBD8;">👩🏽‍🦱</div>
+      <div class="team-info">
+        <div class="team-name">Ms. Basquine</div>
+        <div class="team-role">Foster Parent · Home</div>
+        <div class="team-contact">🏠 Always available</div>
+      </div>
+      <button class="team-call-btn" onclick="showAlert('📞 Calling Ms. Basquine...')">Call</button>
+    </div>
+
+    <div style="background:#E0F5F3;border-radius:14px;padding:14px 16px;margin-top:8px;border:1.5px solid rgba(0,133,122,0.2);">
+      <div style="font-weight:800;font-size:13px;color:var(--teal);margin-bottom:4px;font-family:'Nunito',sans-serif;">💙 Remember</div>
+      <div style="font-size:13px;color:var(--text);line-height:1.6;">Every person on this list chose to be here for you. You have people who care about what happens to you.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════
+     URGENT SCREEN
+════════════════════════════ -->
+<div id="screen-urgent" class="screen">
+  <span class="urgent-icon">🆘</span>
+  <div class="urgent-title">I Need Help Right Now</div>
+  <div class="urgent-sub">You are not alone. Choose how you want to reach out. No one will be in trouble for asking for help.</div>
+
+  <div class="urgent-options">
+    <div class="urgent-option highlighted" onclick="showAlert('🚨 URGENT alert sent to Ms. Williams. She will respond within minutes.')">
+      <span class="urgent-option-icon">📱</span>
+      <div class="urgent-option-text">
+        <strong>Alert My Caseworker Now</strong>
+        <span>Sends an urgent notification to Ms. Williams</span>
+      </div>
+    </div>
+    <div class="urgent-option" onclick="showAlert('📞 Connecting to DCFS Hotline: 1-800-252-2873')">
+      <span class="urgent-option-icon">☎️</span>
+      <div class="urgent-option-text">
+        <strong>DCFS Hotline</strong>
+        <span>1-800-252-2873 · Available 24/7</span>
+      </div>
+    </div>
+    <div class="urgent-option" onclick="showAlert('📞 Connecting to Crisis Line: 988')">
+      <span class="urgent-option-icon">💙</span>
+      <div class="urgent-option-text">
+        <strong>988 Crisis Line</strong>
+        <span>Call or text 988 · Someone listens</span>
+      </div>
+    </div>
+    <div class="urgent-option" onclick="showAlert('📞 Calling 911...')">
+      <span class="urgent-option-icon">🚔</span>
+      <div class="urgent-option-text">
+        <strong>Call 911</strong>
+        <span>For immediate physical danger</span>
+      </div>
+    </div>
+    <div class="urgent-option" onclick="showScreen('screen-message')">
+      <span class="urgent-option-icon">💬</span>
+      <div class="urgent-option-text">
+        <strong>Message Ms. Williams</strong>
+        <span>Tell her what's happening in your words</span>
+      </div>
+    </div>
+  </div>
+
+  <button class="urgent-back" onclick="showScreen('screen-app')">← I'm okay, go back home</button>
+</div>
+
+<!-- ════════════════════════════
+     MODALS
+════════════════════════════ -->
+<div class="modal-overlay" id="modal-tell" onclick="closeModal('modal-tell')">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-handle"></div>
+    <button class="modal-close" onclick="closeModal('modal-tell')">✕</button>
+    <h3>📣 Tell My Caseworker</h3>
+    <p>Is there something you want your caseworker to know but it's hard to say out loud? Write it here and we'll send it to them directly.</p>
+    <textarea class="journal-textarea" style="min-height:120px;" placeholder="Something I want you to know..."></textarea>
+    <button class="journal-save-btn" style="background:linear-gradient(135deg,var(--coral),#F08060);box-shadow:0 4px 16px rgba(232,115,74,0.3);" onclick="showAlert('✅ Message sent to Ms. Williams');closeModal('modal-tell')">Send to My Caseworker</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-memories" onclick="closeModal('modal-memories')">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-handle"></div>
+    <button class="modal-close" onclick="closeModal('modal-memories')">✕</button>
+    <h3>🌟 My Memories</h3>
+    <p>This is a place to keep the things that matter to you — people you love, places you've been, things that made you happy. Your story belongs to you.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+      <div style="background:var(--mint);border-radius:12px;padding:14px;text-align:center;cursor:pointer;" onclick="showAlert('📸 Photo memories coming soon!')">
+        <div style="font-size:28px;margin-bottom:4px;">📸</div>
+        <div style="font-size:12px;font-weight:700;color:var(--teal);">Photos</div>
+      </div>
+      <div style="background:#FEF9EF;border-radius:12px;padding:14px;text-align:center;cursor:pointer;" onclick="showAlert('👥 People I love feature coming soon!')">
+        <div style="font-size:28px;margin-bottom:4px;">👥</div>
+        <div style="font-size:12px;font-weight:700;color:var(--gold);">People I Love</div>
+      </div>
+      <div style="background:#F8F4FF;border-radius:12px;padding:14px;text-align:center;cursor:pointer;" onclick="showAlert('✍️ My story feature coming soon!')">
+        <div style="font-size:28px;margin-bottom:4px;">✍️</div>
+        <div style="font-size:12px;font-weight:700;color:var(--purple);">My Story</div>
+      </div>
+      <div style="background:#FEE;border-radius:12px;padding:14px;text-align:center;cursor:pointer;" onclick="showAlert('🌟 My dreams feature coming soon!')">
+        <div style="font-size:28px;margin-bottom:4px;">🌟</div>
+        <div style="font-size:12px;font-weight:700;color:var(--coral);">My Dreams</div>
+      </div>
+    </div>
+    <p style="margin:0;font-size:12px;color:var(--muted);text-align:center;">Full memory keeper launching in v2 💎</p>
+  </div>
+</div>
+
+<!-- ALERT TOAST -->
+<div class="alert-sent" id="alert-toast"></div>
+
+<script>
+  let selectedAge = '11-14';
+  let childName = '';
+  const journalPrompts = [
+    "What's something good that happened this week, even if it was small?",
+    "If you could change one thing about your situation right now, what would it be?",
+    "Who is one person who makes you feel safe? What do they do that helps?",
+    "What are you most proud of about yourself?",
+    "What's something you're looking forward to?",
+    "If you could talk to your younger self, what would you say?",
+    "What does 'home' mean to you?",
+    "What are three things you're good at?",
+    "What do you wish adults understood better about kids in foster care?",
+    "What's your biggest dream for your future?"
+  ];
+
+  function selectAge(btn, age) {
+    document.querySelectorAll('.age-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    selectedAge = age;
+  }
+
+  function enterApp() {
+    childName = document.getElementById('child-name').value.trim() || 'Friend';
+    document.getElementById('greeting-text').textContent = `Hi ${childName}! 👋`;
+    const hour = new Date().getHours();
+    let sub = hour < 12 ? 'Good morning.' : hour < 17 ? 'Good afternoon.' : 'Good evening.';
+    document.getElementById('greeting-sub').textContent = sub + ' Your team is here for you.';
+    showScreen('screen-app');
+
+    // Build journal prompts
+    const list = document.getElementById('prompt-list');
+    journalPrompts.forEach(p => {
+      const div = document.createElement('div');
+      div.style.cssText = 'background:white;border-radius:12px;padding:12px 14px;margin-bottom:8px;cursor:pointer;border:1.5px solid var(--border);font-size:13px;color:var(--text);transition:all 0.2s;';
+      div.textContent = p;
+      div.onmouseover = () => { div.style.borderColor = 'var(--purple)'; div.style.transform = 'translateX(4px)'; };
+      div.onmouseout = () => { div.style.borderColor = 'var(--border)'; div.style.transform = 'none'; };
+      div.onclick = () => {
+        document.getElementById('journal-prompt').textContent = p;
+        document.getElementById('journal-text').focus();
+        window.scrollTo(0, 0);
+      };
+      list.appendChild(div);
+    });
+  }
+
+  function showScreen(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  function selectFeeling(btn) {
+    document.querySelectorAll('.feeling-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    const emoji = btn.childNodes[0].textContent;
+    showAlert(`${emoji} Feeling noted. Ms. Williams has been quietly notified.`);
+  }
+
+  let chatHistory = [];
+
+  async function sendMessage() {
+    const input = document.getElementById('msg-input');
+    const text = input.value.trim();
+    if (!text) return;
+    addMessage(text, 'mine');
+    input.value = '';
+    input.style.height = 'auto';
+    await getAIResponse(text);
+  }
+
+  async function sendQuick(text) {
+    addMessage(text, 'mine');
+    await getAIResponse(text);
+  }
+
+  async function getAIResponse(userText) {
+    // Show typing indicator
+    const area = document.getElementById('messages-area');
+    const typingDiv = document.createElement('div');
+    typingDiv.className = 'msg-bubble-wrap theirs';
+    typingDiv.id = 'typing-indicator';
+    typingDiv.innerHTML = '<div class="msg-bubble" style="opacity:0.6">💙 typing...</div>';
+    area.appendChild(typingDiv);
+    area.scrollTop = area.scrollHeight;
+
+    chatHistory.push({ role: 'user', content: userText });
+
+    const systemPrompt = `You are HavenAssist, a warm, safe, trauma-aware AI companion for children and youth in foster care. You were created by Fostering Bling Foundation, founded by a licensed foster parent who deeply cares about every child in care.
+
+Your role is to be a safe, supportive presence for children aged 6–18 in foster care.
+
+CORE PRINCIPLES — never break these:
+1. Always respond with warmth, empathy, and genuine care
+2. Never minimize feelings — always validate first
+3. Use age-appropriate, simple language
+4. Never say anything that could cause fear or panic
+5. If a child expresses danger, abuse, or self-harm — gently encourage them to use the emergency button or tell a trusted adult, and remind them they are safe and loved
+6. Never give legal or medical advice — always refer to their caseworker or trusted adult
+7. Remind children they have rights and they matter
+8. Keep responses short — 2-4 sentences max for younger children, slightly longer for teens
+9. Always end with something encouraging or a gentle question to keep them talking
+10. Use emojis sparingly but warmly — 💙 💎 🌟
+
+You are NOT a replacement for their caseworker, therapist, or foster parent. You are a safe space to express feelings and get gentle support.
+
+If the child seems to be in crisis say: "What you're feeling matters so much. Please press the red 🚨 button at the top so someone who loves you can help right now."`;
+
+    try {
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-direct-browser-calls': 'true'
+        },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-6',
+          max_tokens: 300,
+          system: systemPrompt,
+          messages: chatHistory
+        })
+      });
+
+      const data = await response.json();
+      const aiText = data.content?.[0]?.text || "I'm here with you 💙 Can you tell me more?";
+      chatHistory.push({ role: 'assistant', content: aiText });
+
+      document.getElementById('typing-indicator')?.remove();
+      addMessage(aiText, 'theirs');
+    } catch (err) {
+      document.getElementById('typing-indicator')?.remove();
+      addMessage("I'm here with you 💙 Sometimes the connection gets slow. Can you try again?", 'theirs');
+    }
+  }
+
+  function addMessage(text, side) {
+    const area = document.getElementById('messages-area');
+    const wrap = document.createElement('div');
+    wrap.className = `msg-bubble-wrap ${side}`;
+    const now = new Date();
+    wrap.innerHTML = `<div class="msg-bubble">${text}</div><div class="msg-time">${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')}</div>`;
+    area.appendChild(wrap);
+    area.scrollTop = area.scrollHeight;
+  }
+
+  function saveJournal() {
+    const text = document.getElementById('journal-text').value.trim();
+    if (!text) { showAlert('✏️ Write something first!'); return; }
+    showAlert('💜 Journal entry saved privately');
+    document.getElementById('journal-text').value = '';
+  }
+
+  function openModal(id) {
+    document.getElementById(id).classList.add('open');
+  }
+  function closeModal(id) {
+    document.getElementById(id).classList.remove('open');
+  }
+
+  function showAlert(msg) {
+    const toast = document.getElementById('alert-toast');
+    toast.textContent = msg;
+    toast.style.display = 'block';
+    setTimeout(() => { toast.style.display = 'none'; }, 3500);
+  }
+
+  // Start on welcome
+  document.getElementById('screen-welcome').classList.add('active');
+</script>
+
+<!-- STRIPE PAYMENT MODAL -->
+<script src="https://js.stripe.com/v3/"></script>
+<style>
+.stripe-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:9999;align-items:center;justify-content:center;}
+.stripe-overlay.active{display:flex;}
+.stripe-modal{background:white;border-radius:16px;padding:36px;max-width:480px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.3);position:relative;animation:slideUp 0.3s ease;}
+@keyframes slideUp{from{transform:translateY(30px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+.stripe-modal h2{font-size:1.4rem;font-weight:700;margin-bottom:6px;color:#0D1B2A;}
+.stripe-modal p{color:#6B7280;font-size:0.9rem;margin-bottom:20px;}
+.stripe-close{position:absolute;top:16px;right:20px;font-size:1.6rem;cursor:pointer;color:#9CA3AF;background:none;border:none;line-height:1;}
+.stripe-close:hover{color:#374151;}
+.amount-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px;}
+.amount-btn{padding:12px;border:2px solid #E5E7EB;border-radius:10px;background:white;font-size:1rem;font-weight:600;cursor:pointer;color:#374151;transition:all 0.2s;}
+.amount-btn:hover,.amount-btn.selected{border-color:var(--sc,#00857A);color:var(--sc,#00857A);background:#f0fdf9;}
+.custom-amount{width:100%;padding:12px 16px;border:2px solid #E5E7EB;border-radius:10px;font-size:1rem;margin-bottom:16px;box-sizing:border-box;outline:none;}
+.custom-amount:focus{border-color:var(--sc,#00857A);}
+#scard{padding:14px;border:2px solid #E5E7EB;border-radius:10px;margin-bottom:16px;}
+.stripe-pay-btn{width:100%;padding:14px;border:none;border-radius:10px;font-size:1rem;font-weight:700;color:white;cursor:pointer;transition:opacity 0.2s;background:var(--sc,#00857A);}
+.stripe-pay-btn:hover{opacity:0.9;}
+.stripe-pay-btn:disabled{opacity:0.6;cursor:not-allowed;}
+.smsg{text-align:center;font-size:0.85rem;margin-top:12px;min-height:20px;}
+.smsg.err{color:#DC2626;}
+.smsg.ok{color:#059669;}
+.stripe-secure{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:14px;color:#9CA3AF;font-size:0.78rem;}
+.stabs{display:flex;gap:8px;margin-bottom:20px;}
+.stab{flex:1;padding:9px;border:2px solid #E5E7EB;border-radius:8px;background:white;font-size:0.85rem;font-weight:600;cursor:pointer;color:#6B7280;transition:all 0.2s;}
+.stab.active{border-color:var(--sc,#00857A);color:var(--sc,#00857A);background:#f0fdf9;}
+</style>
+
+<div class="stripe-overlay" id="sOverlay">
+  <div class="stripe-modal">
+    <button class="stripe-close" onclick="sClose()">&#215;</button>
+    <h2 id="sTitle">Support HavenAssist</h2>
+    <p id="sSub">Your contribution keeps this mission alive.</p>
+    <div class="stabs" id="sTabs">
+      <button class="stab active" onclick="sFreq('once',this)">One-Time</button>
+      <button class="stab" onclick="sFreq('monthly',this)">Monthly</button>
+    </div>
+    <div class="amount-grid">
+      <button class="amount-btn" onclick="sAmt(25,this)">$25</button>
+      <button class="amount-btn" onclick="sAmt(50,this)">$50</button>
+      <button class="amount-btn selected" onclick="sAmt(100,this)">$100</button>
+      <button class="amount-btn" onclick="sAmt(250,this)">$250</button>
+      <button class="amount-btn" onclick="sAmt(500,this)">$500</button>
+      <button class="amount-btn" onclick="sAmt(0,this)">Other</button>
+    </div>
+    <input type="number" class="custom-amount" id="sCustom" placeholder="Enter custom amount ($)" style="display:none;" oninput="sS.amount=parseFloat(this.value)*100||0"/>
+    <div id="scard"></div>
+    <button class="stripe-pay-btn" id="sPayBtn" onclick="sPay()">Donate Now</button>
+    <div class="smsg" id="sMsg"></div>
+    <div class="stripe-secure">&#128274; Secured by Stripe &middot; SSL Encrypted</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var sk='pk_live_51T95CwHsdPh1og1bzjIsptg4G2lccT1OqXbX2QPNAeEw5zZ89azOpOfcNkR5izm62KOYITaltVSxtUd5uoFGd2bA00LkvJnv01';
+  var stripe=Stripe(sk);
+  var els=stripe.elements();
+  var card=els.create('card',{style:{base:{fontSize:'16px',color:'#374151','::placeholder':{color:'#9CA3AF'}}}});
+  card.mount('#scard');
+  var sS={amount:10000,freq:'once',color:'#00857A',label:'Donate'};
+  window.openStripe=function(cfg){
+    cfg=cfg||{};
+    sS.amount=(cfg.amount||100)*100;
+    sS.freq=cfg.freq||'once';
+    sS.color=cfg.color||'#00857A';
+    sS.label=cfg.label||'Donate';
+    document.documentElement.style.setProperty('--sc',sS.color);
+    document.getElementById('sTitle').textContent=cfg.title||'Support HavenAssist';
+    document.getElementById('sSub').textContent=cfg.subtitle||'Your contribution keeps this mission alive.';
+    document.getElementById('sPayBtn').textContent=sS.label+' Now';
+    document.getElementById('sTabs').style.display=cfg.hideTabs?'none':'flex';
+    document.getElementById('sOverlay').classList.add('active');
+    document.getElementById('sMsg').textContent='';
+    document.querySelectorAll('.amount-btn').forEach(function(b){b.classList.remove('selected');});
+    document.querySelector('.amount-btn:nth-child(3)').classList.add('selected');
+  };
+  window.sClose=function(){document.getElementById('sOverlay').classList.remove('active');};
+  window.sFreq=function(f,el){sS.freq=f;document.querySelectorAll('.stab').forEach(function(t){t.classList.remove('active');});el.classList.add('active');};
+  window.sAmt=function(a,el){
+    document.querySelectorAll('.amount-btn').forEach(function(b){b.classList.remove('selected');});
+    el.classList.add('selected');
+    if(a===0){document.getElementById('sCustom').style.display='block';sS.amount=0;}
+    else{document.getElementById('sCustom').style.display='none';sS.amount=a*100;}
+  };
+  window.sPay=async function(){
+    var btn=document.getElementById('sPayBtn');
+    var msg=document.getElementById('sMsg');
+    if(!sS.amount||sS.amount<100){msg.textContent='Please enter an amount of at least $1.';msg.className='smsg err';return;}
+    btn.disabled=true;btn.textContent='Processing...';msg.textContent='';
+    try{
+      var r=await stripe.createPaymentMethod({type:'card',card:card});
+      if(r.error){msg.textContent=r.error.message;msg.className='smsg err';btn.disabled=false;btn.textContent=sS.label+' Now';return;}
+      msg.textContent='Thank you! Your payment is being processed. Your support means everything.';
+      msg.className='smsg ok';btn.textContent='Thank You!';
+      setTimeout(function(){sClose();btn.disabled=false;btn.textContent=sS.label+' Now';},3500);
+    }catch(e){msg.textContent='Something went wrong. Please try again.';msg.className='smsg err';btn.disabled=false;btn.textContent=sS.label+' Now';}
+  };
+  document.getElementById('sOverlay').addEventListener('click',function(e){if(e.target===this)sClose();});
+})();
+</script>
+
+</body>
+</html>

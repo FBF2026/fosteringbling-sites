@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HavenAssist — Case Note Generator</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0D1B2A;
+    --navy2: #112236;
+    --teal: #00A896;
+    --teal2: #02C39A;
+    --gold: #C8973A;
+    --white: #FFFFFF;
+    --off: #F4F7F6;
+    --muted: #6B8A8C;
+    --border: #DCE8E6;
+    --text: #1A2E3B;
+    --card: #FFFFFF;
+    --success: #00875A;
+    --warn: #E07B00;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    min-height: 100vh;
+  }
+
+  /* TOP NAV */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 40px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    background: rgba(13,27,42,0.95);
+    backdrop-filter: blur(12px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .nav-left { display: flex; align-items: center; gap: 16px; }
+
+  .nav-logo {
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, var(--teal), var(--teal2));
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+  }
+
+  .nav-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.25rem;
+    color: var(--white);
+  }
+
+  .nav-title span { color: var(--teal); }
+
+  .nav-badge {
+    background: rgba(0,168,150,0.12);
+    border: 1px solid rgba(0,168,150,0.3);
+    color: var(--teal);
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+  }
+
+  .nav-right { display: flex; align-items: center; gap: 16px; }
+
+  .nav-fbf {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.45);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-fbf:hover { color: var(--gold); }
+
+  .nav-fp {
+    background: var(--teal);
+    color: white;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .nav-fp:hover { background: var(--teal2); }
+
+  /* HERO STRIP */
+  .hero-strip {
+    background: linear-gradient(135deg, #0D2B3E 0%, #0D1B2A 50%, #091520 100%);
+    padding: 48px 40px 40px;
+    text-align: center;
+    border-bottom: 1px solid rgba(0,168,150,0.15);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-strip::before {
+    content: '';
+    position: absolute;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(0,168,150,0.08) 0%, transparent 70%);
+    top: -100px; left: 50%; transform: translateX(-50%);
+    pointer-events: none;
+  }
+
+  .hero-strip h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+    position: relative;
+  }
+
+  .hero-strip h1 em { color: var(--teal); font-style: italic; }
+
+  .hero-strip p {
+    color: rgba(255,255,255,0.55);
+    font-size: 0.95rem;
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.7;
+    position: relative;
+  }
+
+  /* MAIN LAYOUT */
+  .main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    min-height: calc(100vh - 200px);
+  }
+
+  /* LEFT PANEL — INPUT */
+  .panel-left {
+    padding: 40px;
+    border-right: 1px solid rgba(255,255,255,0.06);
+    background: var(--navy2);
+  }
+
+  .panel-right {
+    padding: 40px;
+    background: var(--navy);
+  }
+
+  .panel-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .panel-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(0,168,150,0.2);
+  }
+
+  /* NOTE TYPE SELECTOR */
+  .type-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+
+  .type-btn {
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 1.5px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.03);
+    color: rgba(255,255,255,0.6);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+  }
+
+  .type-btn:hover {
+    border-color: rgba(0,168,150,0.4);
+    color: var(--white);
+    background: rgba(0,168,150,0.06);
+  }
+
+  .type-btn.active {
+    border-color: var(--teal);
+    color: var(--white);
+    background: rgba(0,168,150,0.1);
+  }
+
+  .type-btn .type-icon { font-size: 1.1rem; margin-bottom: 4px; display: block; }
+  .type-btn .type-name { display: block; font-weight: 600; }
+  .type-btn .type-desc { display: block; font-size: 0.72rem; color: rgba(255,255,255,0.4); margin-top: 2px; }
+
+  /* INPUT AREA */
+  .input-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .char-count { color: rgba(255,255,255,0.3); font-size: 0.72rem; }
+
+  textarea.notes-input {
+    width: 100%;
+    min-height: 220px;
+    background: rgba(255,255,255,0.04);
+    border: 1.5px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 18px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.85);
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.2s;
+    line-height: 1.7;
+  }
+
+  textarea.notes-input::placeholder { color: rgba(255,255,255,0.2); }
+  textarea.notes-input:focus { border-color: rgba(0,168,150,0.5); background: rgba(255,255,255,0.06); }
+
+  /* TONE SELECTOR */
+  .tone-row {
+    display: flex;
+    gap: 8px;
+    margin: 16px 0;
+    flex-wrap: wrap;
+  }
+
+  .tone-chip {
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1.5px solid rgba(255,255,255,0.1);
+    background: transparent;
+    color: rgba(255,255,255,0.5);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .tone-chip:hover { border-color: rgba(0,168,150,0.4); color: var(--teal); }
+  .tone-chip.active { border-color: var(--teal); color: var(--white); background: rgba(0,168,150,0.12); }
+
+  /* GENERATE BUTTON */
+  .generate-btn {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, var(--teal), var(--teal2));
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    letter-spacing: 0.02em;
+  }
+
+  .generate-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,168,150,0.3); }
+  .generate-btn:active { transform: translateY(0); }
+  .generate-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+  /* OUTPUT AREA */
+  .output-placeholder {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: rgba(255,255,255,0.2);
+    gap: 16px;
+    padding: 40px;
+  }
+
+  .output-placeholder .placeholder-icon { font-size: 3rem; opacity: 0.4; }
+  .output-placeholder p { font-size: 0.88rem; line-height: 1.6; max-width: 280px; }
+
+  .output-wrap { display: none; }
+
+  .output-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .output-type-tag {
+    background: rgba(0,168,150,0.12);
+    border: 1px solid rgba(0,168,150,0.25);
+    color: var(--teal);
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .output-actions { display: flex; gap: 8px; }
+
+  .action-btn {
+    padding: 7px 14px;
+    border-radius: 8px;
+    border: 1.5px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.04);
+    color: rgba(255,255,255,0.6);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .action-btn:hover { border-color: rgba(0,168,150,0.4); color: var(--teal); }
+
+  .output-content {
+    background: rgba(255,255,255,0.04);
+    border: 1.5px solid rgba(255,255,255,0.07);
+    border-radius: 14px;
+    padding: 28px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.85;
+    color: rgba(255,255,255,0.88);
+    white-space: pre-wrap;
+    min-height: 300px;
+    position: relative;
+  }
+
+  .output-content.streaming::after {
+    content: '▊';
+    color: var(--teal);
+    animation: blink 1s infinite;
+  }
+
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+  /* TRAUMA FLAGS */
+  .flag-section {
+    margin-top: 20px;
+    padding: 16px 20px;
+    background: rgba(224,123,0,0.06);
+    border: 1.5px solid rgba(224,123,0,0.2);
+    border-radius: 12px;
+    display: none;
+  }
+
+  .flag-section.visible { display: block; }
+  .flag-title { font-size: 0.75rem; font-weight: 700; color: var(--warn); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; }
+  .flag-item { font-size: 0.82rem; color: rgba(255,255,255,0.65); margin-bottom: 4px; padding-left: 16px; position: relative; }
+  .flag-item::before { content: '⚠'; position: absolute; left: 0; font-size: 0.75rem; }
+
+  /* LOADING */
+  .loading-wrap {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 60px 40px;
+    text-align: center;
+  }
+
+  .loading-spinner {
+    width: 48px; height: 48px;
+    border: 3px solid rgba(0,168,150,0.2);
+    border-top-color: var(--teal);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .loading-text { color: rgba(255,255,255,0.5); font-size: 0.88rem; }
+  .loading-sub { color: rgba(255,255,255,0.25); font-size: 0.78rem; margin-top: -12px; }
+
+  /* TIPS */
+  .tips-box {
+    margin-top: 24px;
+    padding: 16px 20px;
+    background: rgba(200,151,58,0.06);
+    border: 1.5px solid rgba(200,151,58,0.15);
+    border-radius: 12px;
+  }
+
+  .tips-title { font-size: 0.72rem; font-weight: 700; color: var(--gold); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+  .tip-item { font-size: 0.8rem; color: rgba(255,255,255,0.45); margin-bottom: 5px; padding-left: 14px; position: relative; }
+  .tip-item::before { content: '✦'; position: absolute; left: 0; font-size: 0.65rem; color: var(--gold); }
+
+  /* FOOTER */
+  .app-footer {
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.2);
+  }
+
+  .app-footer a { color: rgba(255,255,255,0.35); text-decoration: none; }
+  .app-footer a:hover { color: var(--teal); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .main { grid-template-columns: 1fr; }
+    .panel-left { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    nav { padding: 14px 20px; }
+    .hero-strip { padding: 32px 20px; }
+    .hero-strip h1 { font-size: 1.6rem; }
+    .panel-left, .panel-right { padding: 28px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-left">
+    <div class="nav-logo">🤍</div>
+    <div class="nav-title">Haven<span>Assist</span></div>
+    <div class="nav-badge">CASEWORKER</div>
+  </div>
+  <div class="nav-right">
+    <a href="https://www.fosteringbling.org" class="nav-fbf" target="_blank">A Fostering Bling Foundation Initiative</a> <a href="#" onclick="openStripe({color:'#00857A',title:'Support HavenAssist',subtitle:'Help us support child welfare caseworkers.',label:'Donate'}); return false;" target="_blank" style="background:#00857A;color:white;padding:8px 18px;border-radius:20px;font-weight:600;font-size:13px;text-decoration:none;margin-left:12px;">Donate Now</a>
+    <a href="https://havenassist.org/havenassist-fp.html" class="nav-fp">Foster Parent Tool →</a>
+  </div>
+</nav>
+
+<div class="hero-strip">
+  <h1>Case Note Generator — <em>Trauma-Aware</em></h1>
+  <p>Type your bullet points. HavenAssist transforms them into professional, supervisor-ready documentation in seconds.</p>
+</div>
+
+<div class="main">
+
+  <!-- LEFT: INPUT -->
+  <div class="panel-left">
+
+    <div class="panel-label">Step 1 — Select Note Type</div>
+
+    <div class="type-grid">
+      <button class="type-btn active" onclick="selectType(this, 'home_visit')">
+        <span class="type-icon">🏠</span>
+        <span class="type-name">Home Visit</span>
+        <span class="type-desc">Scheduled or unannounced visit</span>
+      </button>
+      <button class="type-btn" onclick="selectType(this, 'cftm')">
+        <span class="type-icon">👥</span>
+        <span class="type-name">CFTM / Team Meeting</span>
+        <span class="type-desc">Child & family team meeting</span>
+      </button>
+      <button class="type-btn" onclick="selectType(this, 'court')">
+        <span class="type-icon">⚖️</span>
+        <span class="type-name">Court Report</span>
+        <span class="type-desc">Judicial hearing documentation</span>
+      </button>
+      <button class="type-btn" onclick="selectType(this, 'phone_contact')">
+        <span class="type-icon">📞</span>
+        <span class="type-name">Phone / Contact Log</span>
+        <span class="type-desc">Call or contact with family</span>
+      </button>
+      <button class="type-btn" onclick="selectType(this, 'incident')">
+        <span class="type-icon">⚠️</span>
+        <span class="type-name">Incident Report</span>
+        <span class="type-desc">Safety concern or incident</span>
+      </button>
+      <button class="type-btn" onclick="selectType(this, 'progress')">
+        <span class="type-icon">📈</span>
+        <span class="type-name">Progress Note</span>
+        <span class="type-desc">Case plan progress update</span>
+      </button>
+    </div>
+
+    <div class="panel-label">Step 2 — Enter Your Notes</div>
+
+    <div class="input-label">
+      <span>Paste or type your raw bullet points below</span>
+      <span class="char-count" id="charCount">0 / 2000</span>
+    </div>
+    <textarea class="notes-input" id="notesInput" placeholder="• Home visit Tuesday. Mom present.&#10;• Child seemed withdrawn, didn't make eye contact&#10;• Fridge stocked, house clean&#10;• Mom mentioned new job starting next week&#10;• Reviewed safety plan — no concerns noted" maxlength="2000" oninput="updateCount()"></textarea>
+
+    <div class="panel-label" style="margin-top: 20px;">Step 3 — Select Tone</div>
+
+    <div class="tone-row">
+      <button class="tone-chip active" onclick="selectTone(this, 'professional')">Professional</button>
+      <button class="tone-chip" onclick="selectTone(this, 'strength_based')">Strength-Based</button>
+      <button class="tone-chip" onclick="selectTone(this, 'court_ready')">Court-Ready</button>
+      <button class="tone-chip" onclick="selectTone(this, 'concise')">Concise</button>
+    </div>
+
+    <div class="tips-box">
+      <div class="tips-title">Tips for best results</div>
+      <div class="tip-item">Include who was present at the visit</div>
+      <div class="tip-item">Note the date and time if known</div>
+      <div class="tip-item">Mention child's demeanor and wellbeing</div>
+      <div class="tip-item">Include any safety observations</div>
+      <div class="tip-item">Note any next steps or follow-ups needed</div>
+    </div>
+
+    <button class="generate-btn" id="generateBtn" onclick="generateNote()">
+      <span>✦</span> Generate Trauma-Aware Case Note
+    </button>
+
+  </div>
+
+  <!-- RIGHT: OUTPUT -->
+  <div class="panel-right">
+
+    <div class="panel-label">Generated Case Note</div>
+
+    <div class="output-placeholder" id="outputPlaceholder">
+      <div class="placeholder-icon">📋</div>
+      <p>Your professional, trauma-aware case note will appear here. Built by a foster parent, for the people who care most.</p>
+      <p style="font-size:0.75rem; color:rgba(255,255,255,0.15); margin-top:8px;">Powered by Claude AI (Anthropic) · A Fostering Bling Foundation Initiative</p>
+    </div>
+
+    <div class="loading-wrap" id="loadingWrap">
+      <div class="loading-spinner"></div>
+      <div class="loading-text">Generating your case note...</div>
+      <div class="loading-sub">Applying trauma-aware language principles</div>
+    </div>
+
+    <div class="output-wrap" id="outputWrap">
+      <div class="output-header">
+        <div class="output-type-tag" id="outputTypeTag">HOME VISIT NOTE</div>
+        <div class="output-actions">
+          <button class="action-btn" onclick="copyNote()">📋 Copy</button>
+          <button class="action-btn" onclick="regenerate()">↺ Regenerate</button>
+        </div>
+      </div>
+      <div class="output-content" id="outputContent"></div>
+      <div class="flag-section" id="flagSection">
+        <div class="flag-title">⚠ Language Review Suggestions</div>
+        <div id="flagItems"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="app-footer">
+  HavenAssist — A <a href="https://www.fosteringbling.org" target="_blank">Fostering Bling Foundation</a> Initiative &nbsp;•&nbsp;
+  Black Woman-Owned &nbsp;•&nbsp; EIN: 88-2792734 &nbsp;•&nbsp;
+  <a href="https://havenassist.org/havenassist-fp.html" target="_blank">Foster Parent Tool</a>
+</div>
+
+<script>
+  let selectedType = 'home_visit';
+  let selectedTone = 'professional';
+
+  const typeLabels = {
+    home_visit: 'HOME VISIT NOTE',
+    cftm: 'CFTM / TEAM MEETING NOTE',
+    court: 'COURT REPORT NOTE',
+    phone_contact: 'PHONE CONTACT LOG',
+    incident: 'INCIDENT REPORT',
+    progress: 'PROGRESS NOTE'
+  };
+
+  function selectType(btn, type) {
+    document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    selectedType = type;
+  }
+
+  function selectTone(btn, tone) {
+    document.querySelectorAll('.tone-chip').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    selectedTone = tone;
+  }
+
+  function updateCount() {
+    const val = document.getElementById('notesInput').value.length;
+    document.getElementById('charCount').textContent = val + ' / 2000';
+  }
+
+  async function generateNote() {
+    const notes = document.getElementById('notesInput').value.trim();
+    if (!notes) {
+      alert('Please enter your case notes first.');
+      return;
+    }
+
+    const btn = document.getElementById('generateBtn');
+    btn.disabled = true;
+
+    document.getElementById('outputPlaceholder').style.display = 'none';
+    document.getElementById('outputWrap').style.display = 'none';
+    document.getElementById('loadingWrap').style.display = 'flex';
+
+    const toneInstructions = {
+      professional: 'Write in formal, professional third-person documentation style suitable for agency records.',
+      strength_based: 'Write using strength-based, asset-focused language that highlights family capacity and progress.',
+      court_ready: 'Write in precise, factual language suitable for court submission. Be specific and objective.',
+      concise: 'Write concisely. Use clear, direct language. Keep the note brief but complete.'
+    };
+
+    const typeInstructions = {
+      home_visit: 'This is a home visit case note. Include observations about the home environment, family interactions, child wellbeing, and any concerns or positive developments.',
+      cftm: 'This is a Child and Family Team Meeting note. Include attendees, topics discussed, decisions made, action items, and next steps.',
+      court: 'This is court report documentation. Be precise, factual, and objective. Include all relevant case developments, family progress, and recommendations.',
+      phone_contact: 'This is a phone or contact log. Include who was contacted, the purpose of the contact, what was discussed, and any follow-up actions.',
+      incident: 'This is an incident report. Be factual and objective. Include what occurred, who was involved, what actions were taken, and any safety concerns.',
+      progress: 'This is a progress note. Focus on case plan goals, family progress toward those goals, barriers encountered, and updated recommendations.'
+    };
+
+    const systemPrompt = `You are HavenAssist, a trauma-aware AI documentation assistant for child welfare caseworkers. You were built by Fostering Bling Foundation, a Black woman-owned 501(c)(3) nonprofit founded by a licensed foster parent.
+
+Your role is to transform raw caseworker bullet points into professional, trauma-informed case notes.
+
+CORE PRINCIPLES — follow these absolutely:
+1. Use trauma-informed language — never punitive, never deficit-focused, never stigmatizing
+2. Use strength-based framing — focus on family capacity, resilience, and progress
+3. Never use language that pathologizes families, especially Black and Brown families
+4. Be factual and objective — do not add assumptions or interpretations not in the notes
+5. Center the child's wellbeing in all documentation
+6. Use professional, agency-appropriate language
+7. Never use words like "failed", "refused", "non-compliant" without replacing with trauma-aware alternatives
+8. Replace "non-compliant" with "was unable to complete" or "did not engage with"
+9. Replace "refused" with "expressed reluctance" or "was not able to participate"
+10. Replace "hostile" with "appeared guarded" or "expressed frustration"
+
+${typeInstructions[selectedType] || typeInstructions.home_visit}
+
+${toneInstructions[selectedTone] || toneInstructions.professional}
+
+Format the output as a complete, professional case note ready to copy into agency documentation software. Include a header with the note type. Do not include placeholder text — use the actual information from the notes provided.
+
+After the note, on a new line starting with "FLAGS:", list any 1-3 language suggestions if you replaced any potentially problematic language. If no flags, write "FLAGS: none"`;
+
+    const userPrompt = `Please transform these raw case notes into a professional, trauma-aware case note:\n\n${notes}`;
+
+    try {
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-direct-browser-calls': 'true'
+        },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-6',
+          max_tokens: 1000,
+          system: systemPrompt,
+          messages: [{ role: 'user', content: userPrompt }]
+        })
+      });
+
+      const data = await response.json();
+      const fullText = data.content?.[0]?.text || 'Unable to generate note. Please try again.';
+
+      // Split note from flags
+      const flagsIdx = fullText.indexOf('FLAGS:');
+      const noteText = flagsIdx > -1 ? fullText.substring(0, flagsIdx).trim() : fullText.trim();
+      const flagsText = flagsIdx > -1 ? fullText.substring(flagsIdx + 6).trim() : 'none';
+
+      document.getElementById('loadingWrap').style.display = 'none';
+      document.getElementById('outputWrap').style.display = 'block';
+      document.getElementById('outputTypeTag').textContent = typeLabels[selectedType] || 'CASE NOTE';
+      document.getElementById('outputContent').textContent = noteText;
+
+      // Show flags if any
+      const flagSection = document.getElementById('flagSection');
+      if (flagsText && flagsText.toLowerCase() !== 'none' && flagsText.length > 5) {
+        flagSection.classList.add('visible');
+        const flags = flagsText.split('\n').filter(f => f.trim());
+        document.getElementById('flagItems').innerHTML = flags.map(f =>
+          `<div class="flag-item">${f.replace(/^[-•*]\s*/, '')}</div>`
+        ).join('');
+      } else {
+        flagSection.classList.remove('visible');
+      }
+
+    } catch (err) {
+      document.getElementById('loadingWrap').style.display = 'none';
+      document.getElementById('outputPlaceholder').style.display = 'flex';
+      document.getElementById('outputPlaceholder').innerHTML = '<div class="placeholder-icon">⚠️</div><p>Something went wrong. Please try again.</p>';
+    }
+
+    btn.disabled = false;
+  }
+
+  function copyNote() {
+    const text = document.getElementById('outputContent').textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = event.target;
+      btn.textContent = '✓ Copied!';
+      setTimeout(() => btn.textContent = '📋 Copy', 2000);
+    });
+  }
+
+  function regenerate() {
+    document.getElementById('outputWrap').style.display = 'none';
+    document.getElementById('outputPlaceholder').style.display = 'flex';
+    document.getElementById('notesInput').focus();
+  }
+</script>
+
+
+<!-- STRIPE PAYMENT MODAL -->
+<script src="https://js.stripe.com/v3/"></script>
+<style>
+.stripe-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:9999;align-items:center;justify-content:center;}
+.stripe-overlay.active{display:flex;}
+.stripe-modal{background:white;border-radius:16px;padding:36px;max-width:480px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.3);position:relative;animation:slideUp 0.3s ease;}
+@keyframes slideUp{from{transform:translateY(30px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+.stripe-modal h2{font-size:1.4rem;font-weight:700;margin-bottom:6px;color:#0D1B2A;}
+.stripe-modal p{color:#6B7280;font-size:0.9rem;margin-bottom:20px;}
+.stripe-close{position:absolute;top:16px;right:20px;font-size:1.6rem;cursor:pointer;color:#9CA3AF;background:none;border:none;line-height:1;}
+.stripe-close:hover{color:#374151;}
+.amount-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px;}
+.amount-btn{padding:12px;border:2px solid #E5E7EB;border-radius:10px;background:white;font-size:1rem;font-weight:600;cursor:pointer;color:#374151;transition:all 0.2s;}
+.amount-btn:hover,.amount-btn.selected{border-color:var(--sc,#00857A);color:var(--sc,#00857A);background:#f0fdf9;}
+.custom-amount{width:100%;padding:12px 16px;border:2px solid #E5E7EB;border-radius:10px;font-size:1rem;margin-bottom:16px;box-sizing:border-box;outline:none;}
+.custom-amount:focus{border-color:var(--sc,#00857A);}
+#scard{padding:14px;border:2px solid #E5E7EB;border-radius:10px;margin-bottom:16px;}
+.stripe-pay-btn{width:100%;padding:14px;border:none;border-radius:10px;font-size:1rem;font-weight:700;color:white;cursor:pointer;transition:opacity 0.2s;background:var(--sc,#00857A);}
+.stripe-pay-btn:hover{opacity:0.9;}
+.stripe-pay-btn:disabled{opacity:0.6;cursor:not-allowed;}
+.smsg{text-align:center;font-size:0.85rem;margin-top:12px;min-height:20px;}
+.smsg.err{color:#DC2626;}
+.smsg.ok{color:#059669;}
+.stripe-secure{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:14px;color:#9CA3AF;font-size:0.78rem;}
+.stabs{display:flex;gap:8px;margin-bottom:20px;}
+.stab{flex:1;padding:9px;border:2px solid #E5E7EB;border-radius:8px;background:white;font-size:0.85rem;font-weight:600;cursor:pointer;color:#6B7280;transition:all 0.2s;}
+.stab.active{border-color:var(--sc,#00857A);color:var(--sc,#00857A);background:#f0fdf9;}
+</style>
+
+<div class="stripe-overlay" id="sOverlay">
+  <div class="stripe-modal">
+    <button class="stripe-close" onclick="sClose()">&#215;</button>
+    <h2 id="sTitle">Support HavenAssist</h2>
+    <p id="sSub">Your contribution keeps this mission alive.</p>
+    <div class="stabs" id="sTabs">
+      <button class="stab active" onclick="sFreq('once',this)">One-Time</button>
+      <button class="stab" onclick="sFreq('monthly',this)">Monthly</button>
+    </div>
+    <div class="amount-grid">
+      <button class="amount-btn" onclick="sAmt(25,this)">$25</button>
+      <button class="amount-btn" onclick="sAmt(50,this)">$50</button>
+      <button class="amount-btn selected" onclick="sAmt(100,this)">$100</button>
+      <button class="amount-btn" onclick="sAmt(250,this)">$250</button>
+      <button class="amount-btn" onclick="sAmt(500,this)">$500</button>
+      <button class="amount-btn" onclick="sAmt(0,this)">Other</button>
+    </div>
+    <input type="number" class="custom-amount" id="sCustom" placeholder="Enter custom amount ($)" style="display:none;" oninput="sS.amount=parseFloat(this.value)*100||0"/>
+    <div id="scard"></div>
+    <button class="stripe-pay-btn" id="sPayBtn" onclick="sPay()">Donate Now</button>
+    <div class="smsg" id="sMsg"></div>
+    <div class="stripe-secure">&#128274; Secured by Stripe &middot; SSL Encrypted</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var sk='pk_live_51T95CwHsdPh1og1bzjIsptg4G2lccT1OqXbX2QPNAeEw5zZ89azOpOfcNkR5izm62KOYITaltVSxtUd5uoFGd2bA00LkvJnv01';
+  var stripe=Stripe(sk);
+  var els=stripe.elements();
+  var card=els.create('card',{style:{base:{fontSize:'16px',color:'#374151','::placeholder':{color:'#9CA3AF'}}}});
+  card.mount('#scard');
+  var sS={amount:10000,freq:'once',color:'#00857A',label:'Donate'};
+  window.openStripe=function(cfg){
+    cfg=cfg||{};
+    sS.amount=(cfg.amount||100)*100;
+    sS.freq=cfg.freq||'once';
+    sS.color=cfg.color||'#00857A';
+    sS.label=cfg.label||'Donate';
+    document.documentElement.style.setProperty('--sc',sS.color);
+    document.getElementById('sTitle').textContent=cfg.title||'Support HavenAssist';
+    document.getElementById('sSub').textContent=cfg.subtitle||'Your contribution keeps this mission alive.';
+    document.getElementById('sPayBtn').textContent=sS.label+' Now';
+    document.getElementById('sTabs').style.display=cfg.hideTabs?'none':'flex';
+    document.getElementById('sOverlay').classList.add('active');
+    document.getElementById('sMsg').textContent='';
+    document.querySelectorAll('.amount-btn').forEach(function(b){b.classList.remove('selected');});
+    document.querySelector('.amount-btn:nth-child(3)').classList.add('selected');
+  };
+  window.sClose=function(){document.getElementById('sOverlay').classList.remove('active');};
+  window.sFreq=function(f,el){sS.freq=f;document.querySelectorAll('.stab').forEach(function(t){t.classList.remove('active');});el.classList.add('active');};
+  window.sAmt=function(a,el){
+    document.querySelectorAll('.amount-btn').forEach(function(b){b.classList.remove('selected');});
+    el.classList.add('selected');
+    if(a===0){document.getElementById('sCustom').style.display='block';sS.amount=0;}
+    else{document.getElementById('sCustom').style.display='none';sS.amount=a*100;}
+  };
+  window.sPay=async function(){
+    var btn=document.getElementById('sPayBtn');
+    var msg=document.getElementById('sMsg');
+    if(!sS.amount||sS.amount<100){msg.textContent='Please enter an amount of at least $1.';msg.className='smsg err';return;}
+    btn.disabled=true;btn.textContent='Processing...';msg.textContent='';
+    try{
+      var r=await stripe.createPaymentMethod({type:'card',card:card});
+      if(r.error){msg.textContent=r.error.message;msg.className='smsg err';btn.disabled=false;btn.textContent=sS.label+' Now';return;}
+      msg.textContent='Thank you! Your payment is being processed. Your support means everything.';
+      msg.className='smsg ok';btn.textContent='Thank You!';
+      setTimeout(function(){sClose();btn.disabled=false;btn.textContent=sS.label+' Now';},3500);
+    }catch(e){msg.textContent='Something went wrong. Please try again.';msg.className='smsg err';btn.disabled=false;btn.textContent=sS.label+' Now';}
+  };
+  document.getElementById('sOverlay').addEventListener('click',function(e){if(e.target===this)sClose();});
+})();
+</script>
+
+</body>
+</html>
