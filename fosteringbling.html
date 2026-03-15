@@ -835,6 +835,38 @@
   .form-success h4 { color: var(--navy); font-size: 1.2rem; margin-bottom: 8px; }
   .form-success p { color: var(--muted); font-size: 0.88rem; margin: 0; }
   @media (max-width: 768px) { .forms-grid { grid-template-columns: 1fr; } .bwo-badge { font-size: 0.75rem; padding: 6px 16px; } }
+
+  /* ── DROPDOWN NAV ── */
+  .nav-dropdown { position: relative; display: inline-block; }
+  .nav-dropdown-trigger { cursor: pointer; }
+  .nav-dropdown-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #0D2B3E;
+    border: 1px solid rgba(200,151,58,0.3);
+    border-radius: 10px;
+    min-width: 220px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    z-index: 9999;
+    overflow: hidden;
+  }
+  .nav-dropdown:hover .nav-dropdown-menu { display: block; }
+  .nav-dropdown-menu a {
+    display: block;
+    padding: 11px 18px;
+    color: rgba(255,255,255,0.85) !important;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    transition: background 0.15s, color 0.15s;
+  }
+  .nav-dropdown-menu a:last-child { border-bottom: none; }
+  .nav-dropdown-menu a:hover { background: rgba(200,151,58,0.15); color: #C8973A !important; }
+
 </style>
 </head>
 <body>
@@ -849,9 +881,34 @@
     </div>
   </a>
   <div class="nav-links">
-    <a href="#mission">Mission</a>
-    <a href="#gems">Our Gems</a>
-    <a href="#havenassist">HavenAssist</a>
+    <div class="nav-dropdown">
+      <a href="#" class="nav-dropdown-trigger">Programs ▾</a>
+      <div class="nav-dropdown-menu">
+        <a href="/birthday-bling-box.html">🎁 Birthday Bling Box</a>
+        <a href="/jewelry-box.html">💎 The Jewelry Box™</a>
+        <a href="https://havenassist.org/havenassist-fp.html" target="_blank">💚 For Foster Parents</a>
+        <a href="https://havenassist.org/havenassist-cw.html" target="_blank">🤍 For Caseworkers</a>
+        <a href="https://havenassist.org/havenassist-fc.html" target="_blank">💎 For Foster Youth</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <a href="#" class="nav-dropdown-trigger">About ▾</a>
+      <div class="nav-dropdown-menu">
+        <a href="#mission">Our Mission</a>
+        <a href="#gems">Our Gems</a>
+        <a href="/blog.html">📝 Blog</a>
+        <a href="#contact">Contact Us</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <a href="#" class="nav-dropdown-trigger">HavenAssist ▾</a>
+      <div class="nav-dropdown-menu">
+        <a href="https://havenassist.org" target="_blank">🏠 HavenAssist Home</a>
+        <a href="https://havenassist.org/havenassist-cw.html" target="_blank">🤍 Caseworker Tools</a>
+        <a href="https://havenassist.org/havenassist-fp.html" target="_blank">💚 Foster Parent Tools</a>
+        <a href="https://havenassist.org/havenassist-fc.html" target="_blank">💎 Foster Youth Tools</a>
+      </div>
+    </div>
     <a href="#notary">Notary</a>
     <a href="https://buy.stripe.com/7sY5kD43N4sd5nicz7gA800" target="_blank" class="nav-donate">Donate Now</a>
   </div>
